@@ -68,12 +68,20 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "scss/[name].css",
             chunkFilename: "scss/[id].css"
-          })
+          }),
+        new webpack.optimize.SplitChunksPlugin({
+            chunks: "all",
+            minSize: 20000,
+            minChunks: 1,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            name: true
+        }),
     ],
     devServer:{
-        contentBase:Path.join(__dirname,'dist'),
-        compress:true,
-        port:8086
+        contentBase : path.join(__dirname,'dist'),
+        compress : true,         //使用gizp压缩
+        port : 8086
     },
     performance: {
         hints:false
