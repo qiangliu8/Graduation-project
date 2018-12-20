@@ -11,7 +11,7 @@ module.exports = {
     mode:'development',
     output:{
         path:path.resolve(__dirname,'./dist'),
-        filename:'vendor.js'
+        filename:'vendor.js',
     },
     resolve:{
         modules:[
@@ -37,7 +37,8 @@ module.exports = {
                         options: {
                             limit: 8192,
                             name: 'assets/[name].[ext]',
-                        }
+                            publicPath: '../'
+                        },
                     }],
             },
             {
@@ -56,7 +57,8 @@ module.exports = {
                 use:{
                     loader:'babel-loader?cacheDirectory',
                     options:{
-                        presets:["@babel/preset-env"]
+                        presets:["env","react"],
+                        plugins: ["transform-decorators-legacy"]
                     }
                 },
                 include: path.resolve(__dirname, './src')
@@ -67,7 +69,7 @@ module.exports = {
         new HtmlWbpackPlugins({template:'./src/index.html'}),
         new MiniCssExtractPlugin({
             filename: "scss/[name].css",
-            chunkFilename: "scss/[id].css"
+            chunkFilename: "[id].css"
           }),
         new webpack.optimize.SplitChunksPlugin({
             chunks: "all",
