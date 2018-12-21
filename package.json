@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --config webpack.config.js",
-    "dev-server": "webpack-dev-server --compress"
+    "dev-server": "webpack-dev-server --host 0.0.0.0 --hot --inline --content-base --mode development"
   },
   "repository": {
     "type": "git",
@@ -15,7 +15,9 @@
   "author": "刘强",
   "license": "ISC",
   "dependencies": {
+    "@alicloud/sms-sdk": "^1.1.6",
     "antd-mobile": "^2.2.6",
+    "axios": "^0.18.0",
     "expose-loader": "^0.7.5",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
@@ -25,6 +27,7 @@
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {

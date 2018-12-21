@@ -71,21 +71,55 @@ module.exports = {
             filename: "scss/[name].css",
             chunkFilename: "[id].css"
           }),
-        new webpack.optimize.SplitChunksPlugin({
-            chunks: "all",
-            minSize: 20000,
-            minChunks: 1,
-            maxAsyncRequests: 5,
-            maxInitialRequests: 3,
-            name: true
-        }),
+        // new webpack.optimize.SplitChunksPlugin({
+        //     chunks: "all",
+        //     minSize: 20000,
+        //     minChunks: 1,
+        //     maxAsyncRequests: 5,
+        //     maxInitialRequests: 3,
+        //     name: true
+        // }),
     ],
     devServer:{
         contentBase : path.join(__dirname,'dist'),
         compress : true,         //使用gizp压缩
-        port : 8086
+        port : 8086,
+        hot: true,
+        inline: true,
+        historyApiFallback:true,
+        proxy: {
+            '/': {
+                target: "http://localhost:8087",
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/': ''
+                }
+            }
+        }
     },
     performance: {
         hints:false
     },
+    // optimization: {
+    //     splitChunks: {
+    //         chunks: 'initial', // 只对入口文件处理
+    //         cacheGroups: {
+    //             vendor: { // split `node_modules`目录下被打包的代码到 `page/vendor.js && .css` 没找到可打包文件的话，则没有。css需要依赖 `ExtractTextPlugin`
+    //                 test: /node_modules\//,
+    //                 name: 'page/vendor',
+    //                 priority: 10,
+    //                 enforce: true
+    //             },
+    //             commons: { // split `common`和`components`目录下被打包的代码到`page/commons.js && .css`
+    //                 test: /common\/|components\//,
+    //                 name: 'page/commons',
+    //                 priority: 10,
+    //                 enforce: true
+    //             }
+    //         }
+    //     },
+    //     runtimeChunk: {
+    //         name: 'page/manifest'
+    //     }
+    // },
 }
