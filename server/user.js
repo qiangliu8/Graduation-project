@@ -26,18 +26,27 @@ Router.get('/userinfo',function(req,res){
         }
     })
 })
-// Router.post('/usercode',function(req,res){
-//     // const {mobile,code} = 
-//     // console.log(res)
-//     User.find({},function(err,doc){
-//         return res.json({code:0,msg:doc})
-//     })
-//     // sendSerifly(SMSClient,15755337162,110)
-// })
-Router.post('/usercode', function (req, res) {
-   
-    User.find({},function(err,doc){
-        return res.json({code:0,msg:req.body})
-    })
+
+Router.post('/sendcode', function (req, res) {
+    const {mobile,serify}  = req.body
+     //if(sendSerifly(SMSClient,mobile,serify)){
+        if(true){
+        return res.json({code:0,msg:'短信发送成功，请及时接收！'})
+    }else{
+        return res.json({code:1,msg:'短信发送失败，请稍后重试！'})
+    }
+
   })
+
+Router.post('/register', function (req, res) {
+    const {mobile,name,pwd}  = req.body
+    const userModel = new User({name,mobile,pwd}) 
+    userModel.save(function(e,d){
+        if(e){
+            return res.json({code:1,msg:'异常'})
+        }
+        return res.json({code:0,msg:'注册成功'})
+    })
+    // return res.json({code:0,msg:{mobile,name,pwd} })
+})
 module.exports = Router

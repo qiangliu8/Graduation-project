@@ -57,7 +57,7 @@ module.exports = {
                 use:{
                     loader:'babel-loader?cacheDirectory',
                     options:{
-                        presets:["env","react"],
+                        presets:["env","react","stage-2"],
                         plugins: ["transform-decorators-legacy"]
                     }
                 },

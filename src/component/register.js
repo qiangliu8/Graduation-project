@@ -1,10 +1,12 @@
 import React from 'react'
-import { Button, WhiteSpace, ImagePicker, SegmentedControl,List, InputItem } from 'antd-mobile';
+import { Button, WhiteSpace, Toast,ImagePicker, SegmentedControl,List, InputItem } from 'antd-mobile';
 import {HocFrom} from 'util/util'
 import leftIcon from 'assets/icon/left.png'
 import loginIcon from 'assets/login/logo2.png'
 import {checkMobile,randomCode} from 'util/util'
 import {sendSerifly} from 'api/user'
+import {connect} from 'react-redux'
+import {register} from 'redux/user.redux.js'
 import 'scss/register.scss'
 import axios from 'axios'
 
@@ -13,6 +15,11 @@ const data = [{
     id: '2121',
   }];
 
+@connect(
+    state=>state,
+    {register}
+)
+
 @HocFrom
 class RegisterPage extends React.Component{
     constructor(props){
@@ -20,55 +27,50 @@ class RegisterPage extends React.Component{
         this.state = {
             files: data,
             multiple: false,
-          }
-        
+            time:60,
+            serify:0
+          }      
     }
     componentDidMount(){
-        //this.animationBg()
-        axios.get('/user/userlist')
-        axios.get('/user/userinfo')
-        axios({
-            headers: {
-                'deviceCode': 'A95ZEF1-47B5-AC90BF3'
-            },
-            method: 'post',
-            url: '/user/usercode',
-            data: {
-                username:'1',
-                pwd:2
-            }
-        })
-        // axios.post('/user/usercode', {
-        //         firstName: 'Fred',
-        //         lastName: 'Flintstone'
-        //       })
-        //       .then(function (response) {
-        //         console.log(response);
-        //       })
-        //       .catch(function (error) {
-        //         console.log(error);
-        //       });
+        this.setState({serify:randomCode()})
     }
     onChanges(files, type, index){
         console.log(files, type, index);
         this.setState({
           files,
         });
-      }
+    }
     toLogin(){
         this.props.history.push('/login')
         window.location.reload()
     }
     sendSerify(){
-        if(checkMobile(this.props.state.mobile)){
-            axios.post('/user/send', {
-                mobile:'15755337162',
-                code:randomCode()
+        if(checkMobile(this.props.state.mobile)&& this.state.time===60){
+            sendSerifly({
+                ...this.props.state,
+                ...this.state
+            }).then(res=>{        
+                if(res.status ===200){
+                    let inter = setInterval(()=>{
+                        this.setState({time:this.state.time-1},()=>{
+                            if(this.state.time==0){
+                                this.setState({time:60,serify:randomCode()})
+                                clearInterval(inter) 
+                            }
+                        })
+                    },1000)
+                }
             })
-            // sendSerifly({
-            //     mobile:'15755337162',
-            //     code:randomCode()
-            // })
+        }
+    }
+    toregister(){
+        if(!this.props.state.mobile){
+            Toast.info('手机号为空！', 1)
+        }
+        else if(this.props.state.serify!=this.state.serify){
+            Toast.info('不是完整或者正确的验证码！', 1)
+        }else{
+            this.props.register(this.props.state)
         }
     }
     render(){
@@ -77,6 +79,7 @@ class RegisterPage extends React.Component{
         <div className="registerPage">
             <img src={leftIcon} style={{margin:10}} onClick={()=>this.toLogin()}></img>
             <img src={loginIcon} className="logo"></img>
+            <div class="registerBody">
             <List>
                 <InputItem
                     placeholder="输入用户名"
@@ -103,9 +106,12 @@ class RegisterPage extends React.Component{
                 <InputItem
                     placeholder="输入验证码"
                     onChange={e=>this.props.handleChange('serify',e)}
-                    extra={<p onClick={()=>this.sendSerify()}>获取验证码</p>}
+                    extra={this.state.time==60?<p onClick={()=>this.sendSerify()}>获取验证码</p>:<p disabled>{this.state.time}秒重新发送</p>}
                 >验证码</InputItem>
             </List>
+
+            <Button type="ghost" inline className="registerBtn" onClick={()=>this.toregister()}>注册</Button>
+            </div>
             {/* <ImagePicker
             files={files}
             onChange={(files, type, index)=>this.onChanges(files, type, index)}

@@ -16,6 +16,7 @@ import { withRouter } from 'react-router-dom'
 @withRouter  withRouter针对于一个子组件 props只有父组件传过来的信息 想要获取url 就必须通过这个组件来获取路由信息
 
 npm install browser-cookies --save  是对操作cookie 方便的组件
+npm install body-parser --save 引入了body-parser模块处理请求体。在上述代码中，模块会处理application/x-www-form-urlencoded、application/json两种格式的请求体。经过这个中间件后，就可以在所有路由处理器的req.body中访问请求参数
 
 高阶组件
 //反向继承

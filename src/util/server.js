@@ -1,5 +1,5 @@
 
-function sendSerifly(tel,code){
+function sendSerifly(SMSClient,tel,code){
     const accessKeyId = 'LTAI7CKFhXWNEw6n'
     const secretAccessKey = 'MlndfURoruM89zq1ZOc7fIc6S0Ekgd'
     let smsClient = new SMSClient({accessKeyId, secretAccessKey})
@@ -12,9 +12,11 @@ function sendSerifly(tel,code){
         let {Code}=res
         if (Code === 'OK') {
             console.log('发送成功')
+            return true
         }
     }, function (err) {
         console.log('失败')
+        return false
     })
 }     
 

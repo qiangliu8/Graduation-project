@@ -9,7 +9,7 @@ let models = {
     user:{
         'name':{'type':String, 'require':true},
         'pwd':{'type':String, 'require':true},
-        'telephone': { 'type': String ,'require':true},
+        'mobile': { 'type': String ,'require':true},
         'portrait': { 'type': String },
     }
 }

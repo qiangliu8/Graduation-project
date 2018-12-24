@@ -1,9 +1,8 @@
 import axios from 'axios'
 
-const sendSerifly = ({mobile,code}) =>{
-    axios.post('/user/send', {mobile,code})
-} 
-
+const sendSerifly = ({mobile,serify}) =>{
+   return  axios.post('/user/sendcode', {mobile,serify})
+}
 module.exports = {
     sendSerifly
 }
