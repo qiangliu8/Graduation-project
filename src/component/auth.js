@@ -5,6 +5,7 @@ import { getUserInfo } from 'redux/user.redux'
 import { connect } from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {getUserinfo} from 'api/user'
+import {Redirect} from 'react-router-dom'
 @withRouter
 @connect(
     state => state.user,
@@ -26,6 +27,7 @@ class Auth extends React.Component{
     render(){
         return (
         <div>
+            {this.props.redirectTo?<Redirect to={this.props.redirectTo}/>:null}
         </div>    
         )
     }

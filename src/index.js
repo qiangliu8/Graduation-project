@@ -29,7 +29,8 @@ ReactDom.render(
                     <Route path='/login' component={LoginPage}></Route>
                     <Route path='/auth' component={AuthPage}></Route>
                     <Route path='/register' component={RegisterPage}></Route>
-                    <Route path='/honepage' component={HomePage}></Route>
+                    <Route path='/homepage' component={HomePage}></Route>
+                    <Route path='/adminpage' component={HomePage}></Route>
                 </Switch>
             </div>
         </HashRouter>

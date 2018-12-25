@@ -7,19 +7,21 @@ const LOAD_DATA = 'LOAD_DATA'
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 const ERROR_MSG = 'ERROR_MSG'
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
-
+import { getRedirectPath } from 'util/util'
 const initState = {
     name:'',
     mobile:'',
-    msg:''
+    msg:'',
+    admin:false,
+    isAuth:false
 }
 
 export function user(state = initState,action){
     switch(action.type){
         case  LOAD_DATA:
-            return {...state,...action.payload,msg:''}
+            return {...state,...action.payload,redirectTo:getRedirectPath(action.payload),msg:''}
         case  AUTH_SUCCESS:
-            return {...state,...action.payload,msg:''}
+            return {...state,...action.payload,redirectTo:getRedirectPath(action.payload),msg:''}
         case ERROR_MSG:
             return {...initState,msg:action.msg}
         default:
@@ -32,7 +34,7 @@ function errorMsg(msg){
     return {msg ,type:ERROR_MSG}
 }
 function authSuccess(obj){
-    return {type:AUTH_SUCCESS,payload:obj}
+    return {type:AUTH_SUCCESS,payload:{...obj,isAuth:true}}
 }
 //注册
 export function register({name,pwd,repwd,mobile,serify,code}){ 
@@ -77,5 +79,6 @@ export function login({mobile,pwd}){
 
 
 export function getUserInfo (userinfo) {
-    return { type: LOAD_DATA, payload: userinfo }
+    // return { type: LOAD_DATA, payload:{...userinfo,isAuth:true}}
+    return { type: LOAD_DATA, payload:userinfo}
 }

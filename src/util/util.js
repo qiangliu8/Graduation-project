@@ -22,12 +22,21 @@ export function HocFrom(Comp){
 export function checkMobile(mobile){
     if(!(/^1[3|4|5|8][0-9]\d{8}$/).test(mobile)){
         Toast.info('不是完整的11位手机号或者正确的手机号', 1)
-        return false
+        return false;
     }
-    return true
+    return true;
 }
 
 //生成随机6位数字验证码
 export function randomCode(){
    return  Math.random().toString().slice(-6)
+}
+
+//根据用户的权限
+export function getRedirectPath({admin,isAuth}){
+    if(isAuth){
+        let url = admin ? '/adminPage':'/homepage'
+        return url
+    }
+    return false
 }

@@ -47,7 +47,7 @@ Router.post('/register', function (req, res) {
         if(doc){
           return  res.json({code:1,msg:'手机号已注册！'})
         }
-        const userModel = new User({name,mobile, pwd: md5Pwd(pwd)}) 
+        const userModel = new User({name,mobile, pwd: md5Pwd(pwd),admin:false}) 
         userModel.save(function(e,d){
             if(e){
                 return res.json({code:1,msg:'异常'})
