@@ -11,6 +11,7 @@ let models = {
         'pwd':{'type':String, 'require':true},
         'mobile': { 'type': String ,'require':true},
         'portrait': { 'type': String },
+        'admin':{'type':Boolean}
     }
 }
 

@@ -1,40 +1,102 @@
 .loginPage{
-    .bgpage{
-        width: 100%;
-        height: 100vh;
-        background: url(../assets/login/bg_login.png) center;
-        background-size: 100% 100%;
-        filter:brightness(0.7);
-        position: fixed;
+    width: 100%;
+    height: 100vh;
+    .logo{
+        margin: 0 0 1.5rem 2.5rem;
+        display: block;
+        width: 6rem;
+        height: 3rem;
+        animation: shang1 .5s ease-out;
     }
-    .loginLogo{
+     .am-list-body{
+         &::before,&::after{
+            display:none !important;
+         }
+    .am-input-control::after{
+        content: '';
         position: absolute;
-        width: 300px;
-        height: 200px;
-        top: 25%;
-        background: url(../assets/login/logo.png) center no-repeat;
-        background-size: 60%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        background-color: #ddd;
+        display: block;
+        z-index: 1;
+        top: auto;
+        right: auto;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1PX;
+        -webkit-transform-origin: 50% 100%;
+        -ms-transform-origin: 50% 100%;
+        transform-origin: 50% 100%;
+        -webkit-transform: scaleY(0.5);
+        -ms-transform: scaleY(0.5);
+        transform: scaleY(0.5);
+        }
     }
-    .loginButton{
-        position: absolute !important;
+    .loginsBtn{
         width: 75%;
-        bottom: 15%;
         height: 40px;
         line-height: 40px;
         font-size: 20px;
-        background: #04E0E1;
         border-radius: 0;
+        border: none;
         left: 50%;
         transform: translate(-50%,-50%);
-        color: black;
+        margin-top: 40px;
+        &::before{
+            border: 1px solid #A7A7B7 !important;
+        }
     }
-    .register{
+    .loginBtn{
+        width: 75%;
+        height: 40px;
+        line-height: 40px;
         font-size: 20px;
-        position: absolute;
+        background: #A7A7B7;
+        border-radius: 0;
         color: white;
-        bottom: 5%;
-        right: 10%;
+        border: none;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        margin-top: 10px;
+        &::before{
+            border: 1px solid #A7A7B7 !important;
+        }
+    }
+    .loginBody{
+        animation: shang2 .5s ease-out;
+    }
+    .am-list-item.am-input-item{
+        height: 44px;
+        animation: shang3 .5s ease-out;
+    }
+}
+@keyframes shang1{
+    0%{
+        width: 10rem;
+        height: 5rem;
+        margin: 2rem 0 1.5rem 5.5rem;;
+
+    }
+    100%{
+        margin: 0 0 1.5rem 2.5rem;
+        width: 6rem;
+        height: 3rem;
+    }
+}
+
+@keyframes shang2{
+    0%{
+        top: 40%;
+    }
+    100%{
+        top: 20%;
+    }
+}
+@keyframes shang3{
+    0%{
+        height: 60px;
+    }
+    100%{
+        height: 44px;
     }
 }

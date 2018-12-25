@@ -5,8 +5,11 @@ import {createStore, applyMiddleware,compose} from 'redux'
 import {Provider} from 'react-redux'
 import reudcer from 'redux/reducer'
 import thunk from 'redux-thunk'
-import LoginPage from 'component/login'
-import RegisterPage from 'component/register'
+import LoginPage from 'page/login'
+import RegisterPage from 'page/register'
+import AuthPage from 'page/auth'
+import HomePage from 'page/homepage'
+import Auth from 'component/auth'
 import '../config/axios'
 import 'antd-mobile/dist/antd-mobile.css'
 import 'scss/main.scss'
@@ -20,10 +23,13 @@ ReactDom.render(
     (<Provider store= {store}>
         <HashRouter>
             <div>
+                <Auth></Auth>
                 <Switch>
                     <Route path='/' exact component={LoginPage}></Route>
                     <Route path='/login' component={LoginPage}></Route>
+                    <Route path='/auth' component={AuthPage}></Route>
                     <Route path='/register' component={RegisterPage}></Route>
+                    <Route path='/honepage' component={HomePage}></Route>
                 </Switch>
             </div>
         </HashRouter>

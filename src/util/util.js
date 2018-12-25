@@ -2,7 +2,6 @@
 
 import React from 'react'
 import { Toast } from 'antd-mobile'
-
 //高阶组件
 export function HocFrom(Comp){
     return class WrapperComp extends React.Component{
@@ -14,7 +13,7 @@ export function HocFrom(Comp){
             this.setState({[key]:val})
         }
         render(){
-            return <Comp handleChange={(key,val)=>this.handleChange(key,val)} state={this.state} {...this.props}></Comp>
+            return <Comp handleChange={(key,val)=>this.handleChange(key,val)} handleChange={(key,val)=>this.handleChange(key,val)} state={this.state} {...this.props}></Comp>
         }
     }
 }

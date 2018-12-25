@@ -28,11 +28,11 @@ class RegisterPage extends React.Component{
             files: data,
             multiple: false,
             time:60,
-            serify:0
+            code:0
           }      
     }
     componentDidMount(){
-        this.setState({serify:randomCode()})
+        this.setState({code:randomCode()})
     }
     onChanges(files, type, index){
         console.log(files, type, index);
@@ -41,7 +41,7 @@ class RegisterPage extends React.Component{
         });
     }
     toLogin(){
-        this.props.history.push('/login')
+        this.props.history.push('/auth')
         window.location.reload()
     }
     sendSerify(){
@@ -54,7 +54,7 @@ class RegisterPage extends React.Component{
                     let inter = setInterval(()=>{
                         this.setState({time:this.state.time-1},()=>{
                             if(this.state.time==0){
-                                this.setState({time:60,serify:randomCode()})
+                                this.setState({time:60,code:randomCode()})
                                 clearInterval(inter) 
                             }
                         })
@@ -64,13 +64,8 @@ class RegisterPage extends React.Component{
         }
     }
     toregister(){
-        if(!this.props.state.mobile){
-            Toast.info('手机号为空！', 1)
-        }
-        else if(this.props.state.serify!=this.state.serify){
-            Toast.info('不是完整或者正确的验证码！', 1)
-        }else{
-            this.props.register(this.props.state)
+        if(checkMobile(this.props.state.mobile)){
+            this.props.register({...this.props.state,...this.state})
         }
     }
     render(){
@@ -79,7 +74,7 @@ class RegisterPage extends React.Component{
         <div className="registerPage">
             <img src={leftIcon} style={{margin:10}} onClick={()=>this.toLogin()}></img>
             <img src={loginIcon} className="logo"></img>
-            <div class="registerBody">
+            <div className="registerBody">
             <List>
                 <InputItem
                     placeholder="输入用户名"
@@ -88,11 +83,13 @@ class RegisterPage extends React.Component{
                 >用户名</InputItem>
                 <WhiteSpace/>
                 <InputItem
+                    type='password'
                     placeholder="输入密码"
                     onChange={e=>this.props.handleChange('pwd',e)}
                 >密码</InputItem>
                 <WhiteSpace/>
                 <InputItem
+                    type='password'
                     placeholder="输入重复密码"
                     onChange={e=>this.props.handleChange('repwd',e)}
                 >重复密码</InputItem>
@@ -106,7 +103,7 @@ class RegisterPage extends React.Component{
                 <InputItem
                     placeholder="输入验证码"
                     onChange={e=>this.props.handleChange('serify',e)}
-                    extra={this.state.time==60?<p onClick={()=>this.sendSerify()}>获取验证码</p>:<p disabled>{this.state.time}秒重新发送</p>}
+                    extra={this.state.time==60?<p onClick={()=>this.sendSerify()}>获取验证码</p>:<p>{this.state.time}秒重新发送</p>}
                 >验证码</InputItem>
             </List>
 

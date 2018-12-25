@@ -20,6 +20,28 @@ function sendSerifly(SMSClient,tel,code){
     })
 }     
 
+function loginSerifly(SMSClient,tel){
+    const accessKeyId = 'LTAI7CKFhXWNEw6n'
+    const secretAccessKey = 'MlndfURoruM89zq1ZOc7fIc6S0Ekgd'
+    let smsClient = new SMSClient({accessKeyId, secretAccessKey})
+    let time = new Date().toLocaleString()
+    smsClient.sendSMS({
+        PhoneNumbers: tel,
+        SignName: 'lyer创新APP',
+        TemplateCode: 'SMS_153725866',
+        TemplateParam:`{"time":"${time}"}`
+    }).then(function (res) {
+        let {Code}=res
+        if (Code === 'OK') {
+            console.log('发送成功')
+            return true
+        }
+    }, function (err) {
+        console.log('失败')
+        return false
+    })
+}  
 module.exports = {
-    sendSerifly
+    sendSerifly,
+    loginSerifly
 }

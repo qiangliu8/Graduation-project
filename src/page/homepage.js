@@ -1,11 +1,11 @@
 import React from 'react'
 import { Button, WhiteSpace, WingBlank } from 'antd-mobile';
 
-import 'scss/login.scss'
-class LoginPage extends React.Component{
+import 'scss/auth.scss'
+class HomePage extends React.Component{
 
     componentDidMount(){
-        this.animationBg()
+        //this.animationBg()
     }
     animationBg(){
         let offest= 0
@@ -16,18 +16,21 @@ class LoginPage extends React.Component{
              offest+'px')
     }, 10)
     }
+    tologin(){
+        this.props.history.push('/login')
+    }
     toRegister(){
         this.props.history.push('/register')
     }
     render(){
         return (
-        <div className="loginPage">
+        <div className="AuthPage">
             <div className="bgpage"></div>
             <div className="loginLogo"></div>
-            <Button  className="loginButton"  size="small" inline >登录</Button>
+            <Button  className="loginButton"  size="small" inline onClick={()=>this.tologin()} >登录</Button>
             <p className="register" onClick={()=>this.toRegister()}>注册</p>
         </div>    
         )
     }
 }
-export default LoginPage
+export default HomePage
