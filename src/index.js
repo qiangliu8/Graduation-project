@@ -25,12 +25,11 @@ ReactDom.render(
             <div>
                 <Auth></Auth>
                 <Switch>
-                    <Route path='/' exact component={LoginPage}></Route>
                     <Route path='/login' component={LoginPage}></Route>
                     <Route path='/auth' component={AuthPage}></Route>
                     <Route path='/register' component={RegisterPage}></Route>
-                    <Route path='/homepage' component={HomePage}></Route>
                     <Route path='/adminpage' component={HomePage}></Route>
+                    <Route component={HomePage}></Route>
                 </Switch>
             </div>
         </HashRouter>

@@ -1,0 +1,24 @@
+.icon-logo{
+    background: url('../assets/login/logo3.png') center no-repeat;
+    width: 49px;
+    height: 27px;
+    background-size: 100% 100%;
+}
+.am-search {
+    border-bottom: 1px solid #ddd;
+    background:none !important;
+  }
+  .sub-title {
+    color: #888;
+    font-size: 14px;
+    padding: 30px 0 18px 0;
+  }
+.am-search-cancel{
+    color: #2c2c2c !important;
+}
+.space-carousel {
+    overflow: hidden;
+}
+.slider.am-carousel.space-carousel{
+z-index: 1;
+}

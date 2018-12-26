@@ -5,7 +5,7 @@ import 'scss/auth.scss'
 class AuthPage extends React.Component{
 
     componentDidMount(){
-        //this.animationBg()
+        this.animationBg()
     }
     animationBg(){
         let offest= 0

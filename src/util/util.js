@@ -35,7 +35,7 @@ export function randomCode(){
 //根据用户的权限
 export function getRedirectPath({admin,isAuth}){
     if(isAuth){
-        let url = admin ? '/adminPage':'/homepage'
+        let url = admin ? '/adminPage':'/'
         return url
     }
     return false

@@ -1,8 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWbpackPlugins = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+var SpritesmithPlugin = require('webpack-spritesmith')
 function resolve(dir){
     return path.join(__dirname,dir)
 }
@@ -79,6 +79,23 @@ module.exports = {
         //     maxInitialRequests: 3,
         //     name: true
         // }),
+        new SpritesmithPlugin({            // 目标小图标                        
+            src: {                //下面的路径，根据自己的实际路径配置                
+            cwd: path.resolve(__dirname, './src/assets/icon'),                
+            glob: '*.png'                        },            // 输出雪碧图文件及样式文件                        
+            target: {//下面的路径，根据自己的实际路径配置                
+                image: path.resolve(__dirname, './src/assets/sprites/sprite.png'),                
+                css: path.resolve(__dirname, './src/scss/sprites/sprite.css')            
+            },            
+                // 样式文件中调用雪碧图地址写法                        
+                apiOptions: {// 这个路径根据自己页面配置                           
+                     cssImageRef: '../../assets/sprites/sprite.png'    //这是相对路径
+                     //cssImageRef:path.resolve(__dirname,'../../assets/sprites/sprite.png')        //这是绝对路径       
+                },            
+                    spritesmithOptions: {                
+                        algorithm: 'top-down'                        
+                    }       
+                 })
     ],
     devServer:{
         contentBase : path.join(__dirname,'dist'),
