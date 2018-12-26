@@ -7,6 +7,7 @@ const LOAD_DATA = 'LOAD_DATA'
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 const ERROR_MSG = 'ERROR_MSG'
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
+const LOGOUT = 'LOGOUT'
 import { getRedirectPath } from 'util/util'
 const initState = {
     name:'',
@@ -24,6 +25,8 @@ export function user(state = initState,action){
             return {...state,...action.payload,redirectTo:getRedirectPath(action.payload),msg:''}
         case ERROR_MSG:
             return {...initState,msg:action.msg}
+        case LOGOUT:
+            return {...initState}
         default:
             return state
     }
@@ -77,7 +80,9 @@ export function login({mobile,pwd}){
     }
 }
 
-
+export function logout(){
+    return {type:LOGOUT}
+}
 export function getUserInfo (userinfo) {
     // return { type: LOAD_DATA, payload:{...userinfo,isAuth:true}}
     return { type: LOAD_DATA, payload:userinfo}

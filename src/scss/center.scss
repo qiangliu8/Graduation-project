@@ -1,12 +1,36 @@
-.headPart{
-    padding:25px 10px;
+.centerPage{
     background-color: whitesmoke;
-    .icon-head{
-        border-radius: 50%;
-        border: 1px solid #8a8a8a;
-        display: inline-block;
-        margin: 0 1rem;
+    .headPart{
+        padding:25px 10px;
+  
+        .icon-head{
+            border-radius: 50%;
+            border: 1px solid #8a8a8a;
+            display: inline-block;
+            margin: 0 1rem;
+        }
     }
-    .infoParts{
+    .infoPart{
+        background-color:white;
+        box-shadow:0px 2px 4px #CECECE;
+        .infoParts{
+            margin: 1rem 0;
+            flex:1;
+            border-right: 1px dashed #CECECE;
+            p{
+                font-size: 1.2rem;
+            }
+            p:first-child{
+                margin-bottom: 0.2rem;
+            }
+            &:last-child{
+                border-right: 0;
+            }
+        }
     }
+    .am-list-content{
+        text-align: center;
+    }
+    
+    
 }

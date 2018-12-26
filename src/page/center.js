@@ -1,17 +1,26 @@
 import React from 'react'
-import { NavBar, Icon, Flex,Grid  } from 'antd-mobile';
+import { NavBar, Icon, Flex,WhiteSpace,List  } from 'antd-mobile';
 import {connect} from 'react-redux'
+import {logout} from 'redux/user.redux.js'
+import cookies from 'browser-cookies'
 import 'scss/center.scss'
 
+const Item = List.Item
 
 @connect(
     state=>state,
+    {logout}
 )
 
 class Center extends React.Component{
     constructor(props) {
         super(props)
-      }
+    }
+    logout(){
+        debugger
+        cookies.erase('userId')
+        this.props.logout()
+    }
     render(){
         const infos =[
             {   
@@ -47,16 +56,19 @@ class Center extends React.Component{
                     </Flex>
                     <Icon type="right"/>
                 </Flex>
-                <Flex justify="between" className="infoPart">
+                <Flex justify="between" className="infoPart" >
                     {infos.map(v=>(
                         <Flex className="infoParts" direction="column" justify="center" key={v.text}>
-                            <p>{v.length}</p>
+                            <p className="infoPartp">{v.length}</p>
                             <p>{v.text}</p>       
                         </Flex>
                     ))}
 
                 </Flex>
-
+                <WhiteSpace></WhiteSpace>
+                <List className="my-list" >
+                <Item onClick={()=>this.logout()}>退出登录</Item>
+                </List>
             </div>
         )
     }

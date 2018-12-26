@@ -19,6 +19,7 @@
     "antd-mobile": "^2.2.6",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "browser-cookies": "^1.2.0",
     "cookie-parser": "^1.4.3",
     "expose-loader": "^0.7.5",
     "express": "^4.16.4",
