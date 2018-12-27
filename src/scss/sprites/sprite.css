@@ -16,69 +16,105 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 // HTML
 <i class="icon icon-home"></i>
 */
-.icon-boy {
+.icon-girl {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px 0px;
   width: 16px;
   height: 16px;
 }
-.icon-girl {
+.icon-boy {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -16px;
   width: 16px;
   height: 16px;
 }
-.icon-center {
+.icon-birth {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -32px;
-  width: 32px;
-  height: 32px;
+  width: 18px;
+  height: 18px;
 }
-.icon-talk {
+.icon-sex {
   background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -64px;
-  width: 32px;
-  height: 32px;
+  background-position: 0px -50px;
+  width: 18px;
+  height: 18px;
 }
-.icon-talk_select {
+.icon-view {
   background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -96px;
-  width: 32px;
-  height: 32px;
+  background-position: 0px -68px;
+  width: 18px;
+  height: 18px;
 }
-.icon-center_select {
+.icon-name {
   background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -128px;
-  width: 32px;
-  height: 32px;
+  background-position: 0px -86px;
+  width: 18px;
+  height: 18px;
+}
+.icon-mobile {
+  background-image: url(../../assets/sprites/sprite.png);
+  background-position: 0px -104px;
+  width: 18px;
+  height: 18px;
+}
+.icon-tab {
+  background-image: url(../../assets/sprites/sprite.png);
+  background-position: 0px -122px;
+  width: 18px;
+  height: 18px;
 }
 .icon-home {
   background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -160px;
-  width: 32px;
-  height: 32px;
-}
-.icon-left {
-  background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -192px;
-  width: 32px;
-  height: 32px;
-}
-.icon-notice {
-  background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -224px;
+  background-position: 0px -140px;
   width: 32px;
   height: 32px;
 }
 .icon-home_select {
   background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -256px;
+  background-position: 0px -172px;
+  width: 32px;
+  height: 32px;
+}
+.icon-notice {
+  background-image: url(../../assets/sprites/sprite.png);
+  background-position: 0px -204px;
+  width: 32px;
+  height: 32px;
+}
+.icon-center {
+  background-image: url(../../assets/sprites/sprite.png);
+  background-position: 0px -236px;
+  width: 32px;
+  height: 32px;
+}
+.icon-center_select {
+  background-image: url(../../assets/sprites/sprite.png);
+  background-position: 0px -268px;
+  width: 32px;
+  height: 32px;
+}
+.icon-talk_select {
+  background-image: url(../../assets/sprites/sprite.png);
+  background-position: 0px -300px;
+  width: 32px;
+  height: 32px;
+}
+.icon-talk {
+  background-image: url(../../assets/sprites/sprite.png);
+  background-position: 0px -332px;
+  width: 32px;
+  height: 32px;
+}
+.icon-left {
+  background-image: url(../../assets/sprites/sprite.png);
+  background-position: 0px -364px;
   width: 32px;
   height: 32px;
 }
 .icon-head {
   background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -288px;
+  background-position: 0px -396px;
   width: 51px;
   height: 50px;
 }

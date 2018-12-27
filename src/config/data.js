@@ -1,0 +1,32 @@
+export const data=[
+    {
+        icon:'icon-name',
+        text:'昵称',
+        info:'name'
+    },
+    {
+        icon:'icon-sex',
+        text:'性别',
+        info:'sex'
+    },
+    {
+        icon:'icon-mobile',
+        text:'手机号',
+        info:'mobile'
+    },
+    {
+        icon:'icon-view',
+        text:'想去景点',
+        info:'view'
+    },
+    {
+        icon:'icon-birth',
+        text:'生日',
+        info:'birth'
+    },
+    {
+        icon:'icon-tab',
+        text:'个性签名',
+        info:'tab'
+    }
+]

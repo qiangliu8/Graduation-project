@@ -26,7 +26,7 @@ export function user(state = initState,action){
         case ERROR_MSG:
             return {...initState,msg:action.msg}
         case LOGOUT:
-            return {...initState}
+            return {...initState,redirectTo:'/auth'}
         default:
             return state
     }
@@ -85,5 +85,5 @@ export function logout(){
 }
 export function getUserInfo (userinfo) {
     // return { type: LOAD_DATA, payload:{...userinfo,isAuth:true}}
-    return { type: LOAD_DATA, payload:userinfo}
+    return { type: LOAD_DATA, payload:{...userinfo, isAuth:true}}
 }

@@ -1,10 +1,9 @@
 import React from 'react'
 import { Button, WhiteSpace, WingBlank  } from 'antd-mobile'
 import { Switch,Route} from 'react-router-dom'
-import Home from 'page/home'
-import Talk from 'page/talk'
-import Center from 'page/center'
 import Footer from 'component/footer'
+import {renderRoutes} from 'react-router-config'
+import {mainRoutes} from 'router/main_router'
 import 'scss/homepage.scss'
 class HomePage extends React.Component{
     constructor(props) {
@@ -17,12 +16,11 @@ class HomePage extends React.Component{
             { 
                 title:'',
                 key:'home',
-                path:'/',
+                path:'/home',
                 icon:'home',
                 badge:0,
                 className:'icon-home',
                 seclassName:'icon-home_select',
-                component:Home
             },
             { 
                 title:'',
@@ -32,7 +30,6 @@ class HomePage extends React.Component{
                 badge:1,
                 className:'icon-talk',
                 seclassName:'icon-talk_select',
-                component:Talk,
             },
             { 
                 title:'',
@@ -42,15 +39,13 @@ class HomePage extends React.Component{
                 badge:0,
                 className:'icon-center',
                 seclassName:'icon-center_select',
-                component:Center
             },
         ]
+        console.log(this.props.route)
         return (
             <div>
                 <Switch>
-                    {tarbarList.map(v=>(
-                        <Route key={v.icon} exact component={v.component} path={v.path}></Route>
-                    ))}
+                    {renderRoutes(mainRoutes)}
                 </Switch>
                 <Footer tarbarList={tarbarList}></Footer>
             </div>

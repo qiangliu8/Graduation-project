@@ -20,7 +20,7 @@ class Footer extends React.Component{
     render(){
         const { tarbarList } = this.props
         return (
-            <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
+            <div style={{ position: 'fixed', height: 'auto', width: '100%', bottom: 0 }}>
             <TabBar 
               unselectedTintColor="#949494"
               tintColor="#33A3F4"
@@ -30,13 +30,13 @@ class Footer extends React.Component{
                  <TabBar.Item
                  title={v.title}
                  key={v.key}
-                 icon={<div  className={v.className}
+                 icon={<div className={v.className}
                  />
                  }
                  selectedIcon={<div  className={v.seclassName}
                  />
                  }
-                 selected={this.props.location.pathname === v.path}
+                 selected={this.props.location.pathname.includes(v.path)}
                  badge={v.badge}
                  onPress={() => {
                    this.props.history.push(v.path)

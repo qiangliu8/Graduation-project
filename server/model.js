@@ -11,7 +11,11 @@ let models = {
         'pwd':{'type':String, 'require':true},
         'mobile': { 'type': String ,'require':true},
         'portrait': { 'type': String },
-        'admin':{'type':Boolean}
+        'admin':{'type':Boolean},
+        'sex':{'type':String},
+        'view':{'type':String},
+        'birth':{'type':String},
+        'tab':{'type':String},
     }
 }
 

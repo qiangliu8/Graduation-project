@@ -1,15 +1,6 @@
 .centerPage{
     background-color: whitesmoke;
-    .headPart{
-        padding:25px 10px;
-  
-        .icon-head{
-            border-radius: 50%;
-            border: 1px solid #8a8a8a;
-            display: inline-block;
-            margin: 0 1rem;
-        }
-    }
+   
     .infoPart{
         background-color:white;
         box-shadow:0px 2px 4px #CECECE;
@@ -33,4 +24,31 @@
     }
     
     
+} 
+.headPart{
+    padding:25px 10px;
+
+    .icon-head{
+        border-radius: 50%;
+        border: 1px solid #8a8a8a;
+        display: inline-block;
+        margin: 0 1rem;
+    }
+}
+
+.userinfo{
+    font-size: 16px;
+    margin-left: 2rem;
+}
+.set{
+    width: 7rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #2c2c2c;
+}
+
+.bigpic{
+    background: url(../assets/icon/head.png) center no-repeat;
+    background-size: 82% 45%;
 }

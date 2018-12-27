@@ -5,16 +5,18 @@ import {createStore, applyMiddleware,compose} from 'redux'
 import {Provider} from 'react-redux'
 import reudcer from 'redux/reducer'
 import thunk from 'redux-thunk'
-import LoginPage from 'page/login'
-import RegisterPage from 'page/register'
-import AuthPage from 'page/auth'
-import HomePage from 'page/homepage'
 import Auth from 'component/auth'
+import {renderRoutes} from 'react-router-config'
+import {loginRoutes} from 'router/login_router'
 import '../config/axios'
 import 'antd-mobile/dist/antd-mobile.css'
 import 'scss/main.scss'
 require('expose-loader?$!jquery')
 
+// const routes = [
+//     ...require('router/login_router'),
+//     // ...require('router/main_router')
+// ]
 const store = createStore(reudcer,compose(
     applyMiddleware(thunk),
     window.devToolsExtension?window.devToolsExtension() : f => f
@@ -25,11 +27,12 @@ ReactDom.render(
             <div>
                 <Auth></Auth>
                 <Switch>
-                    <Route path='/login' component={LoginPage}></Route>
+                    {/* <Route path='/login' component={LoginPage}></Route>
                     <Route path='/auth' component={AuthPage}></Route>
                     <Route path='/register' component={RegisterPage}></Route>
-                    <Route path='/adminpage' component={HomePage}></Route>
-                    <Route component={HomePage}></Route>
+                    <Route path='/adminpage' component={HomePage}></Route> */}
+                    {/* <Route component={HomePage}></Route> */}
+                    {renderRoutes(loginRoutes)}
                 </Switch>
             </div>
         </HashRouter>

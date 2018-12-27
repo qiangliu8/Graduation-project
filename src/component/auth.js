@@ -19,7 +19,7 @@ class Auth extends React.Component{
                 if (res.data.code === 0) {
                   this.props.getUserInfo(res.data.data)
                 } else {
-                    this.props.history.push('/auth')
+                    this.props.location.pathname==='/auth'?null: this.props.history.push('/auth')         
                 }
             }
         })

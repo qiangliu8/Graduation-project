@@ -12,14 +12,16 @@ const Item = List.Item
     {logout}
 )
 
-class Center extends React.Component{
+class personCenter extends React.Component{
     constructor(props) {
         super(props)
     }
     logout(){
-        debugger
         cookies.erase('userId')
         this.props.logout()
+    }
+    toinfo(){
+        this.props.history.push('/center/info')
     }
     render(){
         const infos =[
@@ -54,7 +56,7 @@ class Center extends React.Component{
                         <p style={{fontSize:'22px',marginRight:'2px'}}>{user.name}</p>
                         <div className="icon-boy"></div>
                     </Flex>
-                    <Icon type="right"/>
+                    <Icon type="right" onClick={()=>this.toinfo()}/>
                 </Flex>
                 <Flex justify="between" className="infoPart" >
                     {infos.map(v=>(
@@ -73,4 +75,4 @@ class Center extends React.Component{
         )
     }
 }
-export default Center
+export default personCenter
