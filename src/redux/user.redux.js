@@ -84,6 +84,13 @@ export function logout(){
     return {type:LOGOUT}
 }
 export function getUserInfo (userinfo) {
-    // return { type: LOAD_DATA, payload:{...userinfo,isAuth:true}}
-    return { type: LOAD_DATA, payload:{...userinfo, isAuth:true}}
+    if(userinfo){
+        return { type: LOAD_DATA, payload:{...userinfo, isAuth:true}}
+    }else{
+
+        return {type:LOGOUT}
+    }
+    // userinfo?{ type: LOAD_DATA, payload:{isAuth:false}}:
 }
+    // //  
+    // return 

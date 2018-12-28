@@ -36,7 +36,7 @@ export function randomCode(){
 export function getRedirectPath({admin,isAuth}){
     let url = '/auth'
     if(isAuth){
-        url = admin ? '/adminPage':'' 
+        url = admin ? '/adminPage':'/home' 
     }
     return url
 }

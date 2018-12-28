@@ -29,9 +29,9 @@ export const mainRoutes = [
         exact:true,
         component:personCenter,
         children:[
-            {   path:'/center/info',
-                component:personInfo
-            }
+            // {   path:'/center/info',
+            //     component:personInfo
+            // }
         ]
     },
     {   
@@ -39,4 +39,20 @@ export const mainRoutes = [
         exact:true,
         component:personInfo,
     },
+
+    
+]
+
+
+export const routeConfig = [
+    {
+        path:'/',
+        component:Home,
+        childRoutes:[
+            {path:'home',component:Home},
+            {path:'talk',component:Talk},
+            {path:'center',component:personCenter}
+        ]
+    }
+
 ]

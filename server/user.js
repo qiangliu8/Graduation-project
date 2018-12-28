@@ -6,7 +6,7 @@ const utils = require('utility')
 const SMSClient = require ('@alicloud/sms-sdk')
 const {sendSerifly,loginSerifly} = require('../src/util/server')
 const _filter = { 'pwd': 0, '__v': 0 }
-
+const {put,getBuffer,putStream} = require('./upload')
 //获取用户列表
 Router.get('/userlist',function(req,res){
     User.find({},function(err,doc){
@@ -69,6 +69,29 @@ Router.post('/login', function (req, res) {
     })
 })
 
+Router.post('/headUpload', function (req, res) {
+
+    // .then((result)=>{
+    //     return res.json({code:0,data:result})
+    //     // console.log(result)
+    // })
+    const {name,path}  = req.body
+    putStream(name,path).then((result)=>{
+        return res.json({code:0,data:result})
+        // getBuffer('boy.png').then((result)=>{
+        //     return res.json({code:0,data:result})
+        // })
+    })
+    // put(name,path).then((result)=>{
+    //     return res.json({code:0,data:result})
+    //     // getBuffer('boy.png').then((result)=>{
+    //     //     return res.json({code:0,data:result})
+    //     // })
+    // })
+    // getBuffer('boy.png').then((result)=>{
+    //     return res.json({code:0,data:result.data})
+    // })
+})
 function md5Pwd (pwd) {
     const mds = 'qiang_'
     return utils.md5(utils.md5(mds+pwd))

@@ -16,18 +16,24 @@ class Auth extends React.Component{
     componentDidMount(){
         getUserinfo().then(res=>{
             if (res.status === 200) {
-                if (res.data.code === 0) {
+                //  if (res.data.code === 0) {
                   this.props.getUserInfo(res.data.data)
-                } else {
-                    this.props.location.pathname==='/auth'?null: this.props.history.push('/auth')         
-                }
+                
+                //else {
+                //     this.props.location.pathname==='/auth'?null: this.props.history.push('/auth')         
+                // }
             }
         })
     }
     render(){
+        const {location,redirectTo,isAuth} = this.props
+        const {pathname} = location
         return (
         <div>
-            {this.props.redirectTo?<Redirect to={this.props.redirectTo}/>:null}
+            {isAuth?((pathname ===('/auth'||'/login'||'/register'))&&redirectTo?<Redirect to={redirectTo}/>:null)
+            :
+            ((pathname.includes('/home'||'/talk'||'/center'))&&redirectTo?<Redirect to={redirectTo}/>:null
+            )}
         </div>    
         )
     }

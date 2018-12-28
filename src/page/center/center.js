@@ -1,5 +1,6 @@
 import React from 'react'
-import { NavBar, Icon, Flex,WhiteSpace,List  } from 'antd-mobile';
+import { NavBar, Icon, Flex,WhiteSpace,List  } from 'antd-mobile'
+import { NavLink,} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {logout} from 'redux/user.redux.js'
 import cookies from 'browser-cookies'
@@ -56,6 +57,9 @@ class personCenter extends React.Component{
                         <p style={{fontSize:'22px',marginRight:'2px'}}>{user.name}</p>
                         <div className="icon-boy"></div>
                     </Flex>
+                    <NavLink
+                        to="/center/info"
+                        >FAQs</NavLink>
                     <Icon type="right" onClick={()=>this.toinfo()}/>
                 </Flex>
                 <Flex justify="between" className="infoPart" >
