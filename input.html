@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+function getObjectURL(file) {  
+     var url = null;  
+     if (window.createObjcectURL != undefined) {  
+         url = window.createOjcectURL(file);  
+     } else if (window.URL != undefined) {  
+         url = window.URL.createObjectURL(file);  
+     } else if (window.webkitURL != undefined) {  
+         url = window.webkitURL.createObjectURL(file);  
+     }  
+     return url;  
+ }
+ //使用方法
+ $("#file").change(function(){
+     var file = this.files[0];
+     var url = getObjectURL(file);//blob:http://doamin.com/5376c16a-02f9-489f-b30c-97a1808d5724
+     console.log(url)
+    });
+    </script>
+</head>
+<body>
+        <input type='text' name='textfield' id='textfield' class='txt' />
+<input type="file" name="fileField" class="file" id="fileField" size="28" onchange="document.getElementById('textfield').value=this.value" />
+</body>
+</html>

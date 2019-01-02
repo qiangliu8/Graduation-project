@@ -24,6 +24,7 @@
     "cookie-parser": "^1.4.3",
     "expose-loader": "^0.7.5",
     "express": "^4.16.4",
+    "fs": "0.0.1-security",
     "jquery": "^3.3.1",
     "mongoose": "^5.4.0",
     "nodemon": "^1.18.9",

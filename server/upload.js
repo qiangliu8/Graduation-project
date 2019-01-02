@@ -1,5 +1,5 @@
 const OSS = require('ali-oss')
-
+let fs = require('fs');
 let client = new OSS({
     region: 'oss-cn-hangzhou',
     //云账号AccessKey有所有API访问权限，建议遵循阿里云安全最佳实践，部署在服务端使用RAM子账号或STS，部署在客户端使用STS。
@@ -51,7 +51,7 @@ function getBuffer (name) {
   function putStream (name,path) {
     return new Promise ((reslove,reject)=>{
         let stream = fs.createReadStream(path);
-        let result = client.putStream(name, stream);
+         let result = client.putStream(name, stream)
         if(result){
             reslove(result)
         }else{

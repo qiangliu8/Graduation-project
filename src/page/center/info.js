@@ -22,27 +22,56 @@ class personInfo extends React.Component{
     }
 
     componentDidMount(){
-         $("input[type='file']").change(function(){   
-             var file = this.files[0];
-               if (window.FileReader) {    
-                        var reader = new FileReader();    
-                        reader.readAsDataURL(file);    
-                        //监听文件读取结束后事件    
-                      reader.onloadend = function (e) {
+        $(document).on('change', '#headUpload', function () { //PictureUrl为input file 的id
+            function getObjectURL(file) {
+                var url = null;
+                if (window.createObjcectURL != undefined) {
+                    url = window.createOjcectURL(file);
+                } else if (window.URL != undefined) {
+                    url = window.URL.createObjectURL(file);
+                } else if (window.webkitURL != undefined) {
+                    url = window.webkitURL.createObjectURL(file);
+                }
+                return url;
+            }
+            var objURL = getObjectURL(this.files[0]);//这里的objURL就是input file的真实路径
+            headUpload({name:this.files[0].name,path:objURL}).then(res=>{
                         debugger
-                        headUpload({name:file.name,path:e.target.result}).then(res=>{
-                            debugger
-                            if(res.data.code===0){
-                                $('.icon-head').css('background-image',`url(${res.data.data})`)
-                            }
-                        })
+                        if(res.data.code===0){
+                            $('.icon-head').css('background-image',`url(${res.data.data})`)
+                        }
+                    })  
+        })
 
-            //              console.log(e.target.result)
-            //              console.log(file.name)
-            //             $(".img").attr("src",e.target.result);     
-                       };    
-                   } 
-            })
+
+        //  $("input[type='file']").change(function(){   
+        //      var file = this.files[0];
+        //        if (window.FileReader) {    
+        //     //             var reader = new FileReader();    
+        //     //             reader.readAsDataURL(file);  
+        //     debugger
+        //     headUpload({name:file.name,path:$("input[type='file']").val()}).then(res=>{
+        //         debugger
+        //         if(res.data.code===0){
+        //             $('.icon-head').css('background-image',`url(${res.data.data})`)
+        //         }
+        //     })  
+        //                 //监听文件读取结束后事件    
+        //     //           reader.onloadend = (e)=> {
+        //     //             debugger
+        //     //             headUpload({name:file.name,path:$("input[type='file']").val()}).then(res=>{
+        //     //                 debugger
+        //     //                 if(res.data.code===0){
+        //     //                     $('.icon-head').css('background-image',`url(${res.data.data})`)
+        //     //                 }
+        //     //             })
+
+        //     // //              console.log(e.target.result)
+        //     // //              console.log(file.name)
+        //     // //             $(".img").attr("src",e.target.result);     
+        //     //            };    
+        //            } 
+        //     })
 
    
     }
@@ -76,7 +105,7 @@ class personInfo extends React.Component{
                     <Flex>
                         <img className="icon-head"></img>
                         <p style={{fontSize:'16px',marginLeft:'2rem',color:'#8a8a8a'}} onClick={()=>this.showActionSheet()}>修改头像</p>
-                        <input type="file" id ="headUpload" style={{width:'0'}} accept="image/gif, image/jpeg,image/png"/>
+                        <input type="file" id ="headUpload" style={{width:'0',opacity:'0'}} accept="image/gif, image/jpeg,image/png" />
                         <img src="" className="img" />
                     </Flex>
                 </Flex>

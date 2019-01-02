@@ -76,6 +76,7 @@ Router.post('/headUpload', function (req, res) {
     //     // console.log(result)
     // })
     const {name,path}  = req.body
+    console.log(path)
     putStream(name,path).then((result)=>{
         return res.json({code:0,data:result})
         // getBuffer('boy.png').then((result)=>{
