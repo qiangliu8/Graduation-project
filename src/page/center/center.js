@@ -53,13 +53,10 @@ class personCenter extends React.Component{
                 </NavBar>
                 <Flex justify="between" className="headPart">
                     <Flex>
-                        <div className="icon-head"></div>
+                        <div className="icon-head portrait"></div>
                         <p style={{fontSize:'22px',marginRight:'2px'}}>{user.name}</p>
                         <div className="icon-boy"></div>
                     </Flex>
-                    <NavLink
-                        to="/center/info"
-                        >FAQs</NavLink>
                     <Icon type="right" onClick={()=>this.toinfo()}/>
                 </Flex>
                 <Flex justify="between" className="infoPart" >

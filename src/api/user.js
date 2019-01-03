@@ -19,12 +19,23 @@ const toLogin= ({
     mobile,pwd
 }) => axios.post('/user/login',{mobile,pwd})
 
-const headUpload= ({name,path}) => axios.post('/user/headUpload',{name,path})
+//用户头像上传
+const headUpload = data => axios({
+    url: '/user/headUpload',
+    method: 'post',
+    data: data,
+    contentType: false,
+    processData: false,
+})
+
+//更新数据
+const update = data =>axios.post('/user/update',data)
 
 module.exports = {
     sendSerifly,
     getUserinfo,
     toRegister,
     toLogin,
-    headUpload
+    headUpload,
+    update
 }

@@ -28,11 +28,12 @@
 .headPart{
     padding:25px 10px;
 
-    .icon-head{
+    .portrait{
         border-radius: 50%;
         border: 1px solid #8a8a8a;
         display: inline-block;
         margin: 0 1rem;
+        width: 3.4rem;
     }
 }
 
@@ -53,6 +54,7 @@
     background-size: 82% 45%;
 }
 .img{
-    opacity: 0;
-    width: 0;
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }

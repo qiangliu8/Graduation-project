@@ -4,9 +4,12 @@ const UserModel = require('./model')
 const User = UserModel.getModel('user')
 const utils = require('utility')
 const SMSClient = require ('@alicloud/sms-sdk')
+var fs = require("fs");
 const {sendSerifly,loginSerifly} = require('../src/util/server')
 const _filter = { 'pwd': 0, '__v': 0 }
-const {put,getBuffer,putStream} = require('./upload')
+const {put} = require('./upload')
+
+
 //获取用户列表
 Router.get('/userlist',function(req,res){
     User.find({},function(err,doc){
@@ -69,33 +72,52 @@ Router.post('/login', function (req, res) {
     })
 })
 
+//头像上传
 Router.post('/headUpload', function (req, res) {
-
-    // .then((result)=>{
-    //     return res.json({code:0,data:result})
-    //     // console.log(result)
-    // })
-    const {name,path}  = req.body
-    console.log(path)
-    putStream(name,path).then((result)=>{
-        return res.json({code:0,data:result})
-        // getBuffer('boy.png').then((result)=>{
-        //     return res.json({code:0,data:result})
-        // })
+    const userId = req.cookies.userId
+    if(!userId){
+        return res.json.dumps({code:1})
+    }
+    var des_file = __dirname + "/" + req.files[0].originalname;
+    fs.readFile( req.files[0].path, function (err, data) {
+         fs.writeFile(des_file, data, function (err) {
+          if( err ){
+               console.log( err );
+          }else{
+                response = {
+                    message:'图片上传成功（1/2）', 
+                    filename:req.files[0].originalname
+               }
+               put(req.files[0].originalname,req.files[0].path)
+               .then(result=>{
+                    return res.json({code:0,data:result})
+                })
+               .catch(err=>res.json({code:1,msg:err}))
+           }
+        })
     })
-    // put(name,path).then((result)=>{
-    //     return res.json({code:0,data:result})
-    //     // getBuffer('boy.png').then((result)=>{
-    //     //     return res.json({code:0,data:result})
-    //     // })
-    // })
-    // getBuffer('boy.png').then((result)=>{
-    //     return res.json({code:0,data:result.data})
-    // })
 })
+
+Router.post('/update',function(req,res){
+    const body= req.body
+    const userId = req.cookies.userId
+    console.log(body)
+    if (!userId) {
+        return res.json.dumps({code:1})
+    }
+    User.updateOne({_id:userId}, body, function(err, doc){
+        if (err) {
+            console.log("头像上次失败！")
+        }
+        else {
+            return res.json({code:0,data:body})
+        }
+    })
+})
+
 function md5Pwd (pwd) {
     const mds = 'qiang_'
     return utils.md5(utils.md5(mds+pwd))
-    
-  }
+}
+
 module.exports = Router

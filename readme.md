@@ -53,3 +53,24 @@ webpack -p//压缩混淆脚本，这个非常非常重要！
 webpack -d//生成map映射文件，告知哪些模块被最终打包到哪里了
  
 其中的 -p 是很重要的参数，曾经一个未压缩的 700kb 的文件，压缩后直接降到 180kb （主要是样式这块一句就独占一行脚本，导致未压缩脚本变得很大） 。
+
+
+
+使用ajax进行文件上传
+    var file = this.files[0]
+    var data = new FormData();
+    $.ajax({
+        url: '/user/headUpload',
+        data: data,
+      contentType: false,
+      processData: false,
+      type: 'POST',
+      success: function (result) {
+          if(result.code===0){
+          $('.icon-head').css('background',`url(${result.data.url}) center no-repeat`).addClass('img')
+          }
+        },
+        error: function (err) {
+            console.error(err);
+        }
+    })   

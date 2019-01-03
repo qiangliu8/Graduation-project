@@ -6,27 +6,39 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script>
-function getObjectURL(file) {  
-     var url = null;  
-     if (window.createObjcectURL != undefined) {  
-         url = window.createOjcectURL(file);  
-     } else if (window.URL != undefined) {  
-         url = window.URL.createObjectURL(file);  
-     } else if (window.webkitURL != undefined) {  
-         url = window.webkitURL.createObjectURL(file);  
-     }  
-     return url;  
- }
- //使用方法
- $("#file").change(function(){
-     var file = this.files[0];
-     var url = getObjectURL(file);//blob:http://doamin.com/5376c16a-02f9-489f-b30c-97a1808d5724
-     console.log(url)
-    });
+    function getvl(obj){
+        debugger
+//判断浏览器
+        var Sys = {};
+        var ua = navigator.userAgent.toLowerCase();
+        var s;
+        (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
+            (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
+                (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+                    (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+                        (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+        var file_url="";
+        if(Sys.ie<="6.0"){
+            //ie5.5,ie6.0
+            file_url = obj.value;
+        }else if(Sys.ie>="7.0"){
+            //ie7,ie8
+            obj.select();
+            file_url = document.selection.createRange().text;
+        }else if(Sys.firefox){
+            //fx
+            //file_url = document.getElementById("file").files[0].getAsDataURL();//获取的路径为FF识别的加密字符串
+            file_url = readFileFirefox(obj);
+        }else if(Sys.chrome){
+            file_url = obj.value;
+        }
+        //alert(file_url);
+        document.getElementById("text").innerHTML="获取文件域完整路径为："+file_url;
+    }
     </script>
 </head>
 <body>
-        <input type='text' name='textfield' id='textfield' class='txt' />
-<input type="file" name="fileField" class="file" id="fileField" size="28" onchange="document.getElementById('textfield').value=this.value" />
+    <div id="text" style="color:#f00;"></div>
+    <input type="file" id="file" onchange="getvl(this)" />
 </body>
 </html>

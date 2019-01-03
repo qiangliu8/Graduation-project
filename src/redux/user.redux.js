@@ -1,7 +1,7 @@
 import {dispatch} from 'redux'
 import { Toast } from 'antd-mobile';
 import axios from 'axios'
-import {toRegister ,toLogin} from 'api/user'
+import {toRegister ,toLogin,update} from 'api/user'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 const LOAD_DATA = 'LOAD_DATA'
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
@@ -92,5 +92,16 @@ export function getUserInfo (userinfo) {
     }
     // userinfo?{ type: LOAD_DATA, payload:{isAuth:false}}:
 }
-    // //  
-    // return 
+
+export function updateInfo(data){
+    return dispatch=>{
+        update(data).then(res => {
+            if (res.status === 200 && res.data.code === 0) {
+                Toast.info('头像上传成功！', 2, null, false);
+                dispatch(authSuccess(res.data.data))
+            } else {
+                dispatch(errorMsg(res.data.msg))
+            }
+        })
+    }
+}

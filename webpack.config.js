@@ -71,14 +71,6 @@ module.exports = {
             filename: "scss/[name].css",
             chunkFilename: "[id].css"
           }),
-        // new webpack.optimize.SplitChunksPlugin({
-        //     chunks: "all",
-        //     minSize: 20000,
-        //     minChunks: 1,
-        //     maxAsyncRequests: 5,
-        //     maxInitialRequests: 3,
-        //     name: true
-        // }),
         new SpritesmithPlugin({            // 目标小图标                        
             src: {                //下面的路径，根据自己的实际路径配置                
             cwd: path.resolve(__dirname, './src/assets/icon'),                
