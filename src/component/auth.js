@@ -30,9 +30,9 @@ class Auth extends React.Component{
         const {pathname} = location
         return (
         <div>
-            {!isAuth?((pathname ===('/auth'||'/login'||'/register'))&&redirectTo?<Redirect to={redirectTo}/>:null)
+            {isAuth?((['/auth','/login','/register']).includes(pathname)&&redirectTo?<Redirect to={redirectTo}/>:null)
             :
-            ((pathname.includes('/home'&&'/talk'&&'/center'))&&redirectTo?<Redirect to={redirectTo}/>:null
+            ((['/home','/talk','/center']).includes(pathname)&&redirectTo?<Redirect to={redirectTo}/>:null
             )}
         </div>    
         )
