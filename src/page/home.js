@@ -1,6 +1,9 @@
 import React from 'react'
-import { SearchBar,Icon, WingBlank,Flex, WhiteSpace,Carousel } from 'antd-mobile';
+import { SearchBar,Icon, WingBlank,Flex,List , WhiteSpace,Carousel } from 'antd-mobile';
 import 'scss/home.scss'
+
+const Item = List.Item
+
 class Home extends React.Component{
     constructor(props) {
         super(props)
@@ -54,6 +57,18 @@ class Home extends React.Component{
                           </a>
                     ))}
                 </Carousel>
+                <List>
+                    <Item extra={ 
+                            <Flex justify="between">
+                                <p onClick={(e)=>console.log(e.target.innerHTML)}>综合</p>
+                                <p onClick={(e)=>console.log(e.target.innerHTML)}>最热</p>
+                                <p onClick={(e)=>console.log(e.target.innerHTML)}>最新</p>
+                                <p onClick={(e)=>console.log(e.target.innerHTML)}>筛选</p>
+                            </Flex>
+                            }>
+                            {}1篇攻略
+                    </Item>
+                </List>
             </div>
         )
     }

@@ -5,3 +5,8 @@
 .am-list-item .am-list-line .am-list-content{
     color: #8a8a8a !important;
 }
+
+//list右侧extra 宽度变宽
+.am-list-item .am-list-line .am-list-extra{
+    flex-basis: 45%;
+}
