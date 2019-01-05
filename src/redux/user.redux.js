@@ -93,11 +93,11 @@ export function getUserInfo (userinfo) {
     // userinfo?{ type: LOAD_DATA, payload:{isAuth:false}}:
 }
 
-export function updateInfo(data){
+export function updateInfo(data,name){
     return dispatch=>{
         update(data).then(res => {
             if (res.status === 200 && res.data.code === 0) {
-                Toast.info('头像上传成功！', 2, null, false);
+                Toast.info(`${name}更新成功！`, 2, null, false);
                 dispatch(authSuccess(res.data.data))
             } else {
                 dispatch(errorMsg(res.data.msg))

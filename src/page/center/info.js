@@ -1,11 +1,12 @@
 import React from 'react'
-import {NavBar, Icon,Flex ,List ,ActionSheet} from 'antd-mobile'
+import {NavBar, Icon,Flex ,List ,ActionSheet ,Modal,Radio} from 'antd-mobile'
 import {connect} from 'react-redux'
 import {data} from 'config/data'
 import {updateInfo} from 'redux/user.redux.js'
 import {headUpload} from 'api/user'
 import 'scss/center.scss'
 
+const alert = Modal.alert
 const Item = List.Item
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
 let wrapProps;
@@ -14,6 +15,17 @@ if (isIPhone) {
     onTouchStart: e => e.preventDefault(),
   };
 }
+
+function closest(el, selector) {
+    const matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;
+    while (el) {
+      if (matchesSelector.call(el, selector)) {
+        return el;
+      }
+      el = el.parentElement;
+    }
+    return null;
+  }
 @connect(
     state=>state,
     {updateInfo}
@@ -22,13 +34,21 @@ class personInfo extends React.Component{
     constructor(props) {
         super(props)
         this.state={
-            portrait:''
+            portrait:'',
+            modal1: false,
         }
     }
 
     componentDidMount(){
-        this.uplpoadFile()
+        this.uplpoadFile()       
     }
+
+    componentWillReceiveProps(nextProps){
+        this.setState({sex:nextProps.user.sex},()=>{
+            console.log(this.state)
+        })
+    }
+
     uplpoadFile(){
          $("input[type='file']").change(()=>{   
             var file = $("input[type='file']").get(0).files[0]
@@ -41,9 +61,11 @@ class personInfo extends React.Component{
                     })    
                 }
             })
-     
         })
     }
+
+    toedit = e => this.props.history.push(`/center/editinfo/${e.info}`)
+    
     showActionSheet = () => {
         const BUTTONS = ['从相册中选取', '取消'];
         ActionSheet.showActionSheetWithOptions({
@@ -60,8 +82,47 @@ class personInfo extends React.Component{
         });
         $('.am-action-sheet-mask').addClass('bigpic')
     }
-    toedit(e){
-        this.props.history.push(`/center/editinfo/${e.info}`)
+
+    changeSex = e => this.setState({sex:e})
+
+    showModal = key => (e) => {
+        e.preventDefault(); // 修复 Android 上点击穿透
+        this.setState({
+            [key]: true,
+        });
+    }
+
+    onClose = key => () => {
+        this.setState({
+          [key]: false,
+        });
+    }
+
+    saveData(state,name){
+        if(state){
+            this.props.updateInfo({sex:state},name)
+        }
+    }
+    onWrapTouchStart = (e) => {
+        // fix touch to scroll background page on iOS
+        if (!/iPhone|iPod|iPad/i.test(navigator.userAgent)) {
+          return;
+        }
+        const pNode = closest(e.target, '.am-modal-content');
+        if (!pNode) {
+          e.preventDefault();
+        }
+    }
+
+    switchClick (v) {
+        switch(v.info){
+            case 'sex':
+                this.setState({'modal1': true})
+                break;
+            default:
+                this.props.history.push(`/center/editinfo/${v.info}`)
+                break;
+        }
     }
     render(){
         const {user} = this.props
@@ -84,7 +145,8 @@ class personInfo extends React.Component{
                         <Item
                         thumb={<div className={v.icon}></div>}
                         arrow="horizontal"
-                        onClick={() => this.toedit(v)}
+                        //onClick={() => this.toedit(v)}
+                        onClick={()=>this.switchClick(v)}
                         key={v.text}
                         >
                             <Flex>
@@ -94,6 +156,23 @@ class personInfo extends React.Component{
                         </Item>
                     ))}
                 </List>
+
+                <Modal
+                    visible={this.state.modal1}
+                    transparent
+                    maskClosable={false}
+                    onClose={this.onClose('modal1')}
+                    title="请选择您的性别"
+                    footer={[
+                        { text: '取消', onPress: () => {  this.onClose('modal1')() } },
+                        { text: '确认', onPress: () => { this.saveData(this.state.sex,'性别'); this.onClose('modal1')() } }]}
+                        wrapProps={{ onTouchStart: this.onWrapTouchStart }}
+                    >
+                    <div>
+                        <Radio className="my-radio" checked = {this.state.sex ==='男'} onChange={e => this.changeSex('男')}>男</Radio>
+                        <Radio className="my-radio" checked = {this.state.sex ==='女'} style={{marginLeft:'25px'}} onChange={e => this.changeSex('女')}>女</Radio>
+                    </div>
+                </Modal>
             </div>
         )
     }

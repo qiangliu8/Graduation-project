@@ -1,15 +1,15 @@
 import React from 'react'
-import { NavBar, Icon, Flex,WhiteSpace,List ,TextareaItem } from 'antd-mobile'
+import { NavBar, Icon, WhiteSpace,List ,TextareaItem } from 'antd-mobile'
 import { createForm } from 'rc-form'
-import { NavLink,} from 'react-router-dom'
+import {updateInfo} from 'redux/user.redux.js'
 import {connect} from 'react-redux'
 import {data} from 'config/data'
-import cookies from 'browser-cookies'
 import 'scss/center.scss'
 
 
 @connect(
- state=>state
+ state=>state,
+ {updateInfo}
 )
 
 class EditInfos extends React.Component{
@@ -18,13 +18,17 @@ class EditInfos extends React.Component{
     }
     
     componentDidMount(){
-        console.log(this.props.match.params.text)
-        console.log(this.props.user)
     }
     changEvent(e,info){
         this.setState({[info]:e},()=>{
             console.log(this.state)
         })
+    }
+    saveData(name){
+        if(this.state){
+            this.props.updateInfo(this.state,name)
+        }
+        this.props.history.goBack()
     }
     render(){
         const info = this.props.match.params.text
@@ -36,20 +40,18 @@ class EditInfos extends React.Component{
                     mode="light"
                     icon={<Icon type="left" />}
                     onLeftClick={() => {this.props.history.goBack()}}
-                    rightContent={<p>完成</p>}>
+                    rightContent={<p onClick={()=>this.saveData(v.text)}>完成</p>}>
                     修改{v.text}
                 </NavBar>
                 <WhiteSpace/>
                 <WhiteSpace/>
                 <List>
                     <TextareaItem
-                        rows={5}
+                        rows={v.rows}
                         placeholder={`请修改${v.text}`}
                         onChange={(e)=>this.changEvent(e,v.info)}
-                        count={100}
-                        {...getFieldProps('count', {
-                            initialValue: `${this.props.user[v.info]?this.props.user[v.info]:''}`,
-                          })}
+                        count={v.count}
+                        defaultValue ={this.props.user[v.info]?this.props.user[v.info]:''}
                     />
                 </List>
             </div>

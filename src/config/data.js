@@ -2,31 +2,43 @@ export const data=[
     {
         icon:'icon-name',
         text:'昵称',
-        info:'name'
+        info:'name',
+        rows:2,
+        count:10
     },
     {
         icon:'icon-sex',
         text:'性别',
-        info:'sex'
+        info:'sex',
+        rows:2,
+        count:10
     },
     {
         icon:'icon-mobile',
         text:'手机号',
-        info:'mobile'
+        info:'mobile',
+        rows:2,
+        count:11
     },
     {
         icon:'icon-view',
         text:'想去景点',
-        info:'view'
+        info:'view',
+        rows:2,
+        count:10
     },
     {
         icon:'icon-birth',
         text:'生日',
-        info:'birth'
+        info:'birth',
+        rows:2,
+        count:10
     },
     {
         icon:'icon-tab',
         text:'个性签名',
-        info:'tab'
+        info:'tab',
+        rows:5,
+        count:100
     }
 ]
