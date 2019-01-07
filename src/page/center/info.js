@@ -1,20 +1,26 @@
 import React from 'react'
-import {NavBar, Icon,Flex ,List ,ActionSheet ,Modal,Radio} from 'antd-mobile'
+import {NavBar, Icon,Flex ,List ,DatePicker,ActionSheet ,Modal,Radio, Picker} from 'antd-mobile'
+//import { district} from 'antd-mobile-demo-data'
+import { createForm } from 'rc-form'
 import {connect} from 'react-redux'
 import {data} from 'config/data'
 import {updateInfo} from 'redux/user.redux.js'
 import {headUpload} from 'api/user'
+import {formatDate} from 'util/util'
 import 'scss/center.scss'
 
-const alert = Modal.alert
+
 const Item = List.Item
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
+const nowTimeStamp = Date.now();
+const now = new Date(nowTimeStamp);
 let wrapProps;
 if (isIPhone) {
   wrapProps = {
     onTouchStart: e => e.preventDefault(),
   };
 }
+
 
 function closest(el, selector) {
     const matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;
@@ -25,17 +31,20 @@ function closest(el, selector) {
       el = el.parentElement;
     }
     return null;
-  }
+}
+
 @connect(
     state=>state,
     {updateInfo}
 )
-class personInfo extends React.Component{
+class personInfos extends React.Component{
     constructor(props) {
         super(props)
         this.state={
             portrait:'',
             modal1: false,
+            birth: now,
+            visible: false,
         }
     }
 
@@ -100,9 +109,10 @@ class personInfo extends React.Component{
 
     saveData(state,name){
         if(state){
-            this.props.updateInfo({sex:state},name)
+            this.props.updateInfo(state,name)
         }
     }
+
     onWrapTouchStart = (e) => {
         // fix touch to scroll background page on iOS
         if (!/iPhone|iPod|iPad/i.test(navigator.userAgent)) {
@@ -119,11 +129,15 @@ class personInfo extends React.Component{
             case 'sex':
                 this.setState({'modal1': true})
                 break;
+            case 'birth':
+                this.setState({ visible: true })
+            break;
             default:
                 this.props.history.push(`/center/editinfo/${v.info}`)
                 break;
         }
     }
+
     render(){
         const {user} = this.props
         return (
@@ -155,8 +169,16 @@ class personInfo extends React.Component{
                             </Flex>
                         </Item>
                     ))}
-                </List>
-
+                </List>  
+                <DatePicker
+                    mode="date"
+                    title="选择生日"
+                    minDate = {new Date(1990, 1, 1, 0, 0, 0)}
+                    visible={this.state.visible}
+                    value={this.state.birth}
+                    onOk={birth => { this.saveData({birth:formatDate(birth)},'生日'), this.setState({ visible: false })}}
+                    onDismiss={() => this.setState({ visible: false })}
+                />
                 <Modal
                     visible={this.state.modal1}
                     transparent
@@ -165,7 +187,7 @@ class personInfo extends React.Component{
                     title="请选择您的性别"
                     footer={[
                         { text: '取消', onPress: () => {  this.onClose('modal1')() } },
-                        { text: '确认', onPress: () => { this.saveData(this.state.sex,'性别'); this.onClose('modal1')() } }]}
+                        { text: '确认', onPress: () => { this.saveData({sex:this.state.sex},'性别'); this.onClose('modal1')() } }]}
                         wrapProps={{ onTouchStart: this.onWrapTouchStart }}
                     >
                     <div>
@@ -177,4 +199,6 @@ class personInfo extends React.Component{
         )
     }
 }
+
+let personInfo = createForm()(personInfos)
 export default personInfo
