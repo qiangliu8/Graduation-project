@@ -74,3 +74,10 @@ webpack -d//生成map映射文件，告知哪些模块被最终打包到哪里�
             console.error(err);
         }
     })   
+
+
+
+需要 cnpm 安装的包 ：
+cnpm install array-tree-filter  --save
+cnpm install antd-mobile-demo-data --save
+cnpm install node-sass --save-dev

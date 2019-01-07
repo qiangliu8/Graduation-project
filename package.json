@@ -18,6 +18,8 @@
     "@alicloud/sms-sdk": "^1.1.6",
     "ali-oss": "^6.0.2",
     "antd-mobile": "^2.2.6",
+    "antd-mobile-demo-data": "^0.2.0",
+    "array-tree-filter": "^2.1.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "browser-cookies": "^1.2.0",

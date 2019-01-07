@@ -1,7 +1,7 @@
 import React from 'react'
 import {NavBar, Icon,Flex ,List ,DatePicker,ActionSheet ,Modal,Radio, Picker} from 'antd-mobile'
-//import { district} from 'antd-mobile-demo-data'
-import { createForm } from 'rc-form'
+import { district} from 'antd-mobile-demo-data'
+import arrayTreeFilter from 'array-tree-filter'
 import {connect} from 'react-redux'
 import {data} from 'config/data'
 import {updateInfo} from 'redux/user.redux.js'
@@ -37,7 +37,7 @@ function closest(el, selector) {
     state=>state,
     {updateInfo}
 )
-class personInfos extends React.Component{
+class personInfo extends React.Component{
     constructor(props) {
         super(props)
         this.state={
@@ -45,6 +45,8 @@ class personInfos extends React.Component{
             modal1: false,
             birth: now,
             visible: false,
+            viewvisible:false,
+            pickerValue: ["340000", "341500"],
         }
     }
 
@@ -128,14 +130,32 @@ class personInfos extends React.Component{
         switch(v.info){
             case 'sex':
                 this.setState({'modal1': true})
-                break;
+                break
             case 'birth':
                 this.setState({ visible: true })
-            break;
+                break
+            case 'view':
+                this.setState({ viewvisible: true })
+                break
             default:
                 this.props.history.push(`/center/editinfo/${v.info}`)
-                break;
+                break
         }
+    }
+
+    getSel() {
+        const value = this.state.pickerValue;
+        if (!value) {
+          return '';
+        }
+        const treeChildren = arrayTreeFilter(district, (c, level) => c.value === value[level]);
+        return treeChildren.map(v => v.label).join(',');
+    }
+    
+    onChangeColor = (color) => {
+        this.setState({
+          colorValue: color,
+        });
     }
 
     render(){
@@ -165,7 +185,7 @@ class personInfos extends React.Component{
                         >
                             <Flex>
                                 <p style={{width:'5rem'}}>{v.text}</p>
-                                {user[v.info]?<p className="userinfo set">{user[v.info]}</p>:<p className="userinfo">暂未设置</p>}
+                                {user[v.info]?<p className="userinfo set" title={user[v.info]}>{user[v.info]}</p>:<p className="userinfo">暂未设置</p>}
                             </Flex>
                         </Item>
                     ))}
@@ -179,6 +199,16 @@ class personInfos extends React.Component{
                     onOk={birth => { this.saveData({birth:formatDate(birth)},'生日'), this.setState({ visible: false })}}
                     onDismiss={() => this.setState({ visible: false })}
                 />
+                <Picker
+                    visible={this.state.viewvisible}
+                    data={district}
+                    cols={2}
+                    value={this.state.pickerValue}
+                    onPickerChange={v => {this.setState({ pickerValue: v })}}
+                    onOk={() => {this.saveData({view:this.getSel()},'景点'), this.setState({ viewvisible: false })}}
+                    onDismiss={() => this.setState({ viewvisible: false })}
+                    >
+                </Picker>
                 <Modal
                     visible={this.state.modal1}
                     transparent
@@ -200,5 +230,4 @@ class personInfos extends React.Component{
     }
 }
 
-let personInfo = createForm()(personInfos)
 export default personInfo

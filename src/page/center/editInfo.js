@@ -1,6 +1,5 @@
 import React from 'react'
 import { NavBar, Icon, WhiteSpace,List ,TextareaItem } from 'antd-mobile'
-import { createForm } from 'rc-form'
 import {updateInfo} from 'redux/user.redux.js'
 import {connect} from 'react-redux'
 import {data} from 'config/data'
@@ -12,7 +11,7 @@ import 'scss/center.scss'
  {updateInfo}
 )
 
-class EditInfos extends React.Component{
+class EditInfo extends React.Component{
     constructor(props) {
         super(props)
     }
@@ -33,7 +32,7 @@ class EditInfos extends React.Component{
     render(){
         const info = this.props.match.params.text
         const v = data.find(v=>v.info === info)
-        const { getFieldProps } = this.props.form;
+        // const { getFieldProps } = this.props.form;
         return (
             <div >
                 <NavBar
@@ -58,5 +57,4 @@ class EditInfos extends React.Component{
         )
     }
 }
-let EditInfo =createForm()(EditInfos)
 export default EditInfo 
