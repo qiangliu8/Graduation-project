@@ -11,9 +11,20 @@
     flex-basis: 45%;
 }
 
+//性别男女按钮样式
 .my-radio .am-radio {
     padding: 2.5px;
     border: 1px solid #ccc;
     border-radius: 50%;
     margin-right: 5px;
-  }
+}
+
+
+//发布list样式去掉底部
+.publishPage{
+    .am-list-body{
+        &:before{
+           opacity: 0;
+        }
+    }
+}

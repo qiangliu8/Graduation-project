@@ -81,3 +81,30 @@ webpack -d//生成map映射文件，告知哪些模块被最终打包到哪里�
 cnpm install array-tree-filter  --save
 cnpm install antd-mobile-demo-data --save
 cnpm install node-sass --save-dev
+
+
+后端读取文件和保存文件
+    var des_file = __dirname + "/" + req.files[0].originalname;
+    fs.readFile( req.files[0].path, function (err, data) {
+         fs.writeFile(des_file, data, function (err) {
+          if( err ){
+               console.log( err );
+          }else{
+                response = {
+                    message:'图片上传成功（1/2）', 
+                    filename:req.files[0].originalname
+               }
+               put(req.files[0].originalname,req.files[0].path)
+               .then(result=>{
+                    return res.json({code:0,data:result})
+                })
+               .catch(err=>res.json({code:1,msg:err}))
+           }
+        })
+
+
+
+
+express 文件上传 
+http://www.ptbird.cn/express-multer-single-image-upload.html
+https://github.com/expressjs/multer/blob/master/doc/README-zh-cn.md#singlefieldname

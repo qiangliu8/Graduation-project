@@ -16,6 +16,16 @@ let models = {
         'view':{'type':String},
         'birth':{'type':String},
         'tab':{'type':String},
+    },
+    note: {
+        'userid': { 'type': String, require: true },
+        'mapgroup': { 'type': String, require: true },
+        'content': { 'type': String, require: true, default: '' },
+        'fabulous': { 'type': Number, require: true, default: 0 },
+        'collect': { 'type': Number, require: true, default: 0 },
+        'comment': { 'type': Number, require: true, default: 0 },
+        'address': { 'type': String, default:'' },
+        'create_time': { 'type': Number, default: new Date().getTime() }
     }
 }
 

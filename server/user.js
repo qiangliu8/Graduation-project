@@ -78,30 +78,36 @@ Router.post('/headUpload', function (req, res) {
     if(!userId){
         return res.json.dumps({code:1})
     }
-    var des_file = __dirname + "/" + req.files[0].originalname;
+    // var des_file = __dirname + "/" + req.files[0].originalname;
+    console.log(req.files)
     fs.readFile( req.files[0].path, function (err, data) {
-         fs.writeFile(des_file, data, function (err) {
-          if( err ){
-               console.log( err );
-          }else{
-                response = {
-                    message:'图片上传成功（1/2）', 
-                    filename:req.files[0].originalname
-               }
-               put(req.files[0].originalname,req.files[0].path)
-               .then(result=>{
-                    return res.json({code:0,data:result})
-                })
-               .catch(err=>res.json({code:1,msg:err}))
-           }
-        })
+        put(req.files[0].originalname,req.files[0].path)
+        .then(result=>{
+             return res.json({code:0,data:result})
+         })
+        .catch(err=>res.json({code:1,msg:err}))
+        //  fs.writeFile(des_file, data, function (err) {
+        //   if( err ){
+        //        console.log( err );
+        //   }else{
+        //         response = {
+        //             message:'图片上传成功（1/2）', 
+        //             filename:req.files[0].originalname
+        //        }
+        //        put(req.files[0].originalname,req.files[0].path)
+        //        .then(result=>{
+        //             return res.json({code:0,data:result})
+        //         })
+        //        .catch(err=>res.json({code:1,msg:err}))
+        //    }
+        // })
     })
 })
 
 Router.post('/update',function(req,res){
     const body= req.body
     const userId = req.cookies.userId
-    console.log(body)
+    // console.log(body)
     if (!userId) {
         return res.json.dumps({code:1})
     }

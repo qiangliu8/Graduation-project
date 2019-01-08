@@ -53,7 +53,7 @@ class personCenter extends React.Component{
                 </NavBar>
                 <Flex justify="between" className="headPart">
                     <Flex>
-                        <div className="icon-head portrait"></div>
+                        {user.portrait?<img src={user.portrait} className="portrait"/>:<img className="icon-head portrait"/>}
                         <p style={{fontSize:'22px',marginRight:'2px'}}>{user.name}</p>
                         <div className="icon-boy"></div>
                     </Flex>

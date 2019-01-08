@@ -24,6 +24,15 @@ class HomePage extends React.Component{
             },
             { 
                 title:'',
+                key:'publish',
+                path:'/publish',
+                icon:'publish',
+                badge:0,
+                className:'icon-publish',
+                seclassName:'icon-publish_select',
+            },
+            { 
+                title:'',
                 key:'talk',
                 path:'/talk',
                 icon:'talk',

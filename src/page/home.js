@@ -1,5 +1,7 @@
 import React from 'react'
 import { SearchBar,Icon, WingBlank,Flex,List , WhiteSpace,Carousel } from 'antd-mobile';
+import {getNoteList} from 'api/note'
+import Brief from 'component/briefCard'
 import 'scss/home.scss'
 
 const Item = List.Item
@@ -13,6 +15,7 @@ class Home extends React.Component{
         }
       }
       componentDidMount() {
+        getNoteList()
         // simulate img loading
     //     setTimeout(() => {
     //       this.setState({
@@ -20,7 +23,7 @@ class Home extends React.Component{
     //       });
     //     }, 100);
     //   }
-}
+    }
     render(){
         return (
             <div>
@@ -63,12 +66,18 @@ class Home extends React.Component{
                                 <p onClick={(e)=>console.log(e.target.innerHTML)}>综合</p>
                                 <p onClick={(e)=>console.log(e.target.innerHTML)}>最热</p>
                                 <p onClick={(e)=>console.log(e.target.innerHTML)}>最新</p>
-                                <p onClick={(e)=>console.log(e.target.innerHTML)}>筛选</p>
+                                <div onClick={(e)=>console.log(e.target.innerHTML)}style={{height:'24px'}}><p style={{display:'inline-block',marginRight: '-2px'}}>筛选</p><div className="icon-sort"></div></div>
                             </Flex>
                             }>
                             {}1篇攻略
                     </Item>
                 </List>
+                <div className="breifList">
+                    <Brief/>
+                    <Brief/>
+                    <Brief/>
+                    <Brief/>
+                </div>
             </div>
         )
     }

@@ -12,7 +12,7 @@ let client = new OSS({
 //简单上传
 function put (name,path) {
     return new Promise ((reslove,reject)=>{
-        let result = client.put(name, path)
+        let result = client.put('portrait/' +name, path)
         if(result){
             reslove(result)
         }else{
@@ -20,7 +20,23 @@ function put (name,path) {
         } 
     }) 
 }
-
+//多文件上传
+function putnote (name,path) {
+    return new Promise ((reslove,reject)=>{
+        let result = client.put('noteImg/' +name, path)
+        if(result){
+            reslove(result)
+        }else{
+            reject('上传失败')
+        } 
+    }) 
+}
+//文件上传
+async function uploadlogo(name,path){
+    const result1 = await client.put('noteImg/' +name, path)
+    // const result2 = await client.signatureUrl(name);
+    return result1
+}
 
 async function uploadlogo(name,path){
     const result1 = await put(name, path)
@@ -124,7 +140,7 @@ function httpget (name) {
 //   putStream()
 module.exports = {
     put,
-    getBuffer,
+    putnote,
     putStream,
     allBuffer,
     multipartUpload,

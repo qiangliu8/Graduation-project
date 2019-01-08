@@ -2,6 +2,7 @@ import personCenter from 'page/center/center'
 import personInfo from 'page/center/info'
 import EditInfo from 'page/center/editinfo'
 import Home from 'page/home'
+import Publish from 'page/publish'
 import Talk from 'page/talk'
 
 export const mainRoutes = [
@@ -21,6 +22,13 @@ export const mainRoutes = [
     { 
         path:'/talk',
         component:Talk,
+        children:[
+
+        ]
+    },
+    { 
+        path:'/publish',
+        component:Publish,
         children:[
 
         ]

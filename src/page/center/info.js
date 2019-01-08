@@ -64,7 +64,7 @@ class personInfo extends React.Component{
          $("input[type='file']").change(()=>{   
             var file = $("input[type='file']").get(0).files[0]
             var data = new FormData();
-            data.append('file', file);
+            data.append('image', file);
             headUpload(data).then(result=>{
                 if(result.data.code===0){
                     this.setState({portrait:result.data.data.url},()=>{                 

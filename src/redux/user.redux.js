@@ -93,7 +93,7 @@ export function getUserInfo (userinfo) {
     // userinfo?{ type: LOAD_DATA, payload:{isAuth:false}}:
 }
 
-export function updateInfo(data,name){
+export function updateInfo(data,name='头像'){
     return dispatch=>{
         update(data).then(res => {
             if (res.status === 200 && res.data.code === 0) {

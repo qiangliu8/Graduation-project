@@ -5,40 +5,201 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script>
-    function getvl(obj){
-        debugger
-//判断浏览器
-        var Sys = {};
-        var ua = navigator.userAgent.toLowerCase();
-        var s;
-        (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
-            (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
-                (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
-                    (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
-                        (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
-        var file_url="";
-        if(Sys.ie<="6.0"){
-            //ie5.5,ie6.0
-            file_url = obj.value;
-        }else if(Sys.ie>="7.0"){
-            //ie7,ie8
-            obj.select();
-            file_url = document.selection.createRange().text;
-        }else if(Sys.firefox){
-            //fx
-            //file_url = document.getElementById("file").files[0].getAsDataURL();//获取的路径为FF识别的加密字符串
-            file_url = readFileFirefox(obj);
-        }else if(Sys.chrome){
-            file_url = obj.value;
-        }
-        //alert(file_url);
-        document.getElementById("text").innerHTML="获取文件域完整路径为："+file_url;
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=PT+Mono');
+
+$bg: #4F000B;
+$itemBg1: #720026;
+$itemBg2: #CE4257;
+$itemBg3: #FFC093;
+$itemBg4: #FF7F51;
+$counterBg: #222;
+
+@mixin setColorAndHover($baseColor) {
+  color: $baseColor;
+  &:hover {
+    background: lighten($baseColor, 8%);
+  }
+}
+
+body,
+html {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: $bg;
+  font-family: "PT Mono", monospace;
+}
+
+.masonry {
+  column-count: 1;
+  column-gap: 0;
+  counter-reset: item-counter;
+  
+  @media screen and (min-width: 400px) {
+    column-count: 2;
+  }
+  
+  @media screen and (min-width: 600px) {
+    column-count: 3;
+  }
+  
+  @media screen and (min-width: 800px) {
+    column-count: 4;
+  }
+  
+  @media screen and (min-width: 1100px) {
+    column-count: 5;
+  }
+}
+
+.item {
+  box-sizing: border-box;
+  break-inside: avoid;
+  padding: 10px;
+  counter-increment: item-counter;
+
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 220px;
+    font-size: 40px;
+    color: darken($bg, 5%);
+    background: currentColor;
+    box-sizing: border-box;
+    @include setColorAndHover($itemBg1);
+    
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 13px;
+      width: 2em;
+      height: 2em;
+      line-height: 2em;
+      text-align: center;
+      font-weight: bold;
+      background-color: $counterBg;
+      content: counter(item-counter);
     }
-    </script>
+    
+    &:after {
+      color: darken($bg, 10%);
+      content: 'ಠ‿ಠ';
+    }
+    
+    &--small {
+      @include setColorAndHover($itemBg2);
+      height: 100px;
+      
+      &:after {
+        content: '♥◡♥';
+      }
+    }
+    
+    &--medium {
+      @include setColorAndHover($itemBg3);
+      height: 175px;
+      
+      &:after {
+        content: '◔ᴗ◔';
+      }
+    }
+    
+    &--large {
+      @include setColorAndHover($itemBg4);
+      height: 280px;
+      
+      &:after {
+        content: 'ಠ_๏';
+      }
+    }
+  }
+}
+    </style>
+
 </head>
 <body>
-    <div id="text" style="color:#f00;"></div>
-    <input type="file" id="file" onchange="getvl(this)" />
+    <div class="masonry">
+        <div class="item">
+          <div class="item__content">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content item__content--small">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content item__content--medium">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content item__content--small">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content item__content--medium">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content item__content--large">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content item__content--medium">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content item__content--small">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content item__content--large">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content item__content--small">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content item__content--large">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content item__content--medium">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content item__content--small">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content item__content--medium">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content">
+          </div>
+        </div>
+        <div class="item">
+          <div class="item__content item__content--small">
+          </div>
+        </div>
+      </div>
 </body>
 </html>
