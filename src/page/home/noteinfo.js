@@ -1,12 +1,14 @@
 import React from 'react'
-import {  NavBar, Icon,List,Carousel,Flex} from 'antd-mobile';
-import {getNoteInfo} from 'api/note'
+import { NavBar, Icon,List,Carousel,Flex} from 'antd-mobile';
+import {getNoteInfo, noteFabulous} from 'api/note'
+import cookies from 'browser-cookies'
+
 const Item = List.Item
+
 class NoteInfo extends React.Component{
     constructor(props) {
         super(props)
         this.state={
-            
         }
     }
 
@@ -15,7 +17,14 @@ class NoteInfo extends React.Component{
             this.setState({noteinfo:result.data.data})
         })
     }
-
+    fabulous(){
+        // id:cookies.get('userId'),fabulous:this.state.noteinfo.fabulous,_id:this.state.noteinfo._id
+        noteFabulous(this.state).then(res=>{
+            if(res.data.code ===0){
+                console.log('点赞成功')
+            }
+        })
+    }
     render(){
         const {noteinfo} = this.state
         return (
@@ -48,7 +57,7 @@ class NoteInfo extends React.Component{
                                 <p className="noteContent">{noteinfo.content.split('\n').map(v=><span key={Math.random()}>{v}<br/></span>)}</p>
                                 <Flex justify="end" className="noteNumber">
                                     <div className = "briefimg icon-fabulous"/>  
-                                    <p>{noteinfo.fabulous}</p>
+                                    <p onClick={()=>this.fabulous()}>{noteinfo.fabulous}</p>
                                     <div className = "briefimg icon-collect"/>
                                     <p>{noteinfo.collect}</p>
                                     <div className = "briefimg icon-comment"/>

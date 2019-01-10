@@ -73,4 +73,21 @@ Router.post('/noteImgUpload',function(req,res){
     })
 })
 
+//点赞攻略
+Router.post('/notefabulous',function(req,res){
+    const userId = req.cookies.userId
+    if(!userId){
+        return res.json.dumps({code:1})
+    }
+    const {id,_id,fabulous} =req.body 
+    Note.findByIdAndUpdate(_id,{'fabulous':fabulous+1},function(err,doc){
+        if (err) {
+            console.log("Error:" + err);
+        }
+        else {
+            console.log("Res:" + doc);
+        }
+        return res.json({ code: 0, msg:'点赞成功！' })
+    })
+})
 module.exports = Router

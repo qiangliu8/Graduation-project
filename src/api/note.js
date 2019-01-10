@@ -17,9 +17,11 @@ const noteImgUpload = data => axios({
     processData: false,
 })
 
+const noteFabulous = data => axios.post('/note/notefabulous',data)
 
 module.exports = {
     getNoteList,
     noteImgUpload,
-    getNoteInfo
+    getNoteInfo,
+    noteFabulous
 }

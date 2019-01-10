@@ -4,8 +4,10 @@ import NoteImgUpload from 'component/noteimgupload'
 import {noteImgUpload} from 'api/note'
 import { Toast } from 'antd-mobile'
 import 'scss/publish.scss'
+import { withRouter } from 'react-router-dom'
 
 
+@withRouter
 class Publish extends React.Component{
     constructor(props) {
         super(props)
@@ -23,8 +25,7 @@ class Publish extends React.Component{
         data.append('title', this.state.title)
         noteImgUpload(data).then(result=>{
             if(result.data.code===0){
-                Toast.info(`发表成功！`, 2, null, false);
-                // this.setState({imgUrl:result.data.data})
+                Toast.info(`发表成功！`, 0.9, ()=>{this.props.history.push('/home')}, false)
             }
         })
     }
