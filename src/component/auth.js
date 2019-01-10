@@ -32,7 +32,7 @@ class Auth extends React.Component{
         <div>
             {isAuth?((['/auth','/login','/register']).includes(pathname)&&redirectTo?<Redirect to={redirectTo}/>:null)
             :
-            ((['/home','/talk','/center']).includes(pathname)&&redirectTo?<Redirect to={redirectTo}/>:null
+            ((['/home','/talk','/center','/publish']).includes(pathname)&&redirectTo?<Redirect to={redirectTo}/>:null
             )}
         </div>    
         )

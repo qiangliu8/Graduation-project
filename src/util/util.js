@@ -13,14 +13,14 @@ export function HocFrom(Comp){
             this.setState({[key]:val})
         }
         render(){
-            return <Comp handleChange={(key,val)=>this.handleChange(key,val)} handleChange={(key,val)=>this.handleChange(key,val)} state={this.state} {...this.props}></Comp>
+            return <Comp handleChange={(key,val)=>this.handleChange(key,val)}  state={this.state} {...this.props}></Comp>
         }
     }
 }
 
 //正则校验手机号
 export function checkMobile(mobile){
-    if(!(/^1[3|4|5|8][0-9]\d{8}$/).test(mobile)){
+    if(!(/^1[1-9][0-9]\d{8}$/).test(mobile)){
         Toast.info('不是完整的11位手机号或者正确的手机号', 1)
         return false;
     }

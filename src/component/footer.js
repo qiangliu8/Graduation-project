@@ -39,6 +39,7 @@ class Footer extends React.Component{
                  selected={this.props.location.pathname.includes(v.path)}
                  badge={v.badge}
                  onPress={() => {
+                  //  debugger
                    this.props.history.push(v.path)
                  }}
                  data-seed="logId"

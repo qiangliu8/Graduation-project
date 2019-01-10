@@ -1,6 +1,6 @@
 import React from 'react'
-import { ImagePicker ,SegmentedControl } from 'antd-mobile';
-import {noteImgUpload} from 'api/note'
+import { ImagePicker } from 'antd-mobile'
+
 class NoteImgUpload extends React.Component{
     constructor(props){
         super(props)
@@ -9,25 +9,10 @@ class NoteImgUpload extends React.Component{
         }
     }
 
-    onChange = (files, type, index) => {
-        var data = new FormData();
-        files.map(v=>{
-            var file = v.file
-            data.append('image', file);
-        })
-        noteImgUpload(data).then(result=>{
-            if(result.data.code===0){
-                debugger
-                // this.setState({portrait:result.data.data.url},()=>{                 
-                //     this.props.updateInfo(this.state)
-                // })    
-            }
-        })
+    onChange(files, type, index) {
         this.setState({
           files,
-        },()=>{
-            // console.log(this.state.files[0].file)
-        })
+        });
     }
     render(){
         const { files } = this.state
@@ -35,12 +20,11 @@ class NoteImgUpload extends React.Component{
            <div>
                 <ImagePicker
                 files={files}
-                onChange={this.onChange}
+                onChange={(files, type, index) =>{this.onChange(files, type, index),this.props.uploads(files)}}
                 onImageClick={(index, fs) => console.log(index, fs)}
-                selectable={files.length < 7}
+                 selectable={files.length < 7}
                 multiple={true}
-                />
-                
+                />         
             </div>
         )
     }

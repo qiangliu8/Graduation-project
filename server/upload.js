@@ -20,16 +20,15 @@ function put (name,path) {
         } 
     }) 
 }
+
 //多文件上传
-function putnote (name,path) {
-    return new Promise ((reslove,reject)=>{
-        let result = client.put('noteImg/' +name, path)
-        if(result){
-            reslove(result)
-        }else{
-            reject('上传失败')
-        } 
-    }) 
+function putnotes (files) {
+    return Promise.all(files.map(v=>{
+        return new Promise((resolve, reject) => {
+            let result = client.put('noteImg/' +v.originalname, v.path)
+            resolve(result)
+        })
+    }))
 }
 //文件上传
 async function uploadlogo(name,path){
@@ -140,8 +139,7 @@ function httpget (name) {
 //   putStream()
 module.exports = {
     put,
-    putnote,
-    putStream,
+    putnotes,
     allBuffer,
     multipartUpload,
     allBuffers,

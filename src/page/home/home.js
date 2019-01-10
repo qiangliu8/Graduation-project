@@ -12,10 +12,13 @@ class Home extends React.Component{
         this.state={
             data: ['1', '2', '3'],
             imgHeight: 176,
+            dataList:[]
         }
       }
       componentDidMount() {
-        getNoteList()
+        getNoteList().then(result=>{
+            this.setState({dataList:result.data.data})
+        })
         // simulate img loading
     //     setTimeout(() => {
     //       this.setState({
@@ -25,6 +28,7 @@ class Home extends React.Component{
     //   }
     }
     render(){
+        const {dataList} = this.state
         return (
             <div>
                 <WhiteSpace/>
@@ -48,7 +52,7 @@ class Home extends React.Component{
                             style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
                           >
                             <img
-                              src={require(`../assets/scenery/view${val}.jpg`)}
+                              src={require(`../../assets/scenery/view${val}.jpg`)}
                               alt=""
                               style={{ width: '100%', verticalAlign: 'top',height:'11rem' }}
                               onLoad={() => {
@@ -73,10 +77,7 @@ class Home extends React.Component{
                     </Item>
                 </List>
                 <div className="breifList">
-                    <Brief/>
-                    <Brief/>
-                    <Brief/>
-                    <Brief/>
+                    {dataList?dataList.map(v=><Brief state={v} key={v._id}/>):null}
                 </div>
             </div>
         )

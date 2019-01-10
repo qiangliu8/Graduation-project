@@ -18,8 +18,9 @@ let models = {
         'tab':{'type':String},
     },
     note: {
-        'userid': { 'type': String, require: true },
-        'mapgroup': { 'type': String, require: true },
+        'userId': { 'type': Object, require: true },
+        'mapgroup': { 'type': Array, require: true },
+        "title":{ 'type': String, require: true, default: '' },
         'content': { 'type': String, require: true, default: '' },
         'fabulous': { 'type': Number, require: true, default: 0 },
         'collect': { 'type': Number, require: true, default: 0 },

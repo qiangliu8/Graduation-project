@@ -1,7 +1,8 @@
 import personCenter from 'page/center/center'
 import personInfo from 'page/center/info'
 import EditInfo from 'page/center/editinfo'
-import Home from 'page/home'
+import NoteInfo from 'page/home/noteinfo'
+import Home from 'page/home/home'
 import Publish from 'page/publish'
 import Talk from 'page/talk'
 
@@ -16,6 +17,14 @@ export const mainRoutes = [
     { 
         path:'/home',
         component:Home,
+        exact:true,
+        children:[
+        ]
+    },
+    { 
+        path:'/home/noteinfo/:id',
+        component:NoteInfo,
+        exact:true,
         children:[
         ]
     },

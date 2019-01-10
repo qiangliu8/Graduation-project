@@ -1,5 +1,5 @@
 import {dispatch} from 'redux'
-import { Toast } from 'antd-mobile';
+import { Toast } from 'antd-mobile'
 import axios from 'axios'
 import {toRegister ,toLogin,update} from 'api/user'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'

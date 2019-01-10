@@ -35,6 +35,7 @@ Router.get('/userinfo',function(req,res){
 //发送注册验证码
 Router.post('/sendcode', function (req, res) {
     const {mobile,code}  = req.body
+    console.log(code)
      //if(sendSerifly(SMSClient,mobile,serify)){
         if(true){
         return res.json({code:0,msg:'短信发送成功，请及时接收！'})
