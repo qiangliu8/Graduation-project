@@ -43,6 +43,10 @@ let models = {
         'comment': { 'type': String, require: true,default: '' },
         'noteId': { 'type': Object, require: true },
         'creat_time':{'type':Number,default:new Date().getTime()}
+    },
+    follow:{
+        'userId': { 'type': Object, require: true },
+        'followId': { 'type': Object, require: true },
     }
 }
 

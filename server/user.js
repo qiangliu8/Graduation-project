@@ -2,7 +2,9 @@ const express = require('express')
 const Router = express.Router()
 const UserModel = require('./model')
 const User = UserModel.getModel('user')
+const Follow = UserModel.getModel('follow')
 const utils = require('utility')
+const mongoose = require('mongoose')
 const SMSClient = require ('@alicloud/sms-sdk')
 var fs = require("fs");
 const {sendSerifly,loginSerifly} = require('../src/util/server')
@@ -104,7 +106,7 @@ Router.post('/headUpload', function (req, res) {
         // })
     })
 })
-
+//更新其他信息
 Router.post('/update',function(req,res){
     const body= req.body
     const userId = req.cookies.userId
@@ -121,10 +123,35 @@ Router.post('/update',function(req,res){
         }
     })
 })
-
+//m5 加密
 function md5Pwd (pwd) {
     const mds = 'qiang_'
     return utils.md5(utils.md5(mds+pwd))
 }
+
+//关注别人
+Router.post('/userfollow',function(req,res){
+    const userId= req.cookies.userId
+    if(!userId){
+        return res.json({code:1})
+    }
+    const followId = req.body.userId
+    if( userId === followId){
+        return  res.json({code:1,msg:'关注对象不能是本人！'})
+    }
+    Follow.findOne({'userId':mongoose.Types.ObjectId(userId),'followId':mongoose.Types.ObjectId(followId)},function(err,doc){
+        if(doc){
+          return  res.json({code:1,msg:'您已关注该用户！'})
+        }
+        const noteModel = new Follow({userId:mongoose.Types.ObjectId(userId),'followId':mongoose.Types.ObjectId(followId)})
+        noteModel.save(function(e,d){
+            if(e){
+                 return  res.json({code:1,msg:'异常'})
+            }
+            return res.json({code:0,msg:'关注成功！'})
+        })
+    })
+})
+
 
 module.exports = Router

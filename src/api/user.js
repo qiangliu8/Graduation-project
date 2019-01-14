@@ -31,11 +31,14 @@ const headUpload = data => axios({
 //更新数据
 const update = data =>axios.post('/user/update',data)
 
+//关注某用户
+const Follow = userId => axios.post('/user/userfollow',userId)
 module.exports = {
     sendSerifly,
     getUserinfo,
     toRegister,
     toLogin,
     headUpload,
-    update
+    update,
+    Follow
 }

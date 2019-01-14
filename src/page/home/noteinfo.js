@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavBar, Icon,List,Carousel,Flex,Toast} from 'antd-mobile';
 import {getNoteInfo, noteEvent,getNoteToDo} from 'api/note'
+import {Follow} from 'api/user'
 import cookies from 'browser-cookies'
 import {withRouter} from 'react-router-dom'
 const Item = List.Item
@@ -24,6 +25,7 @@ class NoteInfo extends React.Component{
         })
         
     }
+
     toDoEvent(noteinfo,event){
         noteEvent(noteinfo,event).then(res=>{
             if(res.status ===200){
@@ -50,7 +52,17 @@ class NoteInfo extends React.Component{
             }
         })
     }
+
     toComment = (state) =>this.props.history.push(`/home/noteinfo/comment/${state._id}`)
+
+    tofollow = () =>{ 
+        Follow(this.state.noteinfo).then(res=>{
+            if(res.data.code == 0){
+                Toast.info(res.data.msg, 1.9, null, false)
+            }
+        })
+    }
+
     render(){
         const {noteinfo} = this.state
         const {status} = this.state
@@ -62,7 +74,7 @@ class NoteInfo extends React.Component{
                 onLeftClick={() => this.props.history.goBack()}
                 >发现</NavBar>
                 {noteinfo?(<div><List  className="my-list">
-                                    <Item extra={'收藏'}><img src = {noteinfo.portrait} style={{width:'25px',height:'25px',borderRadius:'50%', marginRight:'5px'}}/>{noteinfo.name}</Item>
+                                    <Item extra={<span onClick={()=>this.tofollow()}>关注</span>}><img src = {noteinfo.portrait} style={{width:'25px',height:'25px',borderRadius:'50%', marginRight:'5px'}}/>{noteinfo.name}</Item>
                                 </List>
                                 <Carousel className="space-carousel"
                                     frameOverflow="visible"
