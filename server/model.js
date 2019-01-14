@@ -22,11 +22,27 @@ let models = {
         'mapgroup': { 'type': Array, require: true },
         "title":{ 'type': String, require: true, default: '' },
         'content': { 'type': String, require: true, default: '' },
-        'fabulous': { 'type': Number, require: true, default: 0 },
-        'collect': { 'type': Number, require: true, default: 0 },
-        'comment': { 'type': Number, require: true, default: 0 },
+        // 'fabulous': { 'type': Number, require: true, default: 0 },
+        // 'collect': { 'type': Number, require: true, default: 0 },
+        // 'comment': { 'type': Number, require: true, default: 0 },
         'address': { 'type': String, default:'' },
         'create_time': { 'type': Number, default: new Date().getTime() }
+    },
+    fabulous:{
+        'userId': { 'type': Object, require: true },
+        'noteId': { 'type': Object, require: true },
+        'create_time': { 'type': Number, default: new Date().getTime() }
+    },
+    collect:{
+        'userId': { 'type': Object, require: true },
+        'noteId': { 'type': Object, require: true },
+        'create_time': { 'type': Number, default: new Date().getTime() }
+    },
+    comment:{
+        'userId': { 'type': Object, require: true },
+        'comment': { 'type': String, require: true,default: '' },
+        'noteId': { 'type': Object, require: true },
+        'creat_time':{'type':Number,default:new Date().getTime()}
     }
 }
 

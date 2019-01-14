@@ -22,7 +22,7 @@ class BriefCrad extends React.Component{
                         </div>
                         <div className="briefInfo right">
                             <div className = "briefimg icon-fabulous"/>
-                            <p>{state.fabulous}</p>
+                            <p style={{fontSize: '18px'}}>{state.fabulous}</p>
                         </div>
                     </div>
                 </div>

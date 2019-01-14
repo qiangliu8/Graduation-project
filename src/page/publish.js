@@ -1,11 +1,11 @@
 import React from 'react'
-import { Button, NavBar ,List, TextareaItem,InputItem, WingBlank  } from 'antd-mobile'
+import { Button, NavBar ,List, TextareaItem,InputItem, Toast  } from 'antd-mobile'
 import NoteImgUpload from 'component/noteimgupload'
+import {tarbarList} from 'config/data'
 import {noteImgUpload} from 'api/note'
-import { Toast } from 'antd-mobile'
-import 'scss/publish.scss'
 import { withRouter } from 'react-router-dom'
-
+import Footer from 'component/footer'
+import 'scss/publish.scss'
 
 @withRouter
 class Publish extends React.Component{
@@ -52,6 +52,7 @@ class Publish extends React.Component{
                             onChange={e=>{this.handleChange('content',e)}}
                         />
                     </List>
+                    <Footer tarbarList={tarbarList}></Footer>
             </div>
         )
     }

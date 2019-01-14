@@ -1,7 +1,9 @@
 import React from 'react'
-import { SearchBar,Icon, WingBlank,Flex,List , WhiteSpace,Carousel } from 'antd-mobile';
+import { SearchBar,Icon, WingBlank,Flex,List , WhiteSpace,Carousel} from 'antd-mobile';
 import {getNoteList} from 'api/note'
+import {tarbarList} from 'config/data'
 import Brief from 'component/briefCard'
+import Footer from 'component/footer'
 import 'scss/home.scss'
 
 const Item = List.Item
@@ -79,6 +81,7 @@ class Home extends React.Component{
                 <div className="breifList">
                     {dataList?dataList.map(v=><Brief state={v} key={v._id}/>):null}
                 </div>
+                <Footer tarbarList={tarbarList}></Footer>
             </div>
         )
     }

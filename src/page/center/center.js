@@ -1,8 +1,9 @@
 import React from 'react'
 import { NavBar, Icon, Flex,WhiteSpace,List  } from 'antd-mobile'
-import { NavLink,} from 'react-router-dom'
+import {tarbarList} from 'config/data'
 import {connect} from 'react-redux'
 import {logout} from 'redux/user.redux.js'
+import Footer from 'component/footer'
 import cookies from 'browser-cookies'
 import 'scss/center.scss'
 
@@ -72,6 +73,7 @@ class personCenter extends React.Component{
                 <List className="my-list" >
                 <Item onClick={()=>this.logout()}>退出登录</Item>
                 </List>
+                <Footer tarbarList={tarbarList}></Footer>
             </div>
         )
     }

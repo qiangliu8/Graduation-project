@@ -1,6 +1,6 @@
 import React from 'react'
-import { NavBar, Icon,List,Carousel,Flex} from 'antd-mobile';
-import {getNoteInfo, noteFabulous} from 'api/note'
+import { NavBar, Icon,List,Carousel,Flex,Toast} from 'antd-mobile';
+import {getNoteInfo, noteEvent,getNoteToDo} from 'api/note'
 import cookies from 'browser-cookies'
 
 const Item = List.Item
@@ -9,24 +9,52 @@ class NoteInfo extends React.Component{
     constructor(props) {
         super(props)
         this.state={
+            status:{}
         }
     }
 
     componentDidMount(){
         getNoteInfo(this.props.match.params).then(result=>{
+            getNoteToDo(result.data.data).then(result1=>{
+                this.setState({status:result1.data.data})
+            })
             this.setState({noteinfo:result.data.data})
         })
+        
     }
-    fabulous(){
-        // id:cookies.get('userId'),fabulous:this.state.noteinfo.fabulous,_id:this.state.noteinfo._id
-        noteFabulous(this.state).then(res=>{
-            if(res.data.code ===0){
-                console.log('点赞成功')
+    toDoEvent(noteinfo,event){
+        noteEvent(noteinfo,event).then(res=>{
+            if(res.status ===200){
+                Toast.info(res.data.msg, 1.9, null, false)
+                if(res.data.code == 0){
+                    let data,num
+                    switch(event){
+                        case 'fabulous':
+                            data = {fabulous:true}
+                            num = {fabulous:res.data.data}
+                            break
+                        case 'collect':
+                            data = {collect:true}
+                            num = {collect:res.data.data}
+                            break
+                        case 'comment':
+                            data = {comment:true}
+                            num = {comment:res.data.data}
+                            break
+                        default:
+                            data = {}
+                            num = {}
+                    }
+                    this.setState({
+                        status:{...this.state.status,...data},
+                        noteinfo:{...noteinfo,...num}})
+                }
             }
         })
     }
     render(){
         const {noteinfo} = this.state
+        const {status} = this.state
         return (
             <div className="noteInfo">
                 <NavBar
@@ -56,12 +84,12 @@ class NoteInfo extends React.Component{
                                 </Carousel>
                                 <p className="noteContent">{noteinfo.content.split('\n').map(v=><span key={Math.random()}>{v}<br/></span>)}</p>
                                 <Flex justify="end" className="noteNumber">
-                                    <div className = "briefimg icon-fabulous"/>  
-                                    <p onClick={()=>this.fabulous()}>{noteinfo.fabulous}</p>
-                                    <div className = "briefimg icon-collect"/>
-                                    <p>{noteinfo.collect}</p>
+                                    <div className = {status.fabulous?"briefimg icon-fabulous_select":"briefimg icon-fabulous"}/>  
+                                    <p onClick={()=>this.toDoEvent(noteinfo,'fabulous')}>{noteinfo.fabulous||0}</p>
+                                    <div className = {status.collect?"briefimg icon-collect_select":"briefimg icon-collect"}/>
+                                    <p onClick={()=>this.toDoEvent(noteinfo,'collect')}>{noteinfo.collect||0}</p>
                                     <div className = "briefimg icon-comment"/>
-                                    <p>{noteinfo.fabulous}</p>
+                                    <p onClick={()=>this.toComment(noteinfo,'comment')}>{noteinfo.comment||0}</p>
                                 </Flex>
                                 </div>):null}
             </div>

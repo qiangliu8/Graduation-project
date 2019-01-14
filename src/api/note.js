@@ -8,6 +8,8 @@ const getNoteList = () => axios.get('/note/notelist')
 //获取攻略详情
 const getNoteInfo = id => axios.post('/note/noteinfo',id)
 
+//获取用户是否点赞或者评论
+const getNoteToDo = ({_id}) => axios.post('/note/noteToDo',{_id} )
 //用户头像上传
 const noteImgUpload = data => axios({
     url: '/note/noteImgUpload',
@@ -17,11 +19,16 @@ const noteImgUpload = data => axios({
     processData: false,
 })
 
-const noteFabulous = data => axios.post('/note/notefabulous',data)
+//点赞攻略
+const noteEvent = ({_id},event) => axios.post('/note/noteEvent',{_id,event})
+//收藏攻略
+const noteCollect = ({_id}) => axios.post('/note/noteCollect',{_id})
 
 module.exports = {
     getNoteList,
     noteImgUpload,
+    getNoteToDo,
     getNoteInfo,
-    noteFabulous
+    noteEvent,
+    noteCollect
 }

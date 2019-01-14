@@ -98,7 +98,6 @@ z-index: 1;
 
 .noteInfo{
     background:white;
-    margin-bottom: 50px;
     .noteContent{
         padding: 1rem;
         font-size: 18px;
@@ -107,6 +106,9 @@ z-index: 1;
         padding: 1rem;
         .briefimg{
         margin-left: 1rem;
+    }
+    p{
+        font-size: 22px;
     }
     }
 

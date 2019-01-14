@@ -42,3 +42,42 @@ export const data=[
         count:100
     }
 ]
+
+export const tarbarList= [
+    { 
+        title:'',
+        key:'home',
+        path:'/home',
+        icon:'home',
+        badge:0,
+        className:'icon-home',
+        seclassName:'icon-home_select',
+    },
+    { 
+        title:'',
+        key:'publish',
+        path:'/publish',
+        icon:'publish',
+        badge:0,
+        className:'icon-publish',
+        seclassName:'icon-publish_select',
+    },
+    { 
+        title:'',
+        key:'talk',
+        path:'/talk',
+        icon:'talk',
+        badge:1,
+        className:'icon-talk',
+        seclassName:'icon-talk_select',
+    },
+    { 
+        title:'',
+        key:'center',
+        icon:'center',
+        path:'/center',
+        badge:0,
+        className:'icon-center',
+        seclassName:'icon-center_select',
+    },
+]
