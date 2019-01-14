@@ -149,9 +149,6 @@ Router.post('/noteEvent',function(req,res){
             case 'collect':
                 userModels =  new Collects(body) 
                 break
-            case 'comment':
-                userModels =  new Comments(body) 
-                break
             default :
                 userModels = new Fabulous(body) 
         }
@@ -170,29 +167,13 @@ Router.post('/noteEvent',function(req,res){
     })
 })
 
-//评论攻略
-Router.post('/noteComment',function(req,res){
-    const userId = req.cookies.userId
-    if(!userId){
-        return res.json.dumps({code:1})
-    }
-    const {_id} =req.body 
-    const body = {'userId':mongoose.Types.ObjectId(userId),'noteId':mongoose.Types.ObjectId(_id)}
-        const userModel = new Fabulous(body) 
-        userModel.save(function(e,d){
-            if(e){
-                return res.json({code:1,msg:'异常'})
-            }
-            return res.json({code:0,msg:'评论成功'})
-    })
-})
 //查询用户是否点赞评论过该攻略
 Router.post('/noteToDo',function(req,res){
     const userId = req.cookies.userId
     if(!userId){
         return res.json.dumps({code:1})
     }
-    const {_id} =req.body 
+    const {_id} = req.body 
     const body = {'userId':mongoose.Types.ObjectId(userId),'noteId':mongoose.Types.ObjectId(_id)}
     let data ={}
     // "fabulous":{"$elemMatch":{'noteId':mongoose.Types.ObjectId(_id)}}
@@ -243,6 +224,49 @@ Router.post('/noteToDo',function(req,res){
     //         // if(doc[0].comment) data.comment= doc[0].comment
     //         return res.json({code:0,data:doc})
     //     })
+})
+
+//查询评论列表
+Router.post('/noteComment',function(req,res){
+    const {id} = req.body
+    Comments.aggregate([{"$match":{"noteId":mongoose.Types.ObjectId(id)}
+        },{$lookup:{
+            from:'users',
+            localField:"userId",
+            foreignField:'_id',
+            as:"user"
+        }},
+        {$project:{  
+            'creat_time':1,
+            'comment':1,
+            'name': {'$arrayElemAt':['$user.name', 0]},
+            'portrait': {'$arrayElemAt':['$user.portrait', 0]},
+        }},
+        { $sort : { creat_time : 1}},
+        {$limit:6}
+        ],function(err,doc){
+            Comments.find({"noteId":mongoose.Types.ObjectId(id)}).count(function(err,docs){
+                return res.json({code:0,data:{list:doc,num:docs}})
+            })
+    })
+
+})
+
+//发送评论
+Router.post('/sendComment',function(req,res){
+    const userId = req.cookies.userId
+    if(!userId){
+        return res.json.dumps({code:1})
+    }
+    const {id,comment} = req.body
+    const noteModel = new Comments({userId:mongoose.Types.ObjectId(userId),'noteId':mongoose.Types.ObjectId(id),comment})
+    console.log(noteModel)
+        noteModel.save(function(e,d){
+            if(e){
+                 return  res.json({code:1,msg:'异常'})
+            }
+            return res.json({code:0,msg:'评论成功！'})
+        })
 })
 
 module.exports = Router

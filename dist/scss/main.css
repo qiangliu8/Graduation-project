@@ -333,8 +333,7 @@
     column-count: 4; } }
 
 .noteInfo {
-  background: white;
-  margin-bottom: 50px; }
+  background: white; }
   .noteInfo .noteContent {
     padding: 1rem;
     font-size: 18px; }

@@ -2,9 +2,11 @@ import React from 'react'
 import { NavBar, Icon,List,Carousel,Flex,Toast} from 'antd-mobile';
 import {getNoteInfo, noteEvent,getNoteToDo} from 'api/note'
 import cookies from 'browser-cookies'
-
+import {withRouter} from 'react-router-dom'
 const Item = List.Item
 
+
+@withRouter
 class NoteInfo extends React.Component{
     constructor(props) {
         super(props)
@@ -37,10 +39,6 @@ class NoteInfo extends React.Component{
                             data = {collect:true}
                             num = {collect:res.data.data}
                             break
-                        case 'comment':
-                            data = {comment:true}
-                            num = {comment:res.data.data}
-                            break
                         default:
                             data = {}
                             num = {}
@@ -52,6 +50,7 @@ class NoteInfo extends React.Component{
             }
         })
     }
+    toComment = (state) =>this.props.history.push(`/home/noteinfo/comment/${state._id}`)
     render(){
         const {noteinfo} = this.state
         const {status} = this.state
@@ -89,7 +88,7 @@ class NoteInfo extends React.Component{
                                     <div className = {status.collect?"briefimg icon-collect_select":"briefimg icon-collect"}/>
                                     <p onClick={()=>this.toDoEvent(noteinfo,'collect')}>{noteinfo.collect||0}</p>
                                     <div className = "briefimg icon-comment"/>
-                                    <p onClick={()=>this.toComment(noteinfo,'comment')}>{noteinfo.comment||0}</p>
+                                    <p onClick={()=>this.toComment(noteinfo)}>{noteinfo.comment||0}</p>
                                 </Flex>
                                 </div>):null}
             </div>

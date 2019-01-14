@@ -28,3 +28,22 @@
         }
     }
 }
+
+//评论 列表 --通告
+.am-card-header-content{
+    img{
+        width: 30px;
+        height: 30px;
+        border-radius:50%;
+    }
+}
+.am-card{
+    &::before{
+        opacity: 0;
+    }
+}
+.am-card-body{
+    &::before{
+        opacity: 0;
+    }
+}

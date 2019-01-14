@@ -21,8 +21,10 @@ const noteImgUpload = data => axios({
 
 //点赞攻略
 const noteEvent = ({_id},event) => axios.post('/note/noteEvent',{_id,event})
-//收藏攻略
-const noteCollect = ({_id}) => axios.post('/note/noteCollect',{_id})
+//获取评论列表
+const noteComment = id => axios.post('/note/noteComment',id)
+//发送评论
+const sendComment = ({id},{comment}) => axios.post('/note/sendComment',{id,comment})
 
 module.exports = {
     getNoteList,
@@ -30,5 +32,6 @@ module.exports = {
     getNoteToDo,
     getNoteInfo,
     noteEvent,
-    noteCollect
+    noteComment,
+    sendComment
 }

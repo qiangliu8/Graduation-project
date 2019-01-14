@@ -2,6 +2,7 @@ import personCenter from 'page/center/center'
 import personInfo from 'page/center/info'
 import EditInfo from 'page/center/editinfo'
 import NoteInfo from 'page/home/noteinfo'
+import NoteComment from 'page/home/notecomment'
 import Home from 'page/home/home'
 import Publish from 'page/publish'
 import Talk from 'page/talk'
@@ -24,6 +25,13 @@ export const mainRoutes = [
     { 
         path:'/home/noteinfo/:id',
         component:NoteInfo,
+        exact:true,
+        children:[
+        ]
+    },
+    { 
+        path:'/home/noteinfo/comment/:id',
+        component:NoteComment,
         exact:true,
         children:[
         ]
