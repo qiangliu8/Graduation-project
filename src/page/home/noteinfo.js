@@ -57,7 +57,7 @@ class NoteInfo extends React.Component{
 
     tofollow = () =>{ 
         Follow(this.state.noteinfo).then(res=>{
-            if(res.data.code == 0){
+            if(res.status == 200){
                 Toast.info(res.data.msg, 1.9, null, false)
             }
         })

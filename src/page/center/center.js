@@ -3,6 +3,8 @@ import { NavBar, Icon, Flex,WhiteSpace,List  } from 'antd-mobile'
 import {tarbarList} from 'config/data'
 import {connect} from 'react-redux'
 import {logout} from 'redux/user.redux.js'
+import {getUserOtherInfo} from 'api/user'
+import {infos} from 'config/data'
 import Footer from 'component/footer'
 import cookies from 'browser-cookies'
 import 'scss/center.scss'
@@ -17,33 +19,36 @@ const Item = List.Item
 class personCenter extends React.Component{
     constructor(props) {
         super(props)
+        this.state={
+
+        }
     }
+
+    //页面加载获取收藏 发布 评论信息
+    componentDidMount(){
+        getUserOtherInfo().then(res=>{
+            if(res.data.code==0){
+                this.setState(res.data.data)
+            }
+        })
+    }
+
+    //推出登陆
     logout(){
         cookies.erase('userId')
         this.props.logout()
     }
+
+    //跳转至详细信息页
     toinfo(){
         this.props.history.push('/center/info')
     }
+
     render(){
-        const infos =[
-            {   
-                text:'发布',
-                length:1
-            },
-            {   
-                text:'收藏',
-                length:2
-            },
-            {   
-                text:'关注',
-                length:3
-            },
-            {   
-                text:'评论',
-                length:4
-            }
-        ] 
+   
+        infos.map(v=>{
+            v.length = this.state[v.name]
+        })
         const {user} = this.props
         return (
             <div className="centerPage">
@@ -62,8 +67,8 @@ class personCenter extends React.Component{
                 </Flex>
                 <Flex justify="between" className="infoPart" >
                     {infos.map(v=>(
-                        <Flex className="infoParts" direction="column" justify="center" key={v.text}>
-                            <p className="infoPartp">{v.length}</p>
+                        <Flex className="infoParts" direction="column" justify="center" key={v.text} onClick={()=>this.props.history.push(`/center/otherinfo/${v.name}`)}>
+                            <p className="infoPartp">{v.length||0}</p>
                             <p>{v.text}</p>       
                         </Flex>
                     ))}

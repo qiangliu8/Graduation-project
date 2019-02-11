@@ -1,11 +1,13 @@
 import personCenter from 'page/center/center'
 import personInfo from 'page/center/info'
 import EditInfo from 'page/center/editinfo'
+import OtherInfo from 'page/center/otherinfo'
 import NoteInfo from 'page/home/noteinfo'
 import NoteComment from 'page/home/notecomment'
 import Home from 'page/home/home'
 import Publish from 'page/publish'
-import Talk from 'page/talk'
+import TalkList from 'page/talk/talk'
+import TalkInfo from 'page/talk/talkinfo'
 
 export const mainRoutes = [
     { 
@@ -38,7 +40,15 @@ export const mainRoutes = [
     },
     { 
         path:'/talk',
-        component:Talk,
+        component:TalkList,
+        exact:true,
+        children:[
+
+        ]
+    },
+    { 
+        path:'/talk/:to',
+        component:TalkInfo,
         children:[
 
         ]
@@ -66,6 +76,11 @@ export const mainRoutes = [
         component:personInfo,
     },
     {   
+        path:'/center/otherinfo/:other',
+        exact:true,
+        component:OtherInfo,
+    },
+    {   
         path:'/center/editinfo/:text',
         component:EditInfo,
     },
@@ -80,7 +95,7 @@ export const routeConfig = [
         component:Home,
         childRoutes:[
             {path:'home',component:Home},
-            {path:'talk',component:Talk},
+            {path:'talk',component:TalkList},
             {path:'center',component:personCenter}
         ]
     }

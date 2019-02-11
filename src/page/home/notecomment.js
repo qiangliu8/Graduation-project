@@ -27,9 +27,9 @@ class NoteComments extends React.Component{
     toComment(){
         sendComment(this.props.match.params,this.state).then(res=>{
             if(res.data.code==0){
-                  noteComment(this.props.match.params).then(res=>{
-                    this.getCommentList()
-                 })
+                this.getCommentList().then(res=>{
+                    $('.am-input-control input').val('')
+                })
             }
         })
     }

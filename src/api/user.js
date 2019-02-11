@@ -21,7 +21,7 @@ const toLogin= ({
 
 //用户头像上传
 const headUpload = data => axios({
-    url: '/user/headUpload',
+    url: '/user/headupload',
     method: 'post',
     data: data,
     contentType: false,
@@ -33,6 +33,13 @@ const update = data =>axios.post('/user/update',data)
 
 //关注某用户
 const Follow = userId => axios.post('/user/userfollow',userId)
+
+//获取用户收藏 评论  关注等各种信息
+const getUserOtherInfo = () => axios.get('/user/getuserotherinfo')
+
+//获取用户关注的用户列表
+const getFollowList = () => axios.get('/user/getfollowlist')
+
 module.exports = {
     sendSerifly,
     getUserinfo,
@@ -40,5 +47,7 @@ module.exports = {
     toLogin,
     headUpload,
     update,
-    Follow
+    Follow,
+    getUserOtherInfo,
+    getFollowList
 }

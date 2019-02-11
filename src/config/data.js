@@ -81,3 +81,22 @@ export const tarbarList= [
         seclassName:'icon-center_select',
     },
 ]
+
+export const infos = [
+    {   
+        text:'发布',
+        name:'note',
+    },
+    {   
+        text:'收藏',
+        name:'collect',
+    },
+    {   
+        text:'关注',
+        name:'follow',
+    },
+    {   
+        text:'评论',
+        name:'comment',
+    }
+]  

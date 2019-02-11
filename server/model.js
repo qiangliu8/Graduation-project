@@ -22,9 +22,6 @@ let models = {
         'mapgroup': { 'type': Array, require: true },
         "title":{ 'type': String, require: true, default: '' },
         'content': { 'type': String, require: true, default: '' },
-        // 'fabulous': { 'type': Number, require: true, default: 0 },
-        // 'collect': { 'type': Number, require: true, default: 0 },
-        // 'comment': { 'type': Number, require: true, default: 0 },
         'address': { 'type': String, default:'' },
         'create_time': { 'type': Number, default: new Date().getTime() }
     },
@@ -47,6 +44,13 @@ let models = {
     follow:{
         'userId': { 'type': Object, require: true },
         'followId': { 'type': Object, require: true },
+    },
+    chat:{
+        'from': { 'type': Object, require: true },
+        'to': { 'type': Object, require: true },
+        'read': { 'type': Boolean, default: false },
+        'content': { 'type': String, require: true, default: '' },
+        'create_time': { 'type': Number, default: new Date().getTime() }
     }
 }
 

@@ -243,7 +243,7 @@ Router.post('/noteComment',function(req,res){
             'portrait': {'$arrayElemAt':['$user.portrait', 0]},
         }},
         { $sort : { creat_time : 1}},
-        {$limit:6}
+        {$limit:10}
         ],function(err,doc){
             Comments.find({"noteId":mongoose.Types.ObjectId(id)}).count(function(err,docs){
                 return res.json({code:0,data:{list:doc,num:docs}})
@@ -256,7 +256,7 @@ Router.post('/noteComment',function(req,res){
 Router.post('/sendComment',function(req,res){
     const userId = req.cookies.userId
     if(!userId){
-        return res.json.dumps({code:1})
+        return res.json({code:1})
     }
     const {id,comment} = req.body
     const noteModel = new Comments({userId:mongoose.Types.ObjectId(userId),'noteId':mongoose.Types.ObjectId(id),comment})

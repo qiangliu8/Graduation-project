@@ -58,3 +58,27 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
+
+
+.otherinfo{
+    .followlList{
+        background: #ffffff;
+        padding: 6px;
+        border-bottom: .5px solid #E8E8E8;
+        img{
+            width:4.5rem;
+            height:4.5rem;
+            border-radius: 50%;
+        }
+        .detail{
+            margin: 0.7rem;
+            p{
+              padding: 2px;  
+              &:first-child{
+                font-size: 20px;
+            }   
+            }
+        }
+    }
+
+}

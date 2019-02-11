@@ -76,10 +76,10 @@ Router.post('/login', function (req, res) {
 })
 
 //头像上传
-Router.post('/headUpload', function (req, res) {
+Router.post('/headupload', function (req, res) {
     const userId = req.cookies.userId
     if(!userId){
-        return res.json.dumps({code:1})
+        return res.json({code:1})
     }
     // var des_file = __dirname + "/" + req.files[0].originalname;
     console.log(req.files)
@@ -112,7 +112,8 @@ Router.post('/update',function(req,res){
     const userId = req.cookies.userId
     // console.log(body)
     if (!userId) {
-        return res.json.dumps({code:1})
+        return res.json
+        ({code:1})
     }
     User.updateOne({_id:userId}, body, function(err, doc){
         if (err) {
@@ -153,5 +154,69 @@ Router.post('/userfollow',function(req,res){
     })
 })
 
+//获取用户各种信息
+Router.get('/getuserotherinfo',function(req,res){
+    const { userId } = req.cookies
+    if(!userId){
+        return res.json({code:90000,msg:'用户未登录'})
+    }
+    User.aggregate([{$match:{"_id": mongoose.Types.ObjectId(userId)}},
+        {$lookup: {
+            from: 'notes',
+            localField: "_id",
+            foreignField: "userId", 
+            as: "note" 
+            }},
+        {$lookup: {
+            from: 'collects',
+            localField: "_id",
+            foreignField: "userId", 
+            as: "collect" 
+        }},
+        {$lookup: {
+            from: 'comments',
+            localField: "_id",
+            foreignField: "userId", 
+            as: "comment" 
+        }},  
+        {$lookup: {
+            from: 'follows',
+            localField: "_id",
+            foreignField: "userId", 
+            as: "follow" 
+        }},
+        {$project:{  
+            '_id':0,
+            'follow':{$size:'$follow'},
+            'note':{$size:'$note'},
+            'collect':{$size:'$collect'},
+            'comment':{$size:'$comment'},
+        }},],function(err,doc){
+        return res.json({code:0,data:doc[0]})
+    })
+})
 
+//获取用户的关注的用户列表
+Router.get('/getfollowlist',function(req,res){
+    const { userId } = req.cookies
+    if(!userId){
+        return res.json({code:90000,msg:'用户未登录'})
+    }
+    Follow.aggregate([{$match:{"userId": mongoose.Types.ObjectId(userId)}},
+        {$lookup: {
+            from: 'users',
+            localField: "followId",
+            foreignField: "_id", 
+            as: "user" 
+            }},
+        {$project:{  
+            '_id':0,
+            'name':{'$arrayElemAt':['$user.name',0]},
+            'portrait': {'$arrayElemAt':['$user.portrait', 0]},
+            'tab': {'$arrayElemAt':['$user.tab', 0]},
+            'userId': {'$arrayElemAt':['$user._id', 0]},
+        }},],function(err,doc){
+        return res.json({code:0,data:doc})
+    })
+})
 module.exports = Router
