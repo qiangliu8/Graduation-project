@@ -2,7 +2,7 @@ import {dispatch} from 'redux'
 import { Toast } from 'antd-mobile'
 import axios from 'axios'
 import io from 'socket.io-client'
-const socket = io('ws://localhost:1004')
+const socket = io('ws://localhost:8087')
 import {getChatList,getChatInfo,sendChatinfo} from 'api/chat'
 import { getRedirectPath } from 'util/util'
 
@@ -59,15 +59,16 @@ export function getChatInfos(data){
     }
 }
 
-export function sendChat({ from, to, msg }){
+export function sendChat({ from, to, content }){
     return dispatch => {
-        socket.emit('sendChat', { from, to, msg })
+        socket.emit('sendChat', { from, to, content })
       }
 }
 
 export function recvChat(){
     return dispatch=>{
         socket.on('recvChat',function(data){
+            debugger
             dispatch(msgRecv(data))
         })
     }

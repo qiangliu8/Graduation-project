@@ -10,7 +10,7 @@ var fs = require("fs")
 var multer  = require('multer')
 const UserModel = require('./model')
 const Chat = UserModel.getModel('chat')
-
+const mongoose = require('mongoose')
 
 const io = require('socket.io')(server)
 
@@ -23,6 +23,7 @@ io.on('connection',function(socket){
             if(e){
                  return  res.json({code:1,msg:'异常'})
             }
+            console.log(Object.assign({},d))
             io.emit('recvChat',Object.assign({},d))
         })
   })

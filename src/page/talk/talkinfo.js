@@ -25,9 +25,8 @@ class TalkInfo extends React.Component{
         const from = this.props.user._id
         const to = this.props.match.params.to
         const content = this.state.content
-        this.props.sendChat({ from, to, content }).then(res=>{
-            $('.am-input-control input').val('')
-        })
+        this.props.sendChat({ from, to, content })
+        $('.am-input-control input').val('')
     }
     render(){
         const { chat } = this.props||{}
