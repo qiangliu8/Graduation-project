@@ -1,12 +1,12 @@
 import React from 'react'
 import { NavBar, List, InputItem,Icon  } from 'antd-mobile'
-import {getChatInfos,sendChat} from 'redux/chat.redux.js'
+import {getChatInfos,sendChat,recvChat} from 'redux/chat.redux.js'
 import {connect} from 'react-redux'
 
 import  'scss/talk.scss'
 @connect(
     state=>state,
-    {getChatInfos,sendChat}
+    {getChatInfos,sendChat,recvChat}
 )
 class TalkInfo extends React.Component{
     constructor(props) {
@@ -15,6 +15,7 @@ class TalkInfo extends React.Component{
 
     componentDidMount(){
         this.props.getChatInfos(this.props.match.params)
+        this.props.recvChat()
     }
 
     handleChange(key,val){
@@ -26,10 +27,11 @@ class TalkInfo extends React.Component{
         const to = this.props.match.params.to
         const content = this.state.content
         this.props.sendChat({ from, to, content })
-        $('.am-input-control input').val('')
+       
     }
     render(){
-        const { chat } = this.props||{}
+        const { chat,user } = this.props||{}
+        const to = this.props.match.params.to
         return (
             <div>
                 <div className="chatinfo">
@@ -40,13 +42,15 @@ class TalkInfo extends React.Component{
                         {chat.name||''}
                     </NavBar>
                     {this.props.chat?this.props.chat.msg.map(v => {
-                        return v.from == v.to ? (
-                            <div className="chatList" >           
-                                <p className="left" key={v._id}>{v.content}</p>
+                        return v.from == to ? (
+                            <div className="chatList left" key={v._id}>  
+                                <img src={chat.portrait} ></img>         
+                                <p >{v.content}</p>
                             </div>
                         ) : (
-                            <div className="chatList" >
-                                <p className="right" key={v._id}>{v.content}</p>
+                            <div className="chatList right" key={v._id} >
+                                <img src={user.portrait} className=''></img>
+                                <p  >{v.content}</p>
                             </div>
                         )
                     }):null}

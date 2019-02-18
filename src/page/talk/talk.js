@@ -19,7 +19,7 @@ class TalkList extends React.Component{
         this.props.getChatLists()
     }
     render(){
-        const { list } = this.state||{}
+        const { list } = this.props.state||{}
         return (
             <div>
                 <div className="chatlist">
@@ -36,7 +36,7 @@ class TalkList extends React.Component{
                             <img  src={v.portrait} />
                             <Flex className="detail" direction='column' align='start'>
                                 <p>{v.name}</p>
-                                <p>{'简介:'+ v.tab||'暂无简介'}</p>
+                                <p>{'简介:'+ v.tab||''}</p>
                             </Flex>
                         </Flex>
                     )):null}

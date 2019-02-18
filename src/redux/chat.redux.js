@@ -25,7 +25,7 @@ export function chat(state = initState,action){
         case  MSG_LIST:
             return {...state,...action.payload,unread: action.payload.msg.filter(v => !v.read).length}
         case MSG_RECV:
-            return { ...state, ...action.payload, unread: state.unread + 1 }
+            return { ...state, msg: [...state.msg, action.payload], unread: state.unread + 1 }
         default:
             return state
     }
@@ -43,6 +43,7 @@ export function getChatLists(){
     return dispatch=>{
         getChatList().then(res=>{
             if(res.status===200){
+                debugger
                 dispatch(msgList(res.data.data))
             }
         })
@@ -66,9 +67,8 @@ export function sendChat({ from, to, content }){
 }
 
 export function recvChat(){
-    return dispatch=>{
-        socket.on('recvChat',function(data){
-            debugger
+    return dispatch =>{
+        socket.on('recvChat', function (data) {
             dispatch(msgRecv(data))
         })
     }

@@ -18,6 +18,7 @@
     .chatList{
         padding: 0px 15px 0px 12.5px;
         font-size: 17px;
+        margin: 5px 0 ;
         overflow: hidden;
         p{
           max-width: 220px;
@@ -25,14 +26,48 @@
           padding: 10px;
           display: inline-block;
           border-radius: 10px;
+          margin:0 5px;
         }
-        .left{
-          background: wheat;
-          float: left; 
-        }
-        .right{
-          background: #6BE61A;
-          float: right; 
+        img{
+          width: 37px;
+          height: 37px;
+          border-radius: 50%;
         }
       }
+      .chatList.left{
+        p{
+          background: wheat;
+        }
+  
+        *{
+          float: left;
+        }
+      }
+      .chatList.right{
+        p{
+          background: #6BE61A;
+        }
+        *{
+          float: right;
+        }
+      }
+      .followlList{
+        background: #ffffff;
+        padding: 6px;
+        border-bottom: .5px solid #E8E8E8;
+        img{
+            width:4.5rem;
+            height:4.5rem;
+            border-radius: 50%;
+        }
+        .detail{
+            margin: 0.7rem;
+            p{
+              padding: 2px;  
+              &:first-child{
+                font-size: 20px;
+            }   
+            }
+        }
+    }
 }
