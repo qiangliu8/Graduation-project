@@ -74,7 +74,7 @@ class NoteInfo extends React.Component{
                 onLeftClick={() => this.props.history.goBack()}
                 >发现</NavBar>
                 {noteinfo?(<div><List  className="my-list">
-                                    <Item extra={<span onClick={()=>this.tofollow()}>关注</span>}><img src = {noteinfo.portrait} style={{width:'25px',height:'25px',borderRadius:'50%', marginRight:'5px'}}/>{noteinfo.name}</Item>
+                                    <Item extra={<span onClick={()=>this.tofollow()}>{noteinfo.follow?'已关注':'关注'}</span>}><img src = {noteinfo.portrait} style={{width:'25px',height:'25px',borderRadius:'50%', marginRight:'5px'}}/>{noteinfo.name}</Item>
                                 </List>
                                 <Carousel className="space-carousel"
                                     frameOverflow="visible"

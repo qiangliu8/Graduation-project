@@ -5,6 +5,7 @@ const Note = UserModel.getModel('note')
 const Fabulous = UserModel.getModel('fabulous')
 const Comments = UserModel.getModel('comment')
 const Collects = UserModel.getModel('collect')
+const Follow = UserModel.getModel('follow')
 const User = UserModel.getModel('user')
 const { putnotes } = require('./upload')
 var fs = require("fs");
@@ -45,6 +46,7 @@ Router.get('/notelist', function(req, res) {
 //获取攻略详情
 Router.post('/noteinfo', function(req, res) {
     const { id } = req.body
+    const userId = req.cookies.userId
     Note.aggregate([{
             $lookup: {
                 from: 'users',
@@ -78,21 +80,39 @@ Router.post('/noteinfo', function(req, res) {
             }
         },
         {
+            $lookup: {
+                from: 'follows',
+                localField: "userId",
+                foreignField: "followId",
+                as: "follows"
+            }
+        },
+        {
             $project: {
-                'userId': 1,
-                'mapgroup': 1,
-                'title': 1,
-                'content': 1,
-                'name': { $arrayElemAt: ['$user.name', 0] },
-                'portrait': { $arrayElemAt: ['$user.portrait', 0] },
-                'fabulous': { $size: '$fabulous' },
-                'collect': { $size: '$collect' },
-                'comment': { $size: '$comment' }
+                userId: 1,
+                mapgroup: 1,
+                title: 1,
+                follows:1,
+                content: 1,
+                name: { $arrayElemAt: ['$user.name', 0] },
+                portrait: { $arrayElemAt: ['$user.portrait', 0] },
+                fabulous: { $size: '$fabulous' },
+                collect: { $size: '$collect' },
+                comment: { $size: '$comment' }
             }
         },
         { "$match": { "_id": mongoose.Types.ObjectId(id) } }
     ], function(err, doc) {
-        return res.json({ code: 0, data: doc[0] })
+
+        Follow.findOne({ 'userId': mongoose.Types.ObjectId(userId), 'followId': mongoose.Types.ObjectId(doc[0].userId) }, function(err, doc1) {
+            
+            if (doc1) {
+                return res.json({ code: 0, data: Object.assign({},doc[0],{follow:true}) })
+            }else{
+                return res.json({ code: 0, data: Object.assign({},doc[0],{follow:false}) })
+            }
+        })
+        //return res.json({ code: 0, data: doc[0] })
     })
 
 })

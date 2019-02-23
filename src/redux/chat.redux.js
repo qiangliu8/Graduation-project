@@ -43,7 +43,6 @@ export function getChatLists(){
     return dispatch=>{
         getChatList().then(res=>{
             if(res.status===200){
-                debugger
                 dispatch(msgList(res.data.data))
             }
         })

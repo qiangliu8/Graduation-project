@@ -47,3 +47,17 @@
         opacity: 0;
     }
 }
+
+//动态展示页 去除多余的border
+.noteInfo{
+    .am-list-body{
+        &::before{
+            opacity: 0;
+        }
+    }
+    .am-list-item.am-list-item-middle{
+        &::after{
+            opacity: 0;
+        }
+    }
+}

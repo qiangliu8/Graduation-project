@@ -45,8 +45,8 @@ Router.post('/sendcode', function(req, res) {
             return res.json({ code: 1, msg: '短信发送失败，请稍后重试！' })
         }
 
-    })
-    //用户注册
+})
+//用户注册
 Router.post('/register', function(req, res) {
     const { mobile, name, pwd } = req.body
     User.findOne({ mobile }, function(err, doc) {

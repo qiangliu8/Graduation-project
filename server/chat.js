@@ -49,7 +49,7 @@ Router.get('/chatlist', function(req, res) {
     }
     //查找列表里对应的chatid数组 搜索最近的一个文档 的内容 和时间
     Chat.aggregate([{ "$match": { chatid: { $in: [mongoose.Types.ObjectId(userId)] } } },
-        { $group: { _id: '$chatid', cotent: { $last: "$content" }, time: { $last: "$create_time" }, count: { $sum: 1 } } },
+        { $group: { _id: '$chatid', content: { $last: "$content" }, time: { $last: "$create_time" }, count: { $sum: 1 } } },
         { $unwind: "$_id" },
         { "$match": { _id: { $ne: mongoose.Types.ObjectId(userId) } } },
         {
@@ -62,7 +62,7 @@ Router.get('/chatlist', function(req, res) {
         },
         {
             $project: {
-                cotent: 1,
+                content: 1,
                 time: 1,
                 _id: 1,
                 name: { $arrayElemAt: ['$user.name', 0] },

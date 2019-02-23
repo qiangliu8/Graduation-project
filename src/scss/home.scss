@@ -111,7 +111,16 @@ z-index: 1;
         font-size: 22px;
     }
     }
-
+    .am-list-body{
+        &::before{
+            opacity: 0;
+        }
+    }
+    .am-list-item.am-list-item-middle{
+        &::after{
+            opacity: 0;
+        }
+    }
 }
 
 #commentFooter{

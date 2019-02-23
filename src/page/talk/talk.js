@@ -1,14 +1,15 @@
 import React from 'react'
 import { NavBar, Flex, SearchBar ,Icon } from 'antd-mobile'
 import {tarbarList} from 'config/data'
-import {getChatLists} from 'redux/chat.redux.js'
+import {getChatList} from 'api/chat'
 import {connect} from 'react-redux'
+import {monentDate} from 'util/util.js'
 import Footer from 'component/footer'
 
 import  'scss/talk.scss'
 @connect(
  state=>state,
- {getChatLists}
+//  {getChatLists}
 )
 class TalkList extends React.Component{
     constructor(props) {
@@ -16,28 +17,34 @@ class TalkList extends React.Component{
     }
 
     componentDidMount(){
-        this.props.getChatLists()
+        getChatList().then(res=>{
+            if(res.status===200){
+                this.setState({list:res.data.data})
+            }
+        })
     }
+    
+    toTalk = e => this.props.history.push(`/talk/${e}`)
+
     render(){
-        const { list } = this.props.state||{}
+        const { list } = this.state||{}
         return (
             <div>
                 <div className="chatlist">
                     <NavBar
                         mode="light"
-                        // icon={<Icon type="left" />}
-                        // onLeftClick={() => {this.props.history.goBack()}}
                         >
                         消息
                     </NavBar>
                     <SearchBar placeholder="搜索" maxLength={8} />
                     {list?list.map(v=>(
-                        <Flex key={v.userId} className="followlList" onClick={()=>this.toTalk(v.userId)}>
+                        <Flex key={v._id} className="userlList" onClick={()=>this.toTalk(v._id)}>
                             <img  src={v.portrait} />
                             <Flex className="detail" direction='column' align='start'>
                                 <p>{v.name}</p>
-                                <p>{'简介:'+ v.tab||''}</p>
+                                <p>{v.content||''}</p>
                             </Flex>
+                            <p className="time">{monentDate(v.time)||''}</p>
                         </Flex>
                     )):null}
                 </div>

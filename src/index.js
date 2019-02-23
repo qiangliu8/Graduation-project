@@ -8,6 +8,7 @@ import thunk from 'redux-thunk'
 import Auth from 'component/auth'
 import {renderRoutes} from 'react-router-config'
 import {loginRoutes} from 'router/login_router'
+import {monmentCN} from 'util/util.js'
 import '../config/axios'
 import 'antd-mobile/dist/antd-mobile.css'
 import 'scss/main.scss'
@@ -21,6 +22,7 @@ const store = createStore(reudcer,compose(
     applyMiddleware(thunk),
     window.devToolsExtension?window.devToolsExtension() : f => f
 ))
+monmentCN()
 ReactDom.render(
     (<Provider store= {store}>
         <HashRouter>
