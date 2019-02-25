@@ -35,6 +35,8 @@
     "nodemon": "^1.18.9",
     "rc-form": "^2.4.0",
     "react": "^16.6.3",
+    "react-amap": "^1.2.8",
+    "react-amap-plugin-geolocation": "0.0.2",
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",
     "react-router-config": "^4.4.0-beta.6",

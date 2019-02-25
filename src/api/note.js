@@ -26,6 +26,7 @@ const noteComment = id => axios.post('/note/noteComment',id)
 //发送评论
 const sendComment = ({id},{comment}) => axios.post('/note/sendComment',{id,comment})
 
+const ipaddress = (ip) =>axios.post(`//restapi.amap.com/v3/place/around?key=3a76f52821beaeb2671e91665db4c625&location=${ip}&keywords=&types=&radius=1000&offset=20&page=1&extensions=all`)
 module.exports = {
     getNoteList,
     noteImgUpload,
@@ -33,5 +34,6 @@ module.exports = {
     getNoteInfo,
     noteEvent,
     noteComment,
-    sendComment
+    sendComment,
+    ipaddress
 }

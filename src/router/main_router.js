@@ -5,7 +5,8 @@ import OtherInfo from 'page/center/otherinfo'
 import NoteInfo from 'page/home/noteinfo'
 import NoteComment from 'page/home/notecomment'
 import Home from 'page/home/home'
-import Publish from 'page/publish'
+import Publish from 'page/publish/publish'
+import addressMap from 'page/publish/address'
 import TalkList from 'page/talk/talk'
 import TalkInfo from 'page/talk/talkinfo'
 
@@ -56,6 +57,14 @@ export const mainRoutes = [
     { 
         path:'/publish',
         component:Publish,
+        exact:true,
+        children:[
+
+        ]
+    },
+    { 
+        path:'/publish/address',
+        component:addressMap,
         children:[
 
         ]

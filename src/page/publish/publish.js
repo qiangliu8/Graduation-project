@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, NavBar ,List, TextareaItem,InputItem, Toast  } from 'antd-mobile'
+import { Button, NavBar ,List, TextareaItem,InputItem, Toast ,Icon } from 'antd-mobile'
 import NoteImgUpload from 'component/noteimgupload'
 import {tarbarList} from 'config/data'
 import {noteImgUpload} from 'api/note'
@@ -7,11 +7,14 @@ import { withRouter } from 'react-router-dom'
 import Footer from 'component/footer'
 import 'scss/publish.scss'
 
+const Item = List.Item
+
 @withRouter
 class Publish extends React.Component{
     constructor(props) {
         super(props)
     }
+
     imgUpload(e){
     this.setState({files:e})
     }
@@ -51,6 +54,11 @@ class Publish extends React.Component{
                             labelNumber={5}
                             onChange={e=>{this.handleChange('content',e)}}
                         />
+                    </List>
+                    <List >
+                        <Item arrow="horizontal"  multipleLine onClick={() => this.props.history.push('/publish/address')}>
+                            所在位置
+                        </Item>  
                     </List>
                     <Footer tarbarList={tarbarList}></Footer>
             </div>

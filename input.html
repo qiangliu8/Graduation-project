@@ -1,205 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>浏览器精确定位</title>
+      <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
     <style>
-    @import url('https://fonts.googleapis.com/css?family=PT+Mono');
-
-$bg: #4F000B;
-$itemBg1: #720026;
-$itemBg2: #CE4257;
-$itemBg3: #FFC093;
-$itemBg4: #FF7F51;
-$counterBg: #222;
-
-@mixin setColorAndHover($baseColor) {
-  color: $baseColor;
-  &:hover {
-    background: lighten($baseColor, 8%);
-  }
-}
-
-body,
-html {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: $bg;
-  font-family: "PT Mono", monospace;
-}
-
-.masonry {
-  column-count: 1;
-  column-gap: 0;
-  counter-reset: item-counter;
-  
-  @media screen and (min-width: 400px) {
-    column-count: 2;
-  }
-  
-  @media screen and (min-width: 600px) {
-    column-count: 3;
-  }
-  
-  @media screen and (min-width: 800px) {
-    column-count: 4;
-  }
-  
-  @media screen and (min-width: 1100px) {
-    column-count: 5;
-  }
-}
-
-.item {
-  box-sizing: border-box;
-  break-inside: avoid;
-  padding: 10px;
-  counter-increment: item-counter;
-
-  &__content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 220px;
-    font-size: 40px;
-    color: darken($bg, 5%);
-    background: currentColor;
-    box-sizing: border-box;
-    @include setColorAndHover($itemBg1);
-    
-    &:before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      font-size: 13px;
-      width: 2em;
-      height: 2em;
-      line-height: 2em;
-      text-align: center;
-      font-weight: bold;
-      background-color: $counterBg;
-      content: counter(item-counter);
-    }
-    
-    &:after {
-      color: darken($bg, 10%);
-      content: 'ಠ‿ಠ';
-    }
-    
-    &--small {
-      @include setColorAndHover($itemBg2);
-      height: 100px;
-      
-      &:after {
-        content: '♥◡♥';
-      }
-    }
-    
-    &--medium {
-      @include setColorAndHover($itemBg3);
-      height: 175px;
-      
-      &:after {
-        content: '◔ᴗ◔';
-      }
-    }
-    
-    &--large {
-      @include setColorAndHover($itemBg4);
-      height: 280px;
-      
-      &:after {
-        content: 'ಠ_๏';
-      }
-    }
-  }
-}
+        html,body,#container{
+            height:100%;
+        }
+        .info{
+            width:26rem;
+        }
+        .markerlnglat{
+            width: 25px;
+            height: 34px;
+        }
+        .marker {
+            position: absolute;
+            top: -20px;
+            right: -118px;
+            color: #fff;
+            padding: 4px 10px;
+            box-shadow: 1px 1px 1px rgba(10, 10, 10, .2);
+            white-space: nowrap;
+            font-size: 12px;
+            font-family: "";
+            background-color: #25A5F7;
+            border-radius: 3px;
+        }
     </style>
-
-</head>
 <body>
-    <div class="masonry">
-        <div class="item">
-          <div class="item__content">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content item__content--small">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content item__content--medium">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content item__content--small">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content item__content--medium">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content item__content--large">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content item__content--medium">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content item__content--small">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content item__content--large">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content item__content--small">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content item__content--large">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content item__content--medium">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content item__content--small">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content item__content--medium">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content">
-          </div>
-        </div>
-        <div class="item">
-          <div class="item__content item__content--small">
-          </div>
-        </div>
-      </div>
+<div id='container'></div>
+<div class="info">
+    <h4 id='status'></h4><hr>
+    <p id='result'></p><hr>
+    <p >由于众多浏览器已不再支持非安全域的定位请求，为保位成功率和精度，请升级您的站点到HTTPS。</p>
+</div>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.13&key=3a76f52821beaeb2671e91665db4c625"></script>
+<script type="text/javascript">
+    var map = new AMap.Map('container', {
+        resizeEnable: true,
+        resizeEnable: true, //是否监控地图容器尺寸变化
+        zoom: 16, //初始地图级别
+    });
+    AMap.plugin('AMap.Geolocation', function() {
+        var geolocation = new AMap.Geolocation({
+            enableHighAccuracy: true,//是否使用高精度定位，默认:true
+            timeout: 10000,          //超过10秒后停止定位，默认：5s
+            buttonPosition:'RB',    //定位按钮的停靠位置
+            buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+            zoomToAccuracy: true,   //定位成功后是否自动调整地图视野到定位点
+        });
+        map.addControl(geolocation);
+        geolocation.getCurrentPosition(function(status,result){
+            if(status=='complete'){
+                onComplete(result)
+            }else{
+                onError(result)
+            }
+        });
+    });
+    //解析定位结果
+    function onComplete(data) {
+        document.getElementById('status').innerHTML='定位成功'
+        var str = [];
+        str.push('定位结果：' + data.position);
+        str.push('定位类别：' + data.location_type);
+        if(data.accuracy){
+             str.push('精度：' + data.accuracy + ' 米');
+        }//如为IP精确定位结果则没有精度信息
+        str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
+        document.getElementById('result').innerHTML = str.join('<br>');
+    }
+    //解析定位错误信息
+    function onError(data) {
+        document.getElementById('status').innerHTML='定位失败'
+        document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
+    }
+    //显示地图层级与中心点信息
+    function logMapinfo(){
+      var zoom = map.getZoom(); //获取当前地图级别
+      var center = map.getCenter(); //获取当前地图中心位置
+      document.querySelector("#result").innerText = zoom;
+      document.querySelector("#result").innerText = center.toString();
+      // clearMarker()
+      //addMarker(center)
+      updateMarker(center)
+    };
+     logMapinfo()
+     console.log(map.getCenter())
+     var marker = new AMap.Marker({
+            icon: "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png",
+            position: map.getCenter(),
+            offset: new AMap.Pixel(-13, -30)
+    });
+    marker.setMap(map);
+    // //绑定地图移动与缩放事件
+    map.on('moveend', logMapinfo);
+    map.on('zoomend', logMapinfo);
+
+    function updateMarker(centers) {
+
+        if (!marker) {
+            return;
+        }
+
+        // 自定义点标记内容
+        var markerContent = document.createElement("div");
+
+        // 点标记中的图标
+        var markerImg = document.createElement("img");
+        markerImg.className = "markerlnglat";
+        markerImg.src = "https://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png";
+        markerContent.appendChild(markerImg);
+
+        // 点标记中的文本
+        var markerSpan = document.createElement("span");
+        // markerSpan.className = 'marker';
+        // markerSpan.innerHTML = "当前地点";
+        markerContent.appendChild(markerSpan);
+
+        marker.setContent(markerContent); //更新点标记内容
+        marker.setPosition(centers); //更新点标记位置
+    }
+
+</script>
 </body>
 </html>
