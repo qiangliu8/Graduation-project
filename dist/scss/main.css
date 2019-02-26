@@ -248,6 +248,21 @@
   background-size: 100% 100%;
   background-repeat: no-repeat; }
 
+.otherinfo .followlList {
+  background: #ffffff;
+  padding: 6px;
+  border-bottom: .5px solid #E8E8E8; }
+  .otherinfo .followlList img {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%; }
+  .otherinfo .followlList .detail {
+    margin: 0.7rem; }
+    .otherinfo .followlList .detail p {
+      padding: 2px; }
+      .otherinfo .followlList .detail p:first-child {
+        font-size: 20px; }
+
 .icon-logo {
   background: url(data:image/png;base64,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) center no-repeat;
   width: 49px;
@@ -343,12 +358,334 @@
       margin-left: 1rem; }
     .noteInfo .noteNumber p {
       font-size: 22px; }
+  .noteInfo .am-list-body::before {
+    opacity: 0; }
+  .noteInfo .am-list-item.am-list-item-middle::after {
+    opacity: 0; }
+
+#commentFooter {
+  position: fixed;
+  width: 100%;
+  bottom: 0px; }
+  #commentFooter .am-input-control input {
+    border-radius: 14px;
+    border: 1px solid #A8A8A8;
+    padding-left: 10px; }
 
 .publishPage {
   background: white;
   height: 100vh; }
   .publishPage .am-list-header {
     padding-bottom: 0px; }
+  .publishPage .am-list-body::before {
+    opacity: 0; }
+
+#container {
+  height: 50%;
+  width: 100%; }
+  #container .info {
+    width: 26rem; }
+
+.addressList {
+  height: 44%;
+  overflow-y: scroll; }
+  .addressList .flex {
+    height: 1.2rem;
+    border-bottom: 1px solid #A8A8A8;
+    padding: 1rem; }
+    .addressList .flex p {
+      text-align: left; }
+    .addressList .flex p:first-child {
+      font-size: 1.1rem;
+      margin-bottom: .2rem; }
+    .addressList .flex p:nth-child(2) {
+      font-size: .8rem;
+      color: #A8A8A8; }
+  .addressList .selected p {
+    color: #3192FE; }
+  .addressList .selected p:nth-child(2) {
+    color: #3192FE; }
+
+/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+.icon-boy {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px 0px;
+  width: 16px;
+  height: 16px;
+}
+.icon-girl {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -16px;
+  width: 16px;
+  height: 16px;
+}
+.icon-view {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -32px;
+  width: 18px;
+  height: 18px;
+}
+.icon-birth {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -50px;
+  width: 18px;
+  height: 18px;
+}
+.icon-name {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -68px;
+  width: 18px;
+  height: 18px;
+}
+.icon-sex {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -86px;
+  width: 18px;
+  height: 18px;
+}
+.icon-mobile {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -104px;
+  width: 18px;
+  height: 18px;
+}
+.icon-tab {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -122px;
+  width: 18px;
+  height: 18px;
+}
+.icon-fabulous_select {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -140px;
+  width: 24px;
+  height: 24px;
+}
+.icon-comment {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -164px;
+  width: 24px;
+  height: 24px;
+}
+.icon-sort {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -188px;
+  width: 24px;
+  height: 24px;
+}
+.icon-fabulous {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -212px;
+  width: 24px;
+  height: 24px;
+}
+.icon-collect {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -236px;
+  width: 28px;
+  height: 28px;
+}
+.icon-address {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -264px;
+  width: 28px;
+  height: 28px;
+}
+.icon-collect_select {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -292px;
+  width: 28px;
+  height: 28px;
+}
+.icon-left {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -320px;
+  width: 32px;
+  height: 32px;
+}
+.icon-home {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -352px;
+  width: 32px;
+  height: 32px;
+}
+.icon-notice {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -384px;
+  width: 32px;
+  height: 32px;
+}
+.icon-talk {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -416px;
+  width: 32px;
+  height: 32px;
+}
+.icon-talk_select {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -448px;
+  width: 32px;
+  height: 32px;
+}
+.icon-home_select {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -480px;
+  width: 32px;
+  height: 32px;
+}
+.icon-center {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -512px;
+  width: 32px;
+  height: 32px;
+}
+.icon-center_select {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -544px;
+  width: 32px;
+  height: 32px;
+}
+.icon-publish {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -576px;
+  width: 34px;
+  height: 34px;
+}
+.icon-publish_select {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -610px;
+  width: 34px;
+  height: 34px;
+}
+.icon-head {
+  background-image: url(../assets/sprite.png);
+  background-position: 0px -644px;
+  width: 51px;
+  height: 50px;
+}
+
+.am-navbar-light {
+  color: #2c2c2c;
+  border-bottom: 1px solid #E8E8E8; }
+
+.am-list-item .am-list-line .am-list-content {
+  color: #8a8a8a !important; }
+
+.am-list-item .am-list-line .am-list-extra {
+  flex-basis: 45%; }
+
+.my-radio .am-radio {
+  padding: 2.5px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  margin-right: 5px; }
+
+.publishPage .am-list-body:before {
+  opacity: 0; }
+
+.am-card-header-content img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; }
+
+.am-card::before {
+  opacity: 0; }
+
+.am-card-body::before {
+  opacity: 0; }
+
+.noteInfo .am-list-body::before {
+  opacity: 0; }
+
+.noteInfo .am-list-item.am-list-item-middle::after {
+  opacity: 0; }
+
+* {
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-family: 'Microsoft YaHei';
+  height: 100vh; }
+
+.chatlist .am-search {
+  border-bottom: none; }
+
+.chatinfo .chatFooter {
+  position: fixed;
+  width: 100%;
+  bottom: 0px; }
+  .chatinfo .chatFooter .am-input-control input {
+    border: 1px solid #A8A8A8;
+    padding-left: 10px; }
+
+.chatinfo .chatList {
+  padding: 0px 15px 0px 12.5px;
+  font-size: 17px;
+  margin: 5px 0;
+  overflow: hidden; }
+  .chatinfo .chatList p {
+    max-width: 220px;
+    background-color: white;
+    padding: 10px;
+    display: inline-block;
+    border-radius: 10px;
+    margin: 0 5px; }
+  .chatinfo .chatList img {
+    width: 37px;
+    height: 37px;
+    border-radius: 50%; }
+
+.chatinfo .chatList.left p {
+  background: wheat; }
+
+.chatinfo .chatList.left * {
+  float: left; }
+
+.chatinfo .chatList.right p {
+  background: #6BE61A; }
+
+.chatinfo .chatList.right * {
+  float: right; }
+
+.userlList {
+  background: #ffffff;
+  padding: 6px;
+  border-bottom: .5px solid #E8E8E8; }
+  .userlList img {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    margin-left: .5rem; }
+  .userlList .detail {
+    margin: 0.7rem; }
+    .userlList .detail p {
+      padding: 2px; }
+      .userlList .detail p:first-child {
+        font-size: 1.1rem; }
+      .userlList .detail p:last-child {
+        color: #A8A8A8; }
+  .userlList .time {
+    flex: 1;
+    text-align: right;
+    margin-right: 1rem; }
 
 @charset "UTF-8";
 /*!
@@ -7716,175 +8053,6 @@ a {
   margin-left: 15px;
   margin-right: 15px; }
 
-/*
-Icon classes can be used entirely standalone. They are named after their original file names.
-
-Example usage in HTML:
-
-`display: block` sprite:
-<div class="icon-home"></div>
-
-To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
-
-// CSS
-.icon {
-  display: inline-block;
-}
-
-// HTML
-<i class="icon icon-home"></i>
-*/
-.icon-boy {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px 0px;
-  width: 16px;
-  height: 16px;
-}
-.icon-girl {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -16px;
-  width: 16px;
-  height: 16px;
-}
-.icon-birth {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -32px;
-  width: 18px;
-  height: 18px;
-}
-.icon-sex {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -50px;
-  width: 18px;
-  height: 18px;
-}
-.icon-name {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -68px;
-  width: 18px;
-  height: 18px;
-}
-.icon-mobile {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -86px;
-  width: 18px;
-  height: 18px;
-}
-.icon-view {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -104px;
-  width: 18px;
-  height: 18px;
-}
-.icon-tab {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -122px;
-  width: 18px;
-  height: 18px;
-}
-.icon-fabulous {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -140px;
-  width: 24px;
-  height: 24px;
-}
-.icon-comment {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -164px;
-  width: 24px;
-  height: 24px;
-}
-.icon-fabulous_select {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -188px;
-  width: 24px;
-  height: 24px;
-}
-.icon-sort {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -212px;
-  width: 24px;
-  height: 24px;
-}
-.icon-collect {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -236px;
-  width: 28px;
-  height: 28px;
-}
-.icon-collect_select {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -264px;
-  width: 28px;
-  height: 28px;
-}
-.icon-talk {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -292px;
-  width: 32px;
-  height: 32px;
-}
-.icon-home_select {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -324px;
-  width: 32px;
-  height: 32px;
-}
-.icon-home {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -356px;
-  width: 32px;
-  height: 32px;
-}
-.icon-talk_select {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -388px;
-  width: 32px;
-  height: 32px;
-}
-.icon-center_select {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -420px;
-  width: 32px;
-  height: 32px;
-}
-.icon-center {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -452px;
-  width: 32px;
-  height: 32px;
-}
-.icon-left {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -484px;
-  width: 32px;
-  height: 32px;
-}
-.icon-notice {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -516px;
-  width: 32px;
-  height: 32px;
-}
-.icon-publish {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -548px;
-  width: 34px;
-  height: 34px;
-}
-.icon-publish_select {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -582px;
-  width: 34px;
-  height: 34px;
-}
-.icon-head {
-  background-image: url(../assets/sprite.png);
-  background-position: 0px -616px;
-  width: 51px;
-  height: 50px;
-}
-
 .am-navbar-light {
   color: #2c2c2c;
   border-bottom: 1px solid #E8E8E8; }
@@ -7902,6 +8070,23 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   margin-right: 5px; }
 
 .publishPage .am-list-body:before {
+  opacity: 0; }
+
+.am-card-header-content img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; }
+
+.am-card::before {
+  opacity: 0; }
+
+.am-card-body::before {
+  opacity: 0; }
+
+.noteInfo .am-list-body::before {
+  opacity: 0; }
+
+.noteInfo .am-list-item.am-list-item-middle::after {
   opacity: 0; }
 
 * {

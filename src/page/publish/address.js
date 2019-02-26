@@ -1,11 +1,18 @@
 import React from 'react'
-import { Button, NavBar ,List, TextareaItem,InputItem, Toast ,Icon } from 'antd-mobile'
+import { Button, NavBar ,List, TextareaItem,InputItem, Flex ,Icon } from 'antd-mobile'
 import { withRouter } from 'react-router-dom'
 import { Map ,Marker,MouseTool } from 'react-amap';
 import {ipaddress} from 'api/note'
+import {connect} from 'react-redux'
+import {writeNote} from 'redux/note.redux'
 import 'scss/publish.scss'
 // import '../../util/map'
 const Item = List.Item
+
+@connect(
+ state=>state,
+ {writeNote}
+)
 @withRouter
 class addressMap extends React.Component{
     constructor(props) {
@@ -68,42 +75,19 @@ class addressMap extends React.Component{
             },
         }
     }
-    // componentWillMount(){
-    //         let script = document.createElement('script')
-    //         script.type = 'text/javascript'
-    //         script.src = 'https://webapi.amap.com/maps?v=1.4.13&key=3a76f52821beaeb2671e91665db4c625'   
-    //         document.body.append(script)
-            
-    // }
     componentDidMount(){
         console.log(this.state.center)
-        // fetch("http://restapi.amap.com/v3/ip?key=3a76f52821beaeb2671e91665db4c625").then((res)=>{
-        //     if(res.ok){
-        //       res.text().then((data)=>{
-        //         const detail=JSON.parse(data)
-        //         this.setState({
-        //           city:detail.city,
-        //           adcode:detail.adcode
-        //         })
-        //       })
-        //     }
-        //   }).catch((res)=>{
-        //     console.log(res.status);
-        //   });
     }
     shouldComponentUpdate(nextProps,nextState){
-        if (this.state.center === nextState.center) return ;
-        //return false 则不更新组件
-        ipaddress(nextState.center)
-        console.log(nextState.center)
+        if (this.state.center === nextState.center) return true;
+        // //return false 则不更新组件
+        ipaddress(nextState.center.toString()).then((res)=>{
+            this.setState({address:res.data.pois},()=>{
+            })
+        })
     }
-    // shouldComponentUpdate: function(nextProps, nextState){
-    //     return this.state.checked === nextState.checked;
-    //     //return false 则不更新组件
-    // }
 
     drawWhat(obj) {
-        console.log(obj.getPosition())
         this.tool.close(true)
         this.tool.marker()
         this.setState({center: [obj.getPosition().N,obj.getPosition().Q]})
@@ -129,24 +113,43 @@ class addressMap extends React.Component{
         markerContent.appendChild(markerImg); 
         // 点标记中的文本
         var markerSpan = document.createElement("span");
-        // markerSpan.className = 'marker';
-        // markerSpan.innerHTML = "当前地点";
         markerContent.appendChild(markerSpan);
         marker.setContent(markerContent); //更新点标记内容
         marker.setPosition(centers); //更新点标记位置
     }
+    select(e){
+        $('.addressList .am-flexbox').removeClass('selected')
+        $(e.currentTarget).addClass('selected')
+        this.props.writeNote({...this.props.note,address:e.currentTarget.innerText}),
+        this.props.history.push('/publish')
+    }   
     render(){
+        const {address} = this.state
         return (
             <div className="publishPage">
                     <NavBar
                     mode="light"
-                    rightContent={''}
+                    icon={<Icon type="left" />}
+                    onLeftClick={() => {this.props.history.goBack()}}
+                    style={{height:'6%'}}
                     >              
                     </NavBar>
                     <div id="container">
                         <Map events={this.amapEvents} zoom= {16} amapkey='3a76f52821beaeb2671e91665db4c625' >
                             <MouseTool events={this.toolEvents}/>
                         </Map>  
+                    </div>
+                    <div  className='addressList'>
+                        <Flex  direction='column' className='flex' justify='center' align="start" onClick={(e)=>this.select(e)}>
+                            <p>{address!=[]&&address?address[0].pname+address[0].cityname+address[0].adname:null}</p>
+                        </Flex>
+                        {address!=[]&&address?address.map(v=>(
+                            <Flex  direction='column' key={v.id} className='flex' justify='center' align="start" onClick={(e)=>this.select(e)}>
+                                <p >{v.name||''}</p>
+                                <p>{v.pname+v.cityname+v.adname+v.address||''}</p>
+                            </Flex>
+                        )):null}
+  
                     </div>
             </div>
         )

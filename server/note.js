@@ -33,6 +33,7 @@ Router.get('/notelist', function(req, res) {
                 'userId': 1,
                 'mapgroup': 1,
                 'title': 1,
+                'create_time':1,
                 'name': { '$arrayElemAt': ['$user.name', 0] },
                 'portrait': { '$arrayElemAt': ['$user.portrait', 0] },
                 'fabulous': { $size: '$fabulous' }
@@ -43,6 +44,108 @@ Router.get('/notelist', function(req, res) {
     })
 })
 
+//最新时间的攻略列表
+Router.get('/notelist_time', function(req, res) {
+    Note.aggregate([{
+            $lookup: {
+                from: 'users',
+                localField: "userId",
+                foreignField: "_id",
+                as: "user"
+            }
+        },
+        {
+            $lookup: {
+                from: 'fabulous',
+                localField: "_id",
+                foreignField: "noteId",
+                as: "fabulous"
+            }
+        },
+        {$sort:{ create_time : -1 }},
+        {
+            $project: {
+                'userId': 1,
+                'mapgroup': 1,
+                'title': 1,
+                'create_time':1,
+                'name': { '$arrayElemAt': ['$user.name', 0] },
+                'portrait': { '$arrayElemAt': ['$user.portrait', 0] },
+                'fabulous': { $size: '$fabulous' }
+            }
+        },
+    ], function(err, doc) {
+        return res.json({ code: 0, data: doc })
+    })
+})
+//最热的攻略列表
+Router.get('/notelist_fabulous', function(req, res) {
+    Note.aggregate([{
+            $lookup: {
+                from: 'users',
+                localField: "userId",
+                foreignField: "_id",
+                as: "user"
+            }
+        },
+        {
+            $lookup: {
+                from: 'fabulous',
+                localField: "_id",
+                foreignField: "noteId",
+                as: "fabulous"
+            }
+        },
+        {$sort:{ fabulous : -1 }},
+        {
+            $project: {
+                'userId': 1,
+                'mapgroup': 1,
+                'title': 1,
+                'create_time':1,
+                'name': { '$arrayElemAt': ['$user.name', 0] },
+                'portrait': { '$arrayElemAt': ['$user.portrait', 0] },
+                'fabulous': { $size: '$fabulous' }
+            }
+        },
+    ], function(err, doc) {
+        return res.json({ code: 0, data: doc })
+    })
+})
+//搜索后攻略列表
+Router.post('/findnotelist', function(req, res) {
+    const {key} = req.body
+    Note.aggregate([{
+            $lookup: {
+                from: 'users',
+                localField: "userId",
+                foreignField: "_id",
+                as: "user"
+            }
+        },
+        {
+            $lookup: {
+                from: 'fabulous',
+                localField: "_id",
+                foreignField: "noteId",
+                as: "fabulous"
+            }
+        },
+        {
+            $project: {
+                'userId': 1,
+                'mapgroup': 1,
+                'title': 1,
+                'create_time':1,
+                'name': { '$arrayElemAt': ['$user.name', 0] },
+                'portrait': { '$arrayElemAt': ['$user.portrait', 0] },
+                'fabulous': { $size: '$fabulous' }
+            }
+        },
+    ], function(err, doc) {
+        return res.json({ code: 0, data: doc.filter(v=>v.title.indexOf(key)!= -1)})
+    })
+})
 //获取攻略详情
 Router.post('/noteinfo', function(req, res) {
     const { id } = req.body
@@ -94,6 +197,7 @@ Router.post('/noteinfo', function(req, res) {
                 title: 1,
                 follows:1,
                 content: 1,
+                address:1,
                 name: { $arrayElemAt: ['$user.name', 0] },
                 portrait: { $arrayElemAt: ['$user.portrait', 0] },
                 fabulous: { $size: '$fabulous' },
@@ -123,10 +227,10 @@ Router.post('/noteImgUpload', function(req, res) {
     if (!userId) {
         return res.json.dumps({ code: 1 })
     }
-    const { content, title } = req.body
+    const { content, title ,address} = req.body
     putnotes(req.files).then((result) => {
         let mapgroup = result.map(v => v.url)
-        const noteModel = new Note({ userId: mongoose.Types.ObjectId(userId), mapgroup, content, title })
+        const noteModel = new Note({ userId: mongoose.Types.ObjectId(userId), mapgroup, content, title,address })
         noteModel.save(function(e, d) {
             if (e) {
                 return res.json({ code: 1, msg: '异常' })

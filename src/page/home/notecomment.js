@@ -41,6 +41,7 @@ class NoteComments extends React.Component{
                     mode="light"
                     icon={<Icon type="left" />}
                     onLeftClick={() => {this.props.history.goBack()}}>
+                    onrightContent={'发送'}
                     共{num||0}条评论
                 </NavBar>
                 {list?list.map(v=>(

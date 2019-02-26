@@ -15,7 +15,7 @@ class NoteImgUpload extends React.Component{
         });
     }
     render(){
-        const { files } = this.state
+        const { files } = this.props
         return (
            <div>
                 <ImagePicker

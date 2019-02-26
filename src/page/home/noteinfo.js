@@ -62,7 +62,6 @@ class NoteInfo extends React.Component{
             }
         })
     }
-
     render(){
         const {noteinfo} = this.state
         const {status} = this.state
@@ -94,6 +93,10 @@ class NoteInfo extends React.Component{
                                     ))}
                                 </Carousel>
                                 <p className="noteContent">{noteinfo.content.split('\n').map(v=><span key={Math.random()}>{v}<br/></span>)}</p>
+                                <Flex justify="start" style={{fontSize:'1rem',color:'#a8a8a8',padding:'1rem'}}>
+                                    <div className="icon-address"></div>
+                                    <p >{<span>{noteinfo.address.split('\n')[0]||'未设置'}</span>}</p>
+                                </Flex>
                                 <Flex justify="end" className="noteNumber">
                                     <div className = {status.fabulous?"briefimg icon-fabulous_select":"briefimg icon-fabulous"}/>  
                                     <p onClick={()=>this.toDoEvent(noteinfo,'fabulous')}>{noteinfo.fabulous||0}</p>

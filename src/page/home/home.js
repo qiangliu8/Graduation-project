@@ -1,6 +1,6 @@
 import React from 'react'
-import { SearchBar,Icon, WingBlank,Flex,List , WhiteSpace,Carousel} from 'antd-mobile';
-import {getNoteList} from 'api/note'
+import { SearchBar,Icon, WingBlank,Flex,List ,Link, WhiteSpace,Carousel} from 'antd-mobile';
+import {getNoteList,getNoteListf,getNoteListt,findNoteList} from 'api/note'
 import {tarbarList} from 'config/data'
 import Brief from 'component/briefCard'
 import Footer from 'component/footer'
@@ -12,22 +12,48 @@ class Home extends React.Component{
     constructor(props) {
         super(props)
         this.state={
-            data: ['1', '2', '3'],
+            data: ['5c370dbad98da8239c7de46e', '5c370e7dd98da8239c7de46f', '5c370f20d98da8239c7de470'],
             imgHeight: 176,
             dataList:[]
         }
       }
-      componentDidMount() {
+    componentDidMount() {
         getNoteList().then(result=>{
             this.setState({dataList:result.data.data})
         })
-        // simulate img loading
-    //     setTimeout(() => {
-    //       this.setState({
-    //         data: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI'],
-    //       });
-    //     }, 100);
-    //   }
+    }
+    findNote(){
+        if(this.state.key){
+            findNoteList(this.state.key).then(result=>{
+                this.setState({dataList:result.data.data})
+            })
+        }else{
+            getNoteList().then(result=>{
+                this.setState({dataList:result.data.data})
+            })
+        }
+
+    }
+    selectSort(e){
+        switch(e.currentTarget.innerText){
+            case '最热':
+                getNoteListf().then(result=>{
+                    this.setState({dataList:result.data.data})
+                })
+                break
+            case '最新':
+                getNoteListt().then(result=>{
+                    this.setState({dataList:result.data.data})
+                })
+                break
+            default:
+                getNoteList().then(result=>{
+                    this.setState({dataList:result.data.data})
+                })
+                break
+        }
+        $('.pickList p').removeClass('selected')
+        $(e.currentTarget).addClass('selected')
     }
     render(){
         const {dataList} = this.state
@@ -37,7 +63,10 @@ class Home extends React.Component{
                 <WingBlank>
                     <Flex justify="between">
                         <div className="icon-logo"></div>
-                        <SearchBar placeholder="搜一搜" maxLength={8} style={{width:'70%'}} />
+                        <SearchBar placeholder="搜一搜" maxLength={8} style={{width:'70%'}} 
+                        onChange={(e)=>this.setState({key:e})}
+                        onSubmit={()=>this.findNote()}
+                        />
                         <div className="icon-notice"></div>
                     </Flex>
                 </WingBlank>
@@ -49,12 +78,13 @@ class Home extends React.Component{
                     >
                     {this.state.data.map((val, index) => (
                         <a
-                            key={val}
-                            href="http://www.alipay.com"
+                            key={val}   
+                  
                             style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
                           >
                             <img
-                              src={require(`../../assets/scenery/view${val}.jpg`)}
+                                onClick={()=>this.props.history.push(`/home/noteinfo/${val}`)}   
+                              src={require(`../../assets/scenery/view${index}.jpg`)}
                               alt=""
                               style={{ width: '100%', verticalAlign: 'top',height:'11rem' }}
                               onLoad={() => {
@@ -68,14 +98,13 @@ class Home extends React.Component{
                 </Carousel>
                 <List>
                     <Item extra={ 
-                            <Flex justify="between">
-                                <p onClick={(e)=>console.log(e.target.innerHTML)}>综合</p>
-                                <p onClick={(e)=>console.log(e.target.innerHTML)}>最热</p>
-                                <p onClick={(e)=>console.log(e.target.innerHTML)}>最新</p>
-                                <div onClick={(e)=>console.log(e.target.innerHTML)}style={{height:'24px'}}><p style={{display:'inline-block',marginRight: '-2px'}}>筛选</p><div className="icon-sort"></div></div>
+                            <Flex justify="between" className='pickList'>
+                                <p onClick={(e)=>this.selectSort(e)}  className='selected'>综合</p>
+                                <p onClick={(e)=>this.selectSort(e)}>最热</p>
+                                <p onClick={(e)=>this.selectSort(e)}>最新</p>
+                                {/* <div onClick={(e)=>console.log(e.target.innerHTML)}style={{height:'24px'}}><p style={{display:'inline-block',marginRight: '-2px'}}>筛选</p><div className="icon-sort"></div></div> */}
                             </Flex>
                             }>
-                            {}1篇攻略
                     </Item>
                 </List>
                 <div className="breifList">
