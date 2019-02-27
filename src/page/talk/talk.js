@@ -1,7 +1,8 @@
 import React from 'react'
 import { NavBar, Flex, SearchBar ,Icon } from 'antd-mobile'
 import {tarbarList} from 'config/data'
-import {getChatList} from 'api/chat'
+import {clearChatLists} from 'redux/chat.redux.js'
+import {getChatList,findChatList} from 'api/chat'
 import {connect} from 'react-redux'
 import {monentDate} from 'util/util.js'
 import Footer from 'component/footer'
@@ -9,7 +10,7 @@ import Footer from 'component/footer'
 import  'scss/talk.scss'
 @connect(
  state=>state,
-//  {getChatLists}
+{clearChatLists}
 )
 class TalkList extends React.Component{
     constructor(props) {
@@ -17,15 +18,30 @@ class TalkList extends React.Component{
     }
 
     componentDidMount(){
+      this.getchat()
+      this.props.clearChatLists()
+    }
+    getchat(){
         getChatList().then(res=>{
             if(res.status===200){
                 this.setState({list:res.data.data})
             }
         })
     }
-    
+
     toTalk = e => this.props.history.push(`/talk/${e}`)
 
+    findchat(){
+        if(this.state.key){
+            findChatList(this.state.key).then(res=>{
+                if(res.status===200){
+                    this.setState({list:res.data.data})
+                }
+            })
+        }else{
+            this.getchat()
+        }
+    }
     render(){
         const { list } = this.state||{}
         return (
@@ -36,7 +52,10 @@ class TalkList extends React.Component{
                         >
                         消息
                     </NavBar>
-                    <SearchBar placeholder="搜索" maxLength={8} />
+                    <SearchBar placeholder="搜索" maxLength={8} 
+                    onChange={(e)=>this.setState({key:e})}
+                    onSubmit={()=>this.findchat()}
+                    />
                     {list?list.map(v=>(
                         <Flex key={v._id} className="userlList" onClick={()=>this.toTalk(v._id)}>
                             <img  src={v.portrait} />

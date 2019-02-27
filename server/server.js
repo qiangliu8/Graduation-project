@@ -15,8 +15,12 @@ const mongoose = require('mongoose')
 
 const io = require('socket.io')(server)
 
+server.listen(8087, function() {
+    console.log('连接成功，请访问8087端口！')
+})
+
 io.on('connection', function(socket) {
-    console.log('建立连接')
+    console.log('socket.io连接成功！')
     socket.on('sendChat', function(data) {
         const { from, to, content } = data
         const chatid = [mongoose.Types.ObjectId(from), mongoose.Types.ObjectId(to)].sort()
@@ -28,12 +32,13 @@ io.on('connection', function(socket) {
             io.emit('recvChat', Object.assign({}, d._doc))
         })
     })
+    socket.on('disconnect', ()=>{
+        console.log('socket.io断开连接！');
+    })
+    socket.on('reconnect', function() {
+        console.log("socket.io重新连接!");
+    });
 })
-
-server.listen(8087, function() {
-    console.log('连接成功，请访问8087端口！')
-})
-
 app.use(express.static('public'));
 app.use(cookieParser())
 app.use(bodyParser.json())

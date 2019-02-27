@@ -67,7 +67,7 @@ export const tarbarList= [
         key:'talk',
         path:'/talk',
         icon:'talk',
-        badge:1,
+        badge:0,
         className:'icon-talk',
         seclassName:'icon-talk_select',
     },
@@ -86,17 +86,25 @@ export const infos = [
     {   
         text:'发布',
         name:'note',
+        sec:'内容',
+        unsec:''
     },
     {   
         text:'收藏',
         name:'collect',
+        sec:'内容',
+        unsec:''
     },
     {   
         text:'关注',
         name:'follow',
+        sec:'简介',
+        unsec:'暂无简介'
     },
     {   
         text:'评论',
         name:'comment',
+        sec:'评论',
+        unsec:''
     }
 ]  

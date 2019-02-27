@@ -386,7 +386,7 @@ Router.post('/noteComment', function(req, res) {
                 'portrait': { '$arrayElemAt': ['$user.portrait', 0] },
             }
         },
-        { $sort: { creat_time: 1 } },
+        { $sort: { creat_time: -1 } },
         { $limit: 10 }
     ], function(err, doc) {
         Comments.find({ "noteId": mongoose.Types.ObjectId(id) }).count(function(err, docs) {

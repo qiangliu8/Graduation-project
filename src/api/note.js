@@ -6,7 +6,7 @@ import axios from 'axios'
 const getNoteList = () => axios.get('/note/notelist')
 const getNoteListf = () => axios.get('/note/notelist_fabulous')
 const getNoteListt = () => axios.get('/note/notelist_time')
-const findNoteList = (key) => axios.post('/note/findnotelist',{key})
+const findNoteList = (key) => axios.post('/note/findnotelist',{key} )
 
 //获取攻略详情
 const getNoteInfo = id => axios.post('/note/noteinfo',id)

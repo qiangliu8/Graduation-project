@@ -13,6 +13,7 @@ const MSG_RECV = 'MSG_RECV'
 //标识已读
 const MSG_READ = 'MSG_READ'
 
+const MSG_CLEAR = 'MSG_CLEAR'
 const initState = {
     msg:[],
     unread:0,
@@ -26,6 +27,8 @@ export function chat(state = initState,action){
             return {...state,...action.payload,unread: action.payload.msg.filter(v => !v.read).length}
         case MSG_RECV:
             return { ...state, msg: [...state.msg, action.payload], unread: state.unread + 1 }
+        case MSG_CLEAR:
+            return { ...initState}
         default:
             return state
     }
@@ -39,6 +42,12 @@ function msgRecv(data){
     return {type:MSG_RECV, payload:data}
 }
 
+
+export function clearChatLists(){
+    return dispatch=>{
+        dispatch({type:MSG_CLEAR})
+    }
+}
 export function getChatLists(){
     return dispatch=>{
         getChatList().then(res=>{

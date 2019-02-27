@@ -38,8 +38,13 @@ const Follow = userId => axios.post('/user/userfollow',userId)
 const getUserOtherInfo = () => axios.get('/user/getuserotherinfo')
 
 //获取用户关注的用户列表
-const getFollowList = () => axios.get('/user/getfollowlist')
+const getUserFollowList = () => axios.get('/user/getuserfollowlist')
 
+const getUserCommentList = () => axios.get('/user/getusercommentlist')
+
+const getUserCollectlist = () => axios.get('/user/getusercollectlist')
+
+const getUserNotelist = () => axios.get('/user/getusernotelist')
 module.exports = {
     sendSerifly,
     getUserinfo,
@@ -49,5 +54,8 @@ module.exports = {
     update,
     Follow,
     getUserOtherInfo,
-    getFollowList
+    getUserFollowList,
+    getUserCommentList,
+    getUserCollectlist,
+    getUserNotelist
 }

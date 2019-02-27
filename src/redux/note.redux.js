@@ -37,5 +37,5 @@ function NOTEUNPUB(data){
 export function pubNote(){
     return dispatch=>{
         dispatch({type:NOTE_PUB})
-    }
+    } 
 }

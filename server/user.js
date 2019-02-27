@@ -1,6 +1,9 @@
 const express = require('express')
 const Router = express.Router()
 const UserModel = require('./model')
+const Note = UserModel.getModel('note')
+const Collect = UserModel.getModel('collect')
+const Comment = UserModel.getModel('comment')
 const User = UserModel.getModel('user')
 const Follow = UserModel.getModel('follow')
 const utils = require('utility')
@@ -206,7 +209,7 @@ Router.get('/getuserotherinfo', function(req, res) {
 })
 
 //获取用户的关注的用户列表
-Router.get('/getfollowlist', function(req, res) {
+Router.get('/getuserfollowlist', function(req, res) {
     const { userId } = req.cookies
     if (!userId) {
         return res.json({ code: 90000, msg: '用户未登录' })
@@ -222,11 +225,94 @@ Router.get('/getfollowlist', function(req, res) {
         },
         {
             $project: {
-                '_id': 0,
                 'name': { '$arrayElemAt': ['$user.name', 0] },
                 'portrait': { '$arrayElemAt': ['$user.portrait', 0] },
                 'tab': { '$arrayElemAt': ['$user.tab', 0] },
-                'userId': { '$arrayElemAt': ['$user._id', 0] },
+                '_id': { '$arrayElemAt': ['$user._id', 0] },
+            }
+        },
+    ], function(err, doc) {
+        return res.json({ code: 0, data: doc })
+    })
+})
+//获取用户的发布的攻略列表
+Router.get('/getusernotelist', function(req, res) {
+    const { userId } = req.cookies
+    if (!userId) {
+        return res.json({ code: 90000, msg: '用户未登录' })
+    }
+    Note.aggregate([{ $match: { "userId": mongoose.Types.ObjectId(userId) } },
+        // {
+        //     $lookup: {
+        //         from: 'users',
+        //         localField: "followId",
+        //         foreignField: "_id",
+        //         as: "user"
+        //     }
+        // },
+        // {
+        //     $project: {
+        //         '_id': 0,
+        //         'name': { '$arrayElemAt': ['$user.name', 0] },
+        //         'portrait': { '$arrayElemAt': ['$user.portrait', 0] },
+        //         'tab': { '$arrayElemAt': ['$user.tab', 0] },
+        //         'userId': { '$arrayElemAt': ['$user._id', 0] },
+        //     }
+        // },
+    ], function(err, doc) {
+        return res.json({ code: 0, data: doc })
+    })
+})
+//获取用户的评论的动态表
+Router.get('/getusercommentlist', function(req, res) {
+    const { userId } = req.cookies
+    if (!userId) {
+        return res.json({ code: 90000, msg: '用户未登录' })
+    }
+    Comment.aggregate([{ $match: { "userId": mongoose.Types.ObjectId(userId) } },
+        {
+            $lookup: {
+                from: 'notes',
+                localField: "noteId",
+                foreignField: "_id",
+                as: "note"
+            }
+        },
+        {
+            $project: {
+                '_id': { '$arrayElemAt': ['$note._id', 0] },
+                'comment':1,
+                'mapgroup': { '$arrayElemAt': ['$note.mapgroup', 0] },
+                'title': { '$arrayElemAt': ['$note.title', 0] },
+            }
+        },
+        { $group: { _id: '$_id',mapgroup: { $last: "$mapgroup" }, title: { $last: "$title" },comment: { $last: "$comment" }}},
+    ], function(err, doc) {
+        return res.json({ code: 0, data: doc })
+    })
+})
+//获取用户的收藏的攻略列表
+Router.get('/getusercollectlist', function(req, res) {
+    const { userId } = req.cookies
+    if (!userId) {
+        return res.json({ code: 90000, msg: '用户未登录' })
+    }
+    Collect.aggregate([{ $match: { "userId": mongoose.Types.ObjectId(userId) } },
+        {
+            $lookup: {
+                from: 'notes',
+                localField: "noteId",
+                foreignField: "_id",
+                as: "note"
+            }
+        },
+        {
+            $project: {
+                '_id': { '$arrayElemAt': ['$note._id', 0] },
+                'name': { '$arrayElemAt': ['$note.name', 0] },
+                'mapgroup': { '$arrayElemAt': ['$note.mapgroup', 0] },
+                'title': { '$arrayElemAt': ['$note.title', 0] },
+                'content': { '$arrayElemAt': ['$note.content', 0] },
             }
         },
     ], function(err, doc) {

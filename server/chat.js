@@ -18,6 +18,7 @@ Router.post('/chatinfo', function(req, res) {
                 return res.json({ code: 9999, msg: '异常' })
             }
             if (doc2) {
+                // Chat.find({ "qty": { $lt: 50 } })
                 return res.json({ code: 0, data: Object.assign({}, { 'msg': doc1 }, doc2._doc) })
             }
         })
@@ -77,4 +78,39 @@ Router.get('/chatlist', function(req, res) {
     })
 })
 
+Router.post('/findchatlist', function(req, res) {
+    const {key} = req.body 
+    const { userId } = req.cookies
+    if (!userId) {
+        return res.json({ code: 90000, msg: '用户未登录' })
+    }
+    //查找列表里对应的chatid数组 搜索最近的一个文档 的内容 和时间
+    Chat.aggregate([{ "$match": { chatid: { $in: [mongoose.Types.ObjectId(userId)] } } },
+        { $group: { _id: '$chatid', content: { $last: "$content" }, time: { $last: "$create_time" }, count: { $sum: 1 } } },
+        { $unwind: "$_id" },
+        { "$match": { _id: { $ne: mongoose.Types.ObjectId(userId) } } },
+        {
+            $lookup: {
+                from: 'users',
+                localField: '_id',
+                foreignField: '_id',
+                as: 'user'
+            }
+        },
+        {
+            $project: {
+                content: 1,
+                time: 1,
+                _id: 1,
+                name: { $arrayElemAt: ['$user.name', 0] },
+                portrait: { $arrayElemAt: ['$user.portrait', 0] }
+            }
+        },
+    ], function(e, d) {
+        if (e) {
+            return res.json({ code: 1, msg: '异常' })
+        }
+        return res.json({ code: 0, data: d.filter(v=>v.name.indexOf(key)!= -1) })
+    })
+})
 module.exports = Router

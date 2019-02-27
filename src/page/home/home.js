@@ -18,6 +18,10 @@ class Home extends React.Component{
         }
       }
     componentDidMount() {
+        this.getList()
+    }
+
+    getList(){
         getNoteList().then(result=>{
             this.setState({dataList:result.data.data})
         })
@@ -28,9 +32,7 @@ class Home extends React.Component{
                 this.setState({dataList:result.data.data})
             })
         }else{
-            getNoteList().then(result=>{
-                this.setState({dataList:result.data.data})
-            })
+            this.getList()
         }
 
     }
@@ -47,9 +49,7 @@ class Home extends React.Component{
                 })
                 break
             default:
-                getNoteList().then(result=>{
-                    this.setState({dataList:result.data.data})
-                })
+                this.getList()
                 break
         }
         $('.pickList p').removeClass('selected')
@@ -104,7 +104,7 @@ class Home extends React.Component{
                                 <p onClick={(e)=>this.selectSort(e)}>最新</p>
                                 {/* <div onClick={(e)=>console.log(e.target.innerHTML)}style={{height:'24px'}}><p style={{display:'inline-block',marginRight: '-2px'}}>筛选</p><div className="icon-sort"></div></div> */}
                             </Flex>
-                            }>
+                            }> 
                     </Item>
                 </List>
                 <div className="breifList">

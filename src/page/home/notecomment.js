@@ -1,11 +1,11 @@
 import React from 'react'
-import { TextareaItem,InputItem, WhiteSpace, WingBlank ,List,NavBar,Icon ,Card} from 'antd-mobile'
+import { TextareaItem,InputItem, WhiteSpace, WingBlank ,Toast,List,NavBar,Icon ,Card} from 'antd-mobile'
 import { withRouter } from 'react-router-dom'
 import {noteComment,sendComment} from 'api/note'
-
+import { createForm } from 'rc-form'
 
 @withRouter
-class NoteComments extends React.Component{
+class NoteComment extends React.Component{
     constructor(props) {
         super(props)
         this.state={
@@ -25,8 +25,13 @@ class NoteComments extends React.Component{
         this.setState({[key]:val})
     }
     toComment(){
-        sendComment(this.props.match.params,this.state).then(res=>{
+        if(!this.props.form.getFieldValue('comment')){
+            Toast.info('请重新输入内容再发送！', 2, null, false);
+            return false
+        }
+        sendComment(this.props.match.params,{comment:this.props.form.getFieldValue('comment')}).then(res=>{
             if(res.data.code==0){
+                this.props.form.setFields({"comment":""})
                 this.getCommentList().then(res=>{
                     $('.am-input-control input').val('')
                 })
@@ -35,13 +40,13 @@ class NoteComments extends React.Component{
     }
     render(){
         const {num, list } = this.state||{}
+        const { getFieldProps } = this.props.form;
         return (
             <div>
                 <NavBar
                     mode="light"
                     icon={<Icon type="left" />}
-                    onLeftClick={() => {this.props.history.goBack()}}>
-                    onrightContent={'发送'}
+                    onLeftClick={() => {this.props.history.goBack()}}>    
                     共{num||0}条评论
                 </NavBar>
                 {list?list.map(v=>(
@@ -64,6 +69,7 @@ class NoteComments extends React.Component{
                 <InputItem
                     placeholder="默默收藏不如评论一下"
                     onChange={e=>{this.handleChange('comment',e)}}
+                    {...getFieldProps('comment')}
                     extra={<span onClick={()=>this.toComment()}>发送</span>}
                 ></InputItem>
                 </List>
@@ -71,4 +77,6 @@ class NoteComments extends React.Component{
         )
     }
 }
+
+const NoteComments = createForm({})(NoteComment);
 export default NoteComments
