@@ -225,7 +225,7 @@ Router.post('/noteinfo', function(req, res) {
 Router.post('/noteImgUpload', function(req, res) {
     const userId = req.cookies.userId
     if (!userId) {
-        return res.json.dumps({ code: 1 })
+        return res.json({ code: 90000, msg: '用户未登录' })
     }
     const { content, title ,address} = req.body
     putnotes(req.files).then((result) => {
@@ -245,7 +245,7 @@ Router.post('/noteImgUpload', function(req, res) {
 Router.post('/noteCollect', function(req, res) {
         const userId = req.cookies.userId
         if (!userId) {
-            return res.json.dumps({ code: 1 })
+            return res.json({ code: 90000, msg: '用户未登录' })
         }
         const { _id } = req.body
         const body = { 'userId': mongoose.Types.ObjectId(userId), 'noteId': mongoose.Types.ObjectId(_id) }
@@ -271,7 +271,7 @@ Router.post('/noteCollect', function(req, res) {
 Router.post('/noteEvent', function(req, res) {
     const userId = req.cookies.userId
     if (!userId) {
-        return res.json.dumps({ code: 1 })
+        return res.json({ code: 90000, msg: '用户未登录' })
     }
     const { _id, event } = req.body
     const body = { 'userId': mongoose.Types.ObjectId(userId), 'noteId': mongoose.Types.ObjectId(_id) }
@@ -310,7 +310,7 @@ Router.post('/noteEvent', function(req, res) {
 Router.post('/noteToDo', function(req, res) {
     const userId = req.cookies.userId
     if (!userId) {
-        return res.json.dumps({ code: 1 })
+        return res.json({ code: 90000, msg: '用户未登录' })
     }
     const { _id } = req.body
     const body = { 'userId': mongoose.Types.ObjectId(userId), 'noteId': mongoose.Types.ObjectId(_id) }
