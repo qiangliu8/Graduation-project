@@ -1,5 +1,5 @@
 import React from 'react'
-import { SearchBar,Icon, WingBlank,Flex,List ,Link, WhiteSpace,Carousel} from 'antd-mobile';
+import { SearchBar,WingBlank,Flex,List , WhiteSpace,Carousel} from 'antd-mobile';
 import {getNoteList,getNoteListf,getNoteListt,findNoteList} from 'api/note'
 import {tarbarList} from 'config/data'
 import Brief from 'component/briefCard'
@@ -110,6 +110,7 @@ class Home extends React.Component{
                 <div className="breifList">
                     {dataList?dataList.map(v=><Brief state={v} key={v._id}/>):null}
                 </div>
+                <p className='tip'>暂无内容</p>
                 <Footer tarbarList={tarbarList}></Footer>
             </div>
         )

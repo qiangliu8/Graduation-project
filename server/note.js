@@ -413,4 +413,21 @@ Router.post('/sendComment', function(req, res) {
     })
 })
 
+
+//删除攻略
+Router.post('/deleteNote', function(req, res) {
+    const userId = req.cookies.userId
+    if (!userId) {
+        return res.json({ code: 1 })
+    }
+    const { _id} = req.body
+    console.log(req.body)
+        Note.deleteOne({_id}, function (err, result) {
+            if (err) {
+                return res.json({ code: 1, msg: '异常' })
+            }
+            return res.json({ code: 0, msg: '删除成功！' })
+        });
+})
+
 module.exports = Router

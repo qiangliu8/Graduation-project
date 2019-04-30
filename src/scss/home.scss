@@ -32,7 +32,13 @@ z-index: 1;
   padding: 10px;
   counter-reset: item-counter;
   margin-bottom: 50px;
- // display: flex; flex-flow: column wrap; width: 100%; height: 800px;
+ .tip{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    font-size: 17px;
+    color: grey;
+    }
 }
 
 .briefCard{

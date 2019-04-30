@@ -100,75 +100,75 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 28px;
   height: 28px;
 }
-.icon-collect_select {
+.icon-left {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -292px;
   width: 28px;
   height: 28px;
 }
-.icon-left {
+.icon-collect_select {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -320px;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
 }
-.icon-home {
+.icon-home_select {
   background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -352px;
+  background-position: 0px -348px;
   width: 32px;
   height: 32px;
 }
 .icon-notice {
   background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -384px;
-  width: 32px;
-  height: 32px;
-}
-.icon-talk {
-  background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -416px;
-  width: 32px;
-  height: 32px;
-}
-.icon-talk_select {
-  background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -448px;
-  width: 32px;
-  height: 32px;
-}
-.icon-home_select {
-  background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -480px;
+  background-position: 0px -380px;
   width: 32px;
   height: 32px;
 }
 .icon-center {
   background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -512px;
+  background-position: 0px -412px;
   width: 32px;
   height: 32px;
 }
 .icon-center_select {
   background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -544px;
+  background-position: 0px -444px;
   width: 32px;
   height: 32px;
 }
-.icon-publish {
+.icon-talk_select {
   background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -576px;
-  width: 34px;
-  height: 34px;
+  background-position: 0px -476px;
+  width: 32px;
+  height: 32px;
+}
+.icon-talk {
+  background-image: url(../../assets/sprites/sprite.png);
+  background-position: 0px -508px;
+  width: 32px;
+  height: 32px;
+}
+.icon-home {
+  background-image: url(../../assets/sprites/sprite.png);
+  background-position: 0px -540px;
+  width: 32px;
+  height: 32px;
 }
 .icon-publish_select {
   background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -610px;
+  background-position: 0px -572px;
+  width: 34px;
+  height: 34px;
+}
+.icon-publish {
+  background-image: url(../../assets/sprites/sprite.png);
+  background-position: 0px -606px;
   width: 34px;
   height: 34px;
 }
 .icon-head {
   background-image: url(../../assets/sprites/sprite.png);
-  background-position: 0px -644px;
+  background-position: 0px -640px;
   width: 51px;
   height: 50px;
 }

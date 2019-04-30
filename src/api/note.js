@@ -28,7 +28,7 @@ const noteEvent = ({_id},event) => axios.post('/note/noteEvent',{_id,event})
 const noteComment = id => axios.post('/note/noteComment',id)
 //发送评论
 const sendComment = ({id},{comment}) => axios.post('/note/sendComment',{id,comment})
-
+const deleteNote = (id) => axios.post('/note/deleteNote',id)
 const ipaddress = (ip) =>axios.get(`https://restapi.amap.com/v3/place/around?key=3a76f52821beaeb2671e91665db4c625&location=${ip}&keywords=&types=&radius=1000&offset=10&page=1&extensions=all`)
 module.exports = {
     getNoteList,
@@ -41,5 +41,6 @@ module.exports = {
     noteEvent,
     noteComment,
     sendComment,
-    ipaddress
+    ipaddress,
+    deleteNote
 }

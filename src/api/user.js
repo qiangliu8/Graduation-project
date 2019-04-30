@@ -9,6 +9,7 @@ const sendSerifly = ({
 //获取用户基本信息
 const getUserinfo = () => axios.get('/user/userinfo')
 
+const getUserList= () => axios.get('/user/userlist')
 //用户注册
 const toRegister = ({
     name,pwd,mobile
@@ -57,5 +58,6 @@ module.exports = {
     getUserFollowList,
     getUserCommentList,
     getUserCollectlist,
-    getUserNotelist
+    getUserNotelist,
+    getUserList
 }

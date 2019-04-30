@@ -20,7 +20,7 @@ Router.get('/userlist', function(req, res) {
         User.find({}, function(err, doc) {
             return res.json({ code: 0, msg: doc })
         })
-    })
+})
     //查看
 Router.get('/userinfo', function(req, res) {
     const { userId } = req.cookies

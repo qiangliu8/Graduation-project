@@ -14,10 +14,7 @@ class HomePage extends React.Component{
     render(){
         return (
             <div>
-                {/* <Switch> */}
                     {renderRoutes(mainRoutes)}
-                {/* </Switch> */}
-                {/* <Footer tarbarList={tarbarList}></Footer> */}
             </div>
         )
     }

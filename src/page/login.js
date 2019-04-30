@@ -52,8 +52,7 @@ class LoginPage extends React.Component{
                     onChange={e=>this.props.handleChange('pwd',e)}
                 >密码</InputItem>
             </List>
-            <Button type="primary" inline className="loginsBtn" onClick={()=>this.props.totelLogon()}>手机号一键登陆</Button>
-            <Button type="ghost" inline className="loginBtn" onClick={()=>this.tologin()}>登录</Button>
+            <Button type="ghost" inline className="am-button am-button-borderfix am-button-ghost am-button-inline loginsBtn" onClick={()=>this.tologin()}>登录</Button>
             </div>
         </div>    
         )

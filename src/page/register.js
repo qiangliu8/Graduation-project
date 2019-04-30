@@ -107,7 +107,7 @@ class RegisterPage extends React.Component{
                 >验证码</InputItem>
             </List>
 
-            <Button type="ghost" inline className="registerBtn" onClick={()=>this.toregister()}>注册</Button>
+            <Button type="ghost" inline className="am-button am-button-borderfix am-button-ghost am-button-inline registerBtn" onClick={()=>this.toregister()}>注册</Button>
             </div>
             {/* <ImagePicker
             files={files}
