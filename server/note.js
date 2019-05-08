@@ -395,6 +395,36 @@ Router.post('/noteComment', function(req, res) {
     })
 
 })
+Router.post('/noteCommentmini', function(req, res) {
+    const { id } = req.body
+    Comments.aggregate([{
+            "$match": { "noteId": mongoose.Types.ObjectId(id) }
+        }, {
+            $lookup: {
+                from: 'users',
+                localField: "userId",
+                foreignField: '_id',
+                as: "user"
+            }
+        },        
+        {$sort:{ create_time : -1 }},
+        {
+            $project: {
+                'creat_time': 1,
+                'comment': 1,
+                'name': { '$arrayElemAt': ['$user.name', 0] },
+                'portrait': { '$arrayElemAt': ['$user.portrait', 0] },
+            }
+        },
+        { $sort: { creat_time: -1 } },
+        { $limit: 2 }
+    ], function(err, doc) {
+        Comments.find({ "noteId": mongoose.Types.ObjectId(id) }).count(function(err, docs) {
+            return res.json({ code: 0, data: { list: doc, num: docs } })
+        })
+    })
+
+})
 
 //发送评论
 Router.post('/sendComment', function(req, res) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { SearchBar,WingBlank,Flex,List , WhiteSpace,Carousel} from 'antd-mobile';
+import { SearchBar,WingBlank,Flex,List , WhiteSpace,Carousel, Tabs,Badge} from 'antd-mobile';
 import {getNoteList,getNoteListf,getNoteListt,findNoteList} from 'api/note'
 import {tarbarList} from 'config/data'
 import Brief from 'component/briefCard'
@@ -7,7 +7,11 @@ import Footer from 'component/footer'
 import 'scss/home.scss'
 
 const Item = List.Item
-
+const tabs = [
+    { title: <p >综合</p>},
+    { title: <p >热门</p>},
+    { title: <p >最新</p>},
+  ];
 class Home extends React.Component{
     constructor(props) {
         super(props)
@@ -37,8 +41,8 @@ class Home extends React.Component{
 
     }
     selectSort(e){
-        switch(e.currentTarget.innerText){
-            case '最热':
+        switch(e.title.props.children){
+            case '热门':
                 getNoteListf().then(result=>{
                     this.setState({dataList:result.data.data})
                 })
@@ -97,15 +101,11 @@ class Home extends React.Component{
                     ))}
                 </Carousel>
                 <List>
-                    <Item extra={ 
-                            <Flex justify="between" className='pickList'>
-                                <p onClick={(e)=>this.selectSort(e)}  className='selected'>综合</p>
-                                <p onClick={(e)=>this.selectSort(e)}>最热</p>
-                                <p onClick={(e)=>this.selectSort(e)}>最新</p>
-                                {/* <div onClick={(e)=>console.log(e.target.innerHTML)}style={{height:'24px'}}><p style={{display:'inline-block',marginRight: '-2px'}}>筛选</p><div className="icon-sort"></div></div> */}
-                            </Flex>
-                            }> 
-                    </Item>
+                <Tabs tabs={tabs}
+                    initialPage={0}
+                    onTabClick={(e) => this.selectSort(e)}
+                    >
+                    </Tabs>
                 </List>
                 <div className="breifList">
                     {dataList?dataList.map(v=><Brief state={v} key={v._id}/>):null}

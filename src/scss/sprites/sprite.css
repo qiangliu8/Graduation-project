@@ -16,19 +16,19 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 // HTML
 <i class="icon icon-home"></i>
 */
-.icon-boy {
+.icon-girl {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px 0px;
   width: 16px;
   height: 16px;
 }
-.icon-girl {
+.icon-boy {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -16px;
   width: 16px;
   height: 16px;
 }
-.icon-view {
+.icon-sex {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -32px;
   width: 18px;
@@ -40,13 +40,13 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 18px;
   height: 18px;
 }
-.icon-name {
+.icon-view {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -68px;
   width: 18px;
   height: 18px;
 }
-.icon-sex {
+.icon-name {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -86px;
   width: 18px;
@@ -64,31 +64,31 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 18px;
   height: 18px;
 }
-.icon-fabulous_select {
+.icon-comment {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -140px;
   width: 24px;
   height: 24px;
 }
-.icon-comment {
+.icon-fabulous_select {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -164px;
   width: 24px;
   height: 24px;
 }
-.icon-sort {
+.icon-fabulous {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -188px;
   width: 24px;
   height: 24px;
 }
-.icon-fabulous {
+.icon-sort {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -212px;
   width: 24px;
   height: 24px;
 }
-.icon-collect {
+.icon-collect_select {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -236px;
   width: 28px;
@@ -100,25 +100,25 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 28px;
   height: 28px;
 }
-.icon-left {
+.icon-collect {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -292px;
   width: 28px;
   height: 28px;
 }
-.icon-collect_select {
+.icon-left {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -320px;
   width: 28px;
   height: 28px;
 }
-.icon-home_select {
+.icon-home {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -348px;
   width: 32px;
   height: 32px;
 }
-.icon-notice {
+.icon-home_select {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -380px;
   width: 32px;
@@ -136,19 +136,19 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 32px;
   height: 32px;
 }
-.icon-talk_select {
+.icon-notice {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -476px;
   width: 32px;
   height: 32px;
 }
-.icon-talk {
+.icon-talk_select {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -508px;
   width: 32px;
   height: 32px;
 }
-.icon-home {
+.icon-talk {
   background-image: url(../../assets/sprites/sprite.png);
   background-position: 0px -540px;
   width: 32px;
@@ -171,4 +171,22 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   background-position: 0px -640px;
   width: 51px;
   height: 50px;
+}
+.icon-2 {
+  background-image: url(../../assets/sprites/sprite.png);
+  background-position: 0px -690px;
+  width: 100px;
+  height: 100px;
+}
+.icon-3 {
+  background-image: url(../../assets/sprites/sprite.png);
+  background-position: 0px -790px;
+  width: 100px;
+  height: 100px;
+}
+.icon-1 {
+  background-image: url(../../assets/sprites/sprite.png);
+  background-position: 0px -890px;
+  width: 100px;
+  height: 100px;
 }

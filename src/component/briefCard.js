@@ -21,8 +21,9 @@ class BriefCrad extends React.Component{
                             <p>{state.name}</p>
                         </div>
                         <div className="briefInfo right">
-                            <div className = "briefimg icon-fabulous"/>
-                            <p style={{fontSize: '18px'}}>{state.fabulous}</p>
+                            {/* <div className = "briefimg icon-fabulous"/> */}
+                            <img src={require('../assets/icon/fabulous.svg')}/>
+                            <p>{state.fabulous}</p>
                         </div>
                     </div>
                 </div>

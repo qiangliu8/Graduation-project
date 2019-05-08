@@ -31,11 +31,12 @@ class Footer extends React.Component{
                  <TabBar.Item
                  title={v.title}
                  key={v.key}
-                 icon={<div className={v.className}
-                 />
+                 icon={ <img src={require(`../assets/svg/${v.className}.svg`)}/>
+                //  <div className={v.className}
+                //  />
                  }
-                 selectedIcon={<div  className={v.seclassName}
-                 />
+                 selectedIcon={
+                  <img src={require(`../assets/svg/${v.seclassName}.svg`)}/>
                  }
                  selected={this.props.location.pathname.includes(v.path)}
                  badge={v.badge}

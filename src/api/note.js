@@ -26,6 +26,8 @@ const noteImgUpload = data => axios({
 const noteEvent = ({_id},event) => axios.post('/note/noteEvent',{_id,event})
 //获取评论列表
 const noteComment = id => axios.post('/note/noteComment',id)
+
+const noteCommentmini = id => axios.post('/note/noteCommentmini',id)
 //发送评论
 const sendComment = ({id},{comment}) => axios.post('/note/sendComment',{id,comment})
 const deleteNote = (id) => axios.post('/note/deleteNote',id)
@@ -42,5 +44,6 @@ module.exports = {
     noteComment,
     sendComment,
     ipaddress,
-    deleteNote
+    deleteNote,
+    noteCommentmini
 }
